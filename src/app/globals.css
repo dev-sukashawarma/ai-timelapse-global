@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  /* ── Obsidian Cinema Theme ── */
+  /* Inspired by: high-end editor, obsidian, neon accents */
+  --background: #131313;
+  --foreground: #e5e2e1;
+  --card: #0e0e0e;
+  --card-foreground: #e5e2e1;
+  --popover: #0e0e0e;
+  --popover-foreground: #e5e2e1;
+  --primary: #4b8eff;         /* Electric Blue */
+  --primary-foreground: #001a41;
+  --secondary: #1c1b1b;
+  --secondary-foreground: #e5e2e1;
+  --muted: #201f1f;
+  --muted-foreground: #c1c6d7;
+  --accent: #2a2a2a;
+  --accent-foreground: #adc6ff;
+  --destructive: #ffb4ab;
+  --destructive-foreground: #690005;
+  --border: #2a2a2a;
+  --input: #1c1b1b;
+  --ring: #4b8eff;
+  --radius: 0.375rem; /* md roundedness */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: var(--radius);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Film grain — subtle texture overlay, differentiates from generic AI tools */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 256px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Seamless atmospheric backdrop without banding or harsh edges */
+.bg-ambient-cinema {
+  background-color: #111111;
+  background-image: 
+    radial-gradient(ellipse 100% 60% at 50% -5%, rgba(59, 130, 246, 0.16) 0%, rgba(30, 58, 138, 0.06) 45%, transparent 75%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(0, 91, 193, 0.05) 0%, transparent 65%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Glass panels — Obsidian Cinema */
+.glass-panel {
+  background: rgba(28, 27, 27, 0.6); /* surface_container_low */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(65, 71, 85, 0.15); /* outline_variant ghost border */
+  box-shadow: 0 24px 48px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-input {
+  background: rgba(14, 14, 14, 0.8); /* surface_container_lowest */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(65, 71, 85, 0.2); /* outline_variant ghost border */
+  color: var(--foreground);
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-input:focus {
+  background: rgba(14, 14, 14, 1);
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(75, 142, 255, 0.3); /* subtle outer glow */
+  outline: none;
+}
+
+.glass-input::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+/* Scrollbar — Obsidian Cinema */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #414755; }
+
+/* Glow button shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.btn-glow {
+  background: linear-gradient(135deg, #adc6ff, #4b8eff, #005bc1, #4b8eff);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  transition: box-shadow 0.2s, transform 0.15s;
+  color: #001a41; /* on_primary */
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 24px rgba(75, 142, 255, 0.5); /* Primary container glow */
+  transform: translateY(-1px);
+}
+
+/* animate-in utility (if not built-in) */
+.animate-in {
+  animation: animateIn 0.4s ease-out both;
+}
+
+@keyframes animateIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation-name: fadeIn; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.slide-in-from-bottom-4 { animation-name: slideInBottom4; }
+@keyframes slideInBottom4 {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-from-bottom-8 { animation-name: slideInBottom8; }
+@keyframes slideInBottom8 {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.duration-300 { animation-duration: 0.3s; }
+.duration-500 { animation-duration: 0.5s; }
+.duration-700 { animation-duration: 0.7s; }
