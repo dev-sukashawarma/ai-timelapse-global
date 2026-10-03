@@ -47,12 +47,25 @@ export default function LandingPage({
   // Video Reference
   const videoRef = useRef(null);
 
-  // Navbar Dynamic Scroll State
+  // Navbar Dynamic Scroll & Sticky CTA State
   const [scrolled, setScrolled] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 20);
+
+      // Check if user is currently viewing the Pricing card
+      const pricingEl = document.getElementById('pricing');
+      let isNearPricing = false;
+      if (pricingEl) {
+        const rect = pricingEl.getBoundingClientRect();
+        isNearPricing = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+      }
+
+      // Show floating bar after scrolling past hero (~450px), hide when viewing pricing card
+      setShowStickyBar(scrollY > 450 && !isNearPricing);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -1111,8 +1124,14 @@ export default function LandingPage({
 
         <div className="max-w-xl mx-auto px-4 sm:px-6 relative z-10 scroll-reveal">
           <div className="bg-[#0f172a] border-2 border-[#0284c7] rounded-3xl p-8 sm:p-10 shadow-2xl shadow-sky-900/20 text-left relative hover-lift">
-            <div className="inline-block bg-[#0284c7] text-white font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm">
-              {isId ? 'PENAWARAN TERBATAS' : 'LIMITED TIME LAUNCH'}
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <div className="inline-block bg-[#0284c7] text-white font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                {isId ? 'PENAWARAN TERBATAS' : 'LIMITED TIME LAUNCH'}
+              </div>
+              <div className="inline-flex items-center gap-1.5 bg-amber-500/15 border border-amber-500/30 text-amber-400 font-bold text-[11px] px-3 py-1 rounded-full uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                <span>{isId ? 'Tersisa 14 Slot' : 'Only 14 Slots Left'}</span>
+              </div>
             </div>
 
             <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
@@ -1122,7 +1141,7 @@ export default function LandingPage({
               {isId ? 'Akses penuh ke semua materi video, prompt formula, dan generator tools.' : 'Full unrestricted access to all training, prompts, and tool generators.'}
             </p>
 
-            <div className="flex items-baseline gap-3 mb-2">
+            <div className="flex items-baseline gap-3 mb-4">
               <span className="text-base text-slate-400 line-through font-medium">
                 {isId ? 'Rp 149.000' : '$49'}
               </span>
@@ -1130,6 +1149,23 @@ export default function LandingPage({
                 {isId ? 'Rp 49.000' : '$19'}
               </span>
               <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
+            </div>
+
+            {/* Quota Progress Bar */}
+            <div className="mb-6 p-3 rounded-2xl bg-slate-900/90 border border-slate-700/60">
+              <div className="flex items-center justify-between text-[11px] font-bold mb-1.5">
+                <span className="text-amber-400 flex items-center gap-1">
+                  <span>🔥</span>
+                  <span>{isId ? 'Kuota Early Bird 86% Terisi' : 'Early Bird Quota 86% Claimed'}</span>
+                </span>
+                <span className="text-slate-300 font-mono">14 {isId ? 'tersisa' : 'remaining'}</span>
+              </div>
+              <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-amber-500 via-[#38bdf8] to-[#0284c7] transition-all duration-1000"
+                  style={{ width: '86%' }}
+                />
+              </div>
             </div>
 
             {/* Direct Generator Access & Shopify Checkout CTA */}
@@ -1292,6 +1328,41 @@ export default function LandingPage({
           </div>
         </div>
       </footer>
+
+      {/* ── STICKY FLOATING CTA BAR (Responsive on Mobile, Tablet & Desktop) ── */}
+      <div
+        className={`fixed bottom-3 sm:bottom-5 left-3 right-3 sm:left-auto sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-40 transition-all duration-500 ease-out ${
+          showStickyBar
+            ? 'translate-y-0 opacity-100 pointer-events-auto'
+            : 'translate-y-12 opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="bg-[#0f172a]/95 backdrop-blur-xl border border-sky-500/35 rounded-2xl sm:rounded-full p-2.5 sm:p-2 pl-4 sm:pl-5 shadow-2xl shadow-sky-950/70 flex items-center justify-between gap-3 sm:gap-6 max-w-md mx-auto">
+          <div className="flex flex-col text-left">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] text-slate-400 line-through font-medium">
+                {isId ? 'Rp 149.000' : '$49'}
+              </span>
+              <span className="text-sm sm:text-base font-black text-white">
+                {isId ? 'Rp 49.000' : '$19'}
+              </span>
+            </div>
+            <span className="text-[10px] text-[#38bdf8] font-bold uppercase tracking-wider flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
+              {isId ? 'Akses Selamanya' : 'Lifetime Access'}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={onOpenStudio}
+            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-[#0284c7]/40 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
+          >
+            <span>{isId ? 'Buka Generator' : 'Open Generator'}</span>
+            <ArrowRight size={14} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
