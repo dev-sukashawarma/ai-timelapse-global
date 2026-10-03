@@ -627,31 +627,39 @@ export default function LandingPage({
             </p>
           </div>
 
-          {/* Panoramic HD Sequence Image */}
-          <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-2xl bg-slate-900 mb-8 shadow-sky-500/5 scroll-reveal hover-lift">
-            <Image
-              src="/construction_sequence_phases.jpg"
-              alt="4-Stage Architectural Construction Timeline Progression"
-              width={1920}
-              height={1080}
-              className="w-full h-auto object-cover"
-            />
+          {/* Panoramic HD Sequence Image with Button-like Cursor Hover Scale */}
+          <div className="rounded-3xl overflow-hidden border border-slate-200/90 shadow-2xl bg-slate-900 mb-8 shadow-sky-500/5 scroll-reveal group cursor-pointer transition-all duration-500 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-2xl hover:shadow-sky-500/25 hover:border-[#38bdf8]">
+            <div className="relative overflow-hidden">
+              <Image
+                src="/construction_sequence_phases.jpg"
+                alt="4-Stage Architectural Construction Timeline Progression"
+                width={2752}
+                height={1536}
+                quality={100}
+                unoptimized
+                className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-[#080c14]/80 backdrop-blur-md border border-white/15 text-white text-[11px] font-bold font-mono tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-[#0284c7] transition-all">
+                <Sparkles size={12} className="text-[#38bdf8] group-hover:text-white" />
+                <span>ULTRA HD 4K</span>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center scroll-reveal">
-            <div className="p-3.5 rounded-2xl bg-[#f8fafc] border border-slate-200 hover-lift">
+            <div className="p-4 rounded-2xl bg-[#f8fafc] border border-slate-200 hover:border-[#0284c7] hover:bg-white hover:shadow-xl hover:shadow-sky-500/10 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
               <span className="text-xs font-mono text-[#0284c7] block font-bold mb-1">TAHAP 1</span>
               <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Galian & Tanah Kosong' : 'Excavation & Empty Land'}</p>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#f8fafc] border border-slate-200 hover-lift">
+            <div className="p-4 rounded-2xl bg-[#f8fafc] border border-slate-200 hover:border-[#0284c7] hover:bg-white hover:shadow-xl hover:shadow-sky-500/10 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
               <span className="text-xs font-mono text-[#0284c7] block font-bold mb-1">TAHAP 2</span>
               <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Pengecoran Pondasi' : 'Foundation & Concrete Slab'}</p>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#f8fafc] border border-slate-200 hover-lift">
+            <div className="p-4 rounded-2xl bg-[#f8fafc] border border-slate-200 hover:border-[#0284c7] hover:bg-white hover:shadow-xl hover:shadow-sky-500/10 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
               <span className="text-xs font-mono text-[#0284c7] block font-bold mb-1">TAHAP 3</span>
               <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Rangka & Dinding Bata' : 'Framing & Structural Walls'}</p>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#f8fafc] border border-slate-200 hover-lift">
+            <div className="p-4 rounded-2xl bg-[#f8fafc] border border-slate-200 hover:border-[#0284c7] hover:bg-white hover:shadow-xl hover:shadow-sky-500/10 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
               <span className="text-xs font-mono text-[#0284c7] block font-bold mb-1">TAHAP 4</span>
               <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Finishing & Golden Hour' : 'Finishing & Completed Villa'}</p>
             </div>
