@@ -1212,27 +1212,48 @@ export default function LandingPage({
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="py-12 bg-[#090d16] border-t border-slate-800 text-center text-xs text-slate-400">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-base">🎬</span>
-            <span className="font-bold text-white">AI TIMELAPSE™</span>
-            <span>&bull; All Rights Reserved</span>
+      <footer className="py-12 sm:py-16 bg-[#f8fafc] border-t border-slate-200 text-slate-600">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200/90">
+            {/* Brand Logo / Name */}
+            <div className="text-left font-black text-lg sm:text-xl text-[#0f172a] tracking-tight">
+              BelajarPakai.AI
+            </div>
+
+            {/* Navigation / Policy Links */}
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm text-slate-500 font-medium">
+              <a
+                href="#terms"
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert(isId ? 'Syarat & Ketentuan: Akses materi dan generator bersifat personal untuk satu pengguna terdaftar.' : 'Terms & Conditions: Material and generator access is personal to one registered user.');
+                }}
+                className="hover:text-[#0f172a] transition-colors cursor-pointer"
+              >
+                {isId ? 'Syarat & Ketentuan' : 'Terms & Conditions'}
+              </a>
+              <a
+                href="#privacy"
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert(isId ? 'Kebijakan Privasi: Data Anda dilindungi dengan standar keamanan privasi Shopify dan SSL.' : 'Privacy Policy: Your data is protected by Shopify and SSL privacy security standards.');
+                }}
+                className="hover:text-[#0f172a] transition-colors cursor-pointer"
+              >
+                {isId ? 'Kebijakan Privasi' : 'Privacy Policy'}
+              </a>
+              <a
+                href="mailto:support@belajarpakai.ai"
+                className="hover:text-[#0f172a] transition-colors cursor-pointer"
+              >
+                {isId ? 'Hubungi Kami' : 'Contact Us'}
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <a
-              href={SHOPIFY_PRODUCT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#38bdf8] font-bold hover:underline cursor-pointer"
-            >
-              {isId ? 'Beli Akses (Rp 49.000) →' : 'Get Access ($19) →'}
-            </a>
-          </div>
-
-          <div>
-            &copy; {new Date().getFullYear()} AI TIMELAPSE™.
+          {/* Copyright Notice */}
+          <div className="pt-8 text-center text-xs text-slate-500 font-normal">
+            &copy; 2026 BelajarPakai.AI. All rights reserved.
           </div>
         </div>
       </footer>
