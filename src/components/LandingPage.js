@@ -29,6 +29,7 @@ import {
 export default function LandingPage({
   language = 'id',
   onSwitchLanguage,
+  onOpenStudio,
 }) {
   const isId = language === 'id';
 
@@ -144,15 +145,14 @@ export default function LandingPage({
 
           {/* Action CTAs & Language Switcher */}
           <div className="flex items-center gap-3">
-            <a
-              href={SHOPIFY_PRODUCT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={onOpenStudio}
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-bold text-xs transition-all cursor-pointer shadow-md shadow-[#0284c7]/30 hover:scale-105 active:scale-95"
             >
-              <span>{isId ? 'Beli Akses - $19' : 'Get Access - $19'}</span>
+              <span>{isId ? 'Buka Generator' : 'Open Generator'}</span>
               <ArrowRight size={14} />
-            </a>
+            </button>
 
             {/* Language Switcher */}
             <div className="flex items-center bg-[#0f172a]/75 backdrop-blur-md p-1 rounded-full border border-slate-700/60">
@@ -239,17 +239,16 @@ export default function LandingPage({
                 : 'Master the exact system to turn simple prompts into satisfying construction timelapse videos engineered for viral reach on TikTok, Reels, and Shorts.'}
             </p>
 
-            {/* Primary CTA */}
+            {/* Primary CTA: Opens Generator Page */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-8">
-              <a
-                href={SHOPIFY_PRODUCT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={onOpenStudio}
                 className="px-8 py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#0284c7]/40 cursor-pointer flex items-center justify-center gap-2.5 shrink-0"
               >
-                <span>{isId ? 'Dapatkan Akses Instan - $19' : 'Get Instant Access - $19'}</span>
+                <span>{isId ? 'Dapatkan Akses Instan' : 'Get Instant Access'}</span>
                 <ArrowRight size={18} />
-              </a>
+              </button>
             </div>
 
             {/* Micro Trust Strip */}
@@ -461,15 +460,14 @@ export default function LandingPage({
                 </div>
               </div>
 
-              <a
-                href={SHOPIFY_PRODUCT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm transition-all shadow-lg shadow-[#0284c7]/25 hover:scale-105 active:scale-95"
+              <button
+                type="button"
+                onClick={onOpenStudio}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm transition-all shadow-lg shadow-[#0284c7]/25 hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <span>{isId ? 'Ambil Kit Lengkap Sekarang' : 'Claim Complete Kit Now'}</span>
+                <span>{isId ? 'Buka Generator Sekarang' : 'Launch Generator Tool'}</span>
                 <ArrowRight size={16} />
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -562,20 +560,27 @@ export default function LandingPage({
               <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
             </div>
 
-            <p className="text-xs text-slate-300 mb-8">
-              {isId ? 'Tanpa biaya bulanan. Akses instan langsung dikirim ke email.' : 'No monthly subscription. Instant digital access delivered 24/7.'}
-            </p>
+            {/* Direct Generator Access & Shopify Checkout CTA */}
+            <div className="flex flex-col gap-3 mb-4">
+              <button
+                type="button"
+                onClick={onOpenStudio}
+                className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
+              >
+                <span>{isId ? 'DAPATKAN AKSES INSTAN (BUKA GENERATOR)' : 'GET INSTANT ACCESS (OPEN GENERATOR)'}</span>
+                <ArrowRight size={18} />
+              </button>
 
-            {/* Direct Shopify Checkout CTA */}
-            <a
-              href={SHOPIFY_PRODUCT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all block text-center mb-4"
-            >
-              <span>{isId ? 'DAPATKAN AKSES SEKARANG - $19' : 'GET INSTANT ACCESS - $19'}</span>
-              <ExternalLink size={16} />
-            </a>
+              <a
+                href={SHOPIFY_PRODUCT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
+              >
+                <span>{isId ? 'Beli Lisensi Penuh via Shopify ($19)' : 'Purchase Full License via Shopify ($19)'}</span>
+                <ExternalLink size={14} />
+              </a>
+            </div>
 
             <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400">
               <ShieldCheck size={14} className="text-[#38bdf8]" />
