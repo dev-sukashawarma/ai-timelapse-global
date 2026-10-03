@@ -983,7 +983,7 @@ export default function LandingPage({
                   {isId ? 'NILAI BONUS' : 'BONUS VALUE'}
                 </span>
                 <span className="text-sm sm:text-base font-extrabold text-[#38bdf8]">
-                  Rp 149.000
+                  {isId ? 'Rp 149.000' : '$49 Value'}
                 </span>
               </div>
             </div>
@@ -1052,7 +1052,7 @@ export default function LandingPage({
               </strong>{' '}
               {isId
                 ? 'dalam harga Rp 49.000 - tanpa syarat tambahan.'
-                : 'within the one-time $3.49 price - zero hidden conditions.'}
+                : 'within the one-time $19 price - zero hidden conditions.'}
             </p>
 
             <button
@@ -1152,8 +1152,12 @@ export default function LandingPage({
             </p>
 
             <div className="flex items-baseline gap-3 mb-2">
-              <span className="text-base text-slate-400 line-through font-medium">$49</span>
-              <span className="text-5xl sm:text-6xl font-black text-white">$19</span>
+              <span className="text-base text-slate-400 line-through font-medium">
+                {isId ? 'Rp 149.000' : '$49'}
+              </span>
+              <span className="text-4xl sm:text-5xl font-black text-white">
+                {isId ? 'Rp 49.000' : '$19'}
+              </span>
               <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
             </div>
 
@@ -1174,7 +1178,7 @@ export default function LandingPage({
                 rel="noopener noreferrer"
                 className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
               >
-                <span>{isId ? 'Beli Lisensi Penuh via Shopify ($19)' : 'Purchase Full License via Shopify ($19)'}</span>
+                <span>{isId ? 'Beli Lisensi Penuh via Shopify (Rp 49.000)' : 'Purchase Full License via Shopify ($19)'}</span>
                 <ExternalLink size={14} />
               </a>
             </div>
@@ -1273,7 +1277,7 @@ export default function LandingPage({
               rel="noopener noreferrer"
               className="text-[#38bdf8] font-bold hover:underline cursor-pointer"
             >
-              {isId ? 'Beli Akses ($19) →' : 'Get Access ($19) →'}
+              {isId ? 'Beli Akses (Rp 49.000) →' : 'Get Access ($19) →'}
             </a>
           </div>
 
