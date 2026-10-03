@@ -445,8 +445,8 @@ export default function LandingPage({
                   <MessageSquareQuote size={20} />
                 </div>
                 <div>
-                  <div className="text-base sm:text-lg font-black text-[#0f172a]">&ldquo;Ini beneran AI?!&rdquo;</div>
-                  <div className="text-xs text-slate-500">{isId ? '90% Komentar Takjub' : '90% of Comments'}</div>
+                  <div className="text-base sm:text-lg font-black text-[#0f172a]">{isId ? '“Ini beneran AI?!”' : '“Is this really AI?!”'}</div>
+                  <div className="text-xs text-slate-500">{isId ? '90% Komentar Takjub' : '90% Amazed Comments'}</div>
                 </div>
               </div>
 
@@ -455,8 +455,8 @@ export default function LandingPage({
                   <TrendingUp size={20} />
                 </div>
                 <div>
-                  <div className="text-base sm:text-lg font-black text-[#0f172a]">Tren #1</div>
-                  <div className="text-xs text-slate-500">Content AI 2026</div>
+                  <div className="text-base sm:text-lg font-black text-[#0f172a]">{isId ? 'Tren #1' : '#1 Trend'}</div>
+                  <div className="text-xs text-slate-500">{isId ? 'Konten AI 2026' : 'AI Video Trend 2026'}</div>
                 </div>
               </div>
             </div>
@@ -1050,7 +1050,9 @@ export default function LandingPage({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-[#f8fafc] p-7 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between scroll-reveal scroll-delay-1 hover-lift">
               <p className="text-sm text-slate-700 leading-relaxed mb-6 italic">
-                &ldquo;Gila sih, gue cuma ikutin template prompt-nya dan langsung jadi video timelapse rumah yang smooth banget. Upload ke TikTok tembus 50K views di hari pertama.&rdquo;
+                {isId
+                  ? '“Gila sih, gue cuma ikutin template prompt-nya dan langsung jadi video timelapse rumah yang smooth banget. Upload ke TikTok tembus 50K views di hari pertama.”'
+                  : '“Honestly insane, I just followed the prompt templates and immediately created an ultra-smooth house timelapse video. Uploaded to TikTok and hit 50K views on day one.”'}
               </p>
               <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
                 <div className="w-9 h-9 rounded-full bg-[#1e3a8a] text-white font-black flex items-center justify-center text-xs shadow-xs">
@@ -1058,14 +1060,16 @@ export default function LandingPage({
                 </div>
                 <div>
                   <div className="text-sm font-bold text-[#0f172a]">Fajar Nugroho</div>
-                  <div className="text-[11px] text-slate-500">AI Content Creator</div>
+                  <div className="text-[11px] text-slate-500">{isId ? 'AI Content Creator' : 'AI Video Creator'}</div>
                 </div>
               </div>
             </div>
 
             <div className="bg-[#f8fafc] p-7 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between scroll-reveal scroll-delay-2 hover-lift">
               <p className="text-sm text-slate-700 leading-relaxed mb-6 italic">
-                &ldquo;Awalnya mikir ini pasti ribet, ternyata beneran gampang. Sekarang tiap hari posting 2-3 video timelapse dan akun saya sudah 10K followers dalam sebulan.&rdquo;
+                {isId
+                  ? '“Awalnya mikir ini pasti ribet, ternyata beneran gampang. Sekarang tiap hari posting 2-3 video timelapse dan akun saya sudah 10K followers dalam sebulan.”'
+                  : '“At first I thought this workflow would be complicated, but it was surprisingly easy. Now I post 2-3 timelapse videos daily and my account reached 10K followers in a month.”'}
               </p>
               <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
                 <div className="w-9 h-9 rounded-full bg-[#1e3a8a] text-white font-black flex items-center justify-center text-xs shadow-xs">
@@ -1073,14 +1077,16 @@ export default function LandingPage({
                 </div>
                 <div>
                   <div className="text-sm font-bold text-[#0f172a]">Sarah Amelia</div>
-                  <div className="text-[11px] text-slate-500">Faceless Page Creator</div>
+                  <div className="text-[11px] text-slate-500">{isId ? 'Faceless Page Creator' : 'Faceless Channel Creator'}</div>
                 </div>
               </div>
             </div>
 
             <div className="bg-[#f8fafc] p-7 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between scroll-reveal scroll-delay-3 hover-lift">
               <p className="text-sm text-slate-700 leading-relaxed mb-6 italic">
-                &ldquo;Template prompt-nya worth it banget. Tinggal ganti style arsitektur dan langsung jadi konten baru. Nggak perlu pusing mikir dari nol lagi.&rdquo;
+                {isId
+                  ? '“Template prompt-nya worth it banget. Tinggal ganti style arsitektur dan langsung jadi konten baru. Nggak perlu pusing mikir dari nol lagi.”'
+                  : '“The prompt templates are totally worth it. Just swap the architectural style and you get brand new viral content. No more racking your brain from scratch.”'}
               </p>
               <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
                 <div className="w-9 h-9 rounded-full bg-[#1e3a8a] text-white font-black flex items-center justify-center text-xs shadow-xs">
@@ -1088,7 +1094,7 @@ export default function LandingPage({
                 </div>
                 <div>
                   <div className="text-sm font-bold text-[#0f172a]">Rendi Wijaya</div>
-                  <div className="text-[11px] text-slate-500">YouTube Shorts Creator</div>
+                  <div className="text-[11px] text-slate-500">{isId ? 'YouTube Shorts Creator' : 'Shorts & Reels Creator'}</div>
                 </div>
               </div>
             </div>
