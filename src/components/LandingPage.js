@@ -19,10 +19,6 @@ import {
   ExternalLink,
   ChevronDown,
   ShieldCheck,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
   Sparkles,
   MessageSquare,
   Palette,
@@ -48,10 +44,8 @@ export default function LandingPage({
   // Direct Shopify Checkout URL
   const SHOPIFY_PRODUCT_URL = 'https://tubaf3puagbnjx9l-60629549105.shopifypreview.com/products/ai-timelapse-video-generator-masterclass-lifetime-access';
 
-  // Video Player Controls
+  // Video Reference
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
 
   // Navbar Dynamic Scroll State
   const [scrolled, setScrolled] = useState(false);
@@ -91,25 +85,6 @@ export default function LandingPage({
 
   const toggleFaq = (idx) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }));
-  };
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
   };
 
   const scrollToSection = (id) => {
@@ -238,7 +213,7 @@ export default function LandingPage({
           ref={videoRef}
           autoPlay
           loop
-          muted={isMuted}
+          muted
           playsInline
           poster="/cinematic_villa_timelapse.jpg"
           className="absolute inset-0 w-full h-full object-cover z-0"
@@ -319,34 +294,6 @@ export default function LandingPage({
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Floating Controls for Background Video */}
-        <div className="absolute bottom-6 right-6 z-20 hidden sm:flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-[#080c14]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/60 shadow-lg text-xs text-white">
-            <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
-            <span className="text-[11px] font-bold text-white tracking-wide">
-              8K ARCHITECTURE REEL
-            </span>
-          </div>
-
-          <button
-            type="button"
-            onClick={togglePlay}
-            className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
-            title={isPlaying ? 'Pause Background Video' : 'Play Background Video'}
-          >
-            {isPlaying ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleMute}
-            className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
-            title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-          >
-            {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-          </button>
         </div>
 
         {/* Scroll Down Indicator */}
