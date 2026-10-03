@@ -31,7 +31,9 @@ import {
   Repeat,
   Eye,
   MessageSquareQuote,
-  TrendingUp
+  TrendingUp,
+  Home,
+  Zap
 } from 'lucide-react';
 
 export default function LandingPage({
@@ -488,6 +490,268 @@ export default function LandingPage({
                 ? '"Ini bukan kerja tim. Ini satu orang, satu laptop, dan AI. Dan sekarang, kamu bisa belajar caranya."'
                 : '"This is not a massive production team. This is one person, one laptop, and AI. And now, you can master how it is done."'}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2B. KENAPA TIMELAPSE AI? ── */}
+      <section id="why" className="py-24 bg-[#f8fafc] border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+          {/* Pill Badge */}
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284c7] font-extrabold text-xs uppercase tracking-wider mb-5">
+            {isId ? 'KENAPA TIMELAPSE AI?' : 'WHY AI TIMELAPSE?'}
+          </div>
+
+          {/* Main Title */}
+          <h2 className="text-3xl sm:text-5xl font-black text-[#0f172a] tracking-tight mb-3">
+            {isId ? (
+              <>
+                Konten Paling Gampang <span className="text-[#0284c7]">yang Paling Viral</span>
+              </>
+            ) : (
+              <>
+                The Easiest Content <span className="text-[#0284c7]">That Goes Most Viral</span>
+              </>
+            )}
+          </h2>
+
+          {/* Subtitle / Sub-bar */}
+          <p className="text-xs sm:text-sm font-bold tracking-widest text-slate-500 uppercase mb-14">
+            {isId ? 'TANPA KAMERA • TANPA DRONE • TANPA LOKASI' : 'NO CAMERA • NO DRONE • NO PHYSICAL LOCATION'}
+          </p>
+
+          {/* 3 Benefit Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Card 1 */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all flex flex-col items-center text-center group">
+              <div className="w-14 h-14 rounded-2xl bg-sky-50 border border-sky-100 text-[#0284c7] flex items-center justify-center mb-5 text-2xl group-hover:scale-110 transition-transform shadow-xs">
+                🏡
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#0f172a] mb-2.5">
+                {isId ? 'Ribuan Desain Rumah' : 'Thousands of Home Designs'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Mau rumah minimalis, modern, atau mewah? AI bisa generate unlimited variasi. Setiap video = konten unik.'
+                  : 'Minimalist, contemporary, or luxury villas? AI generates infinite variations. Every single video is unique.'}
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all flex flex-col items-center text-center group">
+              <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-100 text-amber-500 flex items-center justify-center mb-5 text-2xl group-hover:scale-110 transition-transform shadow-xs">
+                ⚡
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#0f172a] mb-2.5">
+                {isId ? '10 Menit per Video' : '10 Minutes per Video'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Dari prompt ke video siap upload. Nggak perlu nunggu proyek selesai berminggu-minggu.'
+                  : 'From text prompt to upload-ready video. No need to wait weeks for physical construction sites.'}
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all flex flex-col items-center text-center group">
+              <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-100 text-rose-500 flex items-center justify-center mb-5 text-2xl group-hover:scale-110 transition-transform shadow-xs">
+                📈
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-[#0f172a] mb-2.5">
+                {isId ? 'View Gampang Naik' : 'High Engagement & Views'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Niche timelapse rumah punya engagement rate tertinggi di TikTok & Reels. Satisfying content = auto-share.'
+                  : 'Architectural timelapses command the highest retention on TikTok & Reels. Satisfying visual loops trigger viral shares.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2C. YANG KAMU DAPAT (What You Get) ── */}
+      <section id="what-you-get" className="py-24 bg-white border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* Left Column: Heading + 5 Bullet Checklist */}
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284c7] font-extrabold text-xs uppercase tracking-wider mb-5">
+                {isId ? 'YANG KAMU DAPAT' : 'WHAT YOU GET'}
+              </div>
+
+              <h2 className="text-3xl sm:text-5xl font-black text-[#0f172a] tracking-tight leading-[1.15] mb-4">
+                {isId ? (
+                  <>
+                    Semua yang<br />
+                    Kamu Butuhkan<br />
+                    untuk <span className="text-[#0284c7]">Bikin Video</span><br />
+                    <span className="text-[#0284c7]">Timelapse AI</span>
+                  </>
+                ) : (
+                  <>
+                    Everything You Need<br />
+                    to <span className="text-[#0284c7]">Create Viral</span><br />
+                    <span className="text-[#0284c7]">AI Timelapse Videos</span>
+                  </>
+                )}
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-500 font-medium mb-8">
+                {isId
+                  ? 'Panduan lengkap dari nol sampai bisa viral.'
+                  : 'Complete step-by-step masterclass from scratch to viral success.'}
+              </p>
+
+              {/* 5 Checklists with subtle bottom dividers */}
+              <div className="divide-y divide-slate-100 border-t border-b border-slate-100 mb-8">
+                {/* 1. Template Prompt Siap Pakai */}
+                <div className="flex items-start gap-3.5 py-3.5">
+                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Check size={12} strokeWidth={3} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
+                      {isId ? 'Template Prompt Siap Pakai' : 'Ready-to-Use Prompt Templates'}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                      {isId
+                        ? 'Copy-paste prompt untuk generate gambar rumah tahap demi tahap'
+                        : 'Copy-paste exact prompt formulas to generate architectural stages seamlessly.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 2. Tutorial AI Image-to-Video */}
+                <div className="flex items-start gap-3.5 py-3.5">
+                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Check size={12} strokeWidth={3} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
+                      {isId ? 'Tutorial AI Image-to-Video' : 'AI Image-to-Video Tutorials'}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                      {isId
+                        ? 'Step-by-step cara ubah gambar jadi video timelapse smooth'
+                        : 'Step-by-step methods to convert static frames into 60 FPS buttery-smooth motion.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3. Editing & Music Guide */}
+                <div className="flex items-start gap-3.5 py-3.5">
+                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Check size={12} strokeWidth={3} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
+                      {isId ? 'Editing & Music Guide' : 'Editing & Audio Layering Guide'}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                      {isId
+                        ? 'Gabungkan klip, tambah ASMR sound, optimasi durasi untuk TikTok/Reels'
+                        : 'Combine sequence cuts, insert ASMR construction sounds, and optimize timing for TikTok/Reels.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4. Strategi Viral & Hashtag */}
+                <div className="flex items-start gap-3.5 py-3.5">
+                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Check size={12} strokeWidth={3} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
+                      {isId ? 'Strategi Viral & Hashtag' : 'Viral Growth & Hashtag Formula'}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                      {isId
+                        ? 'Formula caption, hashtag, dan timing upload yang terbukti boost views'
+                        : 'Tested caption frameworks, algorithmic tag grouping, and scheduling to trigger viral view spikes.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5. Variasi Niche Timelapse */}
+                <div className="flex items-start gap-3.5 py-3.5">
+                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Check size={12} strokeWidth={3} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
+                      {isId ? 'Variasi Niche Timelapse' : 'Niche Variations Blueprint'}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                      {isId
+                        ? 'Bukan cuma rumah - gedung, taman, interior, kota futuristik'
+                        : 'Expand beyond houses - skyscrapers, luxury interiors, zen gardens, and cyberpunk cities.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <button
+                type="button"
+                onClick={onOpenStudio}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm transition-all shadow-lg shadow-[#0284c7]/25 hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span>{isId ? 'Dapatkan Akses Sekarang' : 'Get Instant Access'}</span>
+                <ArrowRight size={16} />
+              </button>
+            </div>
+
+            {/* Right Column: Visual Preview Card */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-md bg-[#f8fafc] rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm flex flex-col items-center justify-center text-center">
+                <div className="flex items-center justify-between w-full gap-2">
+                  {/* Step 1: Fondasi */}
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center text-2xl mb-2.5 hover:scale-105 transition-transform">
+                      🏗️
+                    </div>
+                    <span className="text-xs font-bold text-slate-700">{isId ? 'Fondasi' : 'Foundation'}</span>
+                  </div>
+
+                  <div className="text-slate-300 font-bold text-sm shrink-0">→</div>
+
+                  {/* Step 2: Struktur */}
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center text-2xl mb-2.5 hover:scale-105 transition-transform">
+                      🧱
+                    </div>
+                    <span className="text-xs font-bold text-slate-700">{isId ? 'Struktur' : 'Structure'}</span>
+                  </div>
+
+                  <div className="text-slate-300 font-bold text-sm shrink-0">→</div>
+
+                  {/* Step 3: Finishing */}
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center text-2xl mb-2.5 hover:scale-105 transition-transform">
+                      🏡
+                    </div>
+                    <span className="text-xs font-bold text-slate-700">{isId ? 'Finishing' : 'Finishing'}</span>
+                  </div>
+
+                  <div className="text-slate-300 font-bold text-sm shrink-0">→</div>
+
+                  {/* Step 4: Video! */}
+                  <div className="flex flex-col items-center flex-1">
+                    <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center text-2xl mb-2.5 hover:scale-105 transition-transform">
+                      🎬
+                    </div>
+                    <span className="text-xs font-bold text-[#0284c7] font-black">{isId ? 'Video!' : 'Video!'}</span>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-slate-200/80 w-full">
+                  <p className="text-sm font-extrabold text-[#0284c7]">
+                    {isId ? 'Semua dari 1 prompt AI' : 'All generated from 1 AI prompt'}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
