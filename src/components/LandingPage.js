@@ -263,6 +263,7 @@ export default function LandingPage({
           loop
           muted
           playsInline
+          disablePictureInPicture
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />
@@ -963,7 +964,7 @@ export default function LandingPage({
                 <span className="text-xs font-mono font-bold text-slate-400 tracking-wider">
                   {isId ? 'NILAI BONUS' : 'BONUS VALUE'}
                 </span>
-                <span className="text-sm sm:text-base font-extrabold text-[#38bdf8]">
+                <span className="text-sm sm:text-base font-extrabold text-[#38bdf8] whitespace-nowrap">
                   {isId ? 'Rp 149.000' : '$49 Value'}
                 </span>
               </div>
@@ -1145,14 +1146,19 @@ export default function LandingPage({
               {isId ? 'Akses penuh ke semua materi video, prompt formula, dan generator tools.' : 'Full unrestricted access to all training, prompts, and tool generators.'}
             </p>
 
-            <div className="flex items-baseline gap-3 mb-4">
-              <span className="text-base text-slate-400 line-through font-medium">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2 mb-5">
+              <span className="text-base sm:text-lg text-slate-400 line-through font-semibold whitespace-nowrap">
                 {isId ? 'Rp 149.000' : '$49'}
               </span>
-              <span className="text-4xl sm:text-5xl font-black text-white">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight whitespace-nowrap">
                 {isId ? 'Rp 49.000' : '$19'}
               </span>
-              <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/15 text-[#38bdf8] border border-sky-500/30 whitespace-nowrap">
+                {isId ? 'Sekali Bayar' : 'One-Time'}
+              </span>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 whitespace-nowrap">
+                {isId ? 'Diskon 67%' : '61% OFF'}
+              </span>
             </div>
 
             {/* Quota Progress Bar */}
@@ -1334,15 +1340,15 @@ export default function LandingPage({
       >
         <div className="bg-[#0f172a]/95 backdrop-blur-xl border border-sky-500/35 rounded-2xl sm:rounded-full p-2.5 sm:p-2 pl-4 sm:pl-5 shadow-2xl shadow-sky-950/70 flex items-center justify-between gap-3 sm:gap-6 max-w-md mx-auto">
           <div className="flex flex-col text-left">
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] text-slate-400 line-through font-medium">
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
+              <span className="text-[10px] text-slate-400 line-through font-medium whitespace-nowrap">
                 {isId ? 'Rp 149.000' : '$49'}
               </span>
-              <span className="text-sm sm:text-base font-black text-white">
+              <span className="text-sm sm:text-base font-black text-white whitespace-nowrap">
                 {isId ? 'Rp 49.000' : '$19'}
               </span>
             </div>
-            <span className="text-[10px] text-[#38bdf8] font-bold uppercase tracking-wider flex items-center gap-1">
+            <span className="text-[10px] text-[#38bdf8] font-bold uppercase tracking-wider flex items-center gap-1 whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
               {isId ? 'Akses Selamanya' : 'Lifetime Access'}
             </span>
