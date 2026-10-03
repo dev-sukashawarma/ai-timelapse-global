@@ -218,9 +218,9 @@ export default function LandingPage({
           poster="/cinematic_villa_timelapse.jpg"
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
-          {/* Custom user video slot takes priority if added */}
-          <source src="/custom_hero_video.mp4" type="video/mp4" />
-          {/* Built-in high-definition generated reel */}
+          {/* Primary AI timelapse video */}
+          <source src="/video-ai.mp4" type="video/mp4" />
+          {/* Fallback generated reel */}
           <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
         </video>
 
