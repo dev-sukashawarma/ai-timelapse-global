@@ -756,6 +756,210 @@ export default function LandingPage({
         </div>
       </section>
 
+      {/* ── 2D. EXCLUSIVE BONUSES (Dua Hal yang Bikin Paket Ini Beda dari yang Lain) ── */}
+      <section id="bonuses" className="py-24 bg-[#f8fafc] border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284c7] font-extrabold text-xs uppercase tracking-wider mb-5">
+              {isId ? 'BONUS EKSKLUSIF' : 'EXCLUSIVE BONUSES'}
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[#0f172a] mb-4 leading-tight">
+              {isId ? (
+                <>
+                  Dua Hal yang Bikin Paket Ini{' '}
+                  <span className="bg-gradient-to-r from-[#0284c7] to-[#6366f1] bg-clip-text text-transparent">
+                    Beda dari yang Lain
+                  </span>
+                </>
+              ) : (
+                <>
+                  Two Things That Set This Bundle{' '}
+                  <span className="bg-gradient-to-r from-[#0284c7] to-[#6366f1] bg-clip-text text-transparent">
+                    Apart from the Rest
+                  </span>
+                </>
+              )}
+            </h2>
+
+            <p className="text-sm sm:text-base text-slate-600 font-medium">
+              {isId
+                ? 'Bukan cuma materi - kamu dapat jaminan terus berkembang dan support langsung dari mentor.'
+                : 'Not just static tutorials - you receive ongoing growth guarantee and direct 1-on-1 mentor support.'}
+            </p>
+          </div>
+
+          {/* 2 Bonus Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8">
+            {/* Bonus #1 Card */}
+            <div className="bg-[#0f172a] text-white rounded-3xl p-7 sm:p-9 border border-slate-800 hover:border-[#0284c7]/60 transition-all flex flex-col justify-between shadow-xl relative group">
+              <div>
+                {/* Icon & Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-sky-950/70 border border-sky-800/60 text-amber-400 flex items-center justify-center text-xl shadow-xs group-hover:scale-110 transition-transform">
+                    <Sparkles size={22} className="text-amber-400" />
+                  </div>
+                  <span className="px-3 py-1 rounded-full bg-sky-950/80 border border-sky-700/60 text-sky-400 font-mono font-bold text-xs uppercase tracking-wider">
+                    {isId ? 'BONUS #1' : 'BONUS #1'}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-1">
+                  {isId ? 'Akses Tools Eksklusif' : 'Exclusive Tool Access'}
+                </h3>
+                <h4 className="text-lg sm:text-xl font-black text-[#38bdf8] mb-4">
+                  AI Prompt Generator
+                </h4>
+
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                  {isId
+                    ? 'Nggak perlu pusing mikirin prompt rumit. Tinggal masukkan idemu, dan AI kami akan meracik prompt sinematik yang sempurna untuk Google Veo atau Nano Banana. Otomatis & Presisi.'
+                    : 'Skip the headaches of manual prompt formulation. Simply input your concept, and our system synthesizes production-ready cinematic prompts for Google Veo and Kling. Automated & precise.'}
+                </p>
+
+                {/* App Interface Visual Mockup */}
+                <div className="rounded-2xl bg-[#090d16] border border-slate-800 p-4 sm:p-5 mb-6 shadow-inner font-sans">
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                      <span className="text-[11px] font-mono text-slate-400 ml-1">AI Timelapse Prompt Generator</span>
+                    </div>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 font-mono font-semibold border border-sky-500/20">
+                      Studio v2.4
+                    </span>
+                  </div>
+
+                  {/* Mock input field */}
+                  <div className="space-y-2.5">
+                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+                      <span className="truncate">Modern Minimalist Concrete Villa on Cliffside...</span>
+                      <span className="text-[10px] text-slate-500 font-mono">16:9 4K</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-[10px]">
+                      <div className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                        <span>Veo 3 Architecture Engine</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        <span>4-Stage Coherent Flow</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Features List */}
+                <ul className="space-y-2.5 mb-6 text-xs sm:text-sm text-slate-300 font-medium">
+                  <li className="flex items-center gap-2.5">
+                    <span className="text-[#38bdf8] text-xs">✦</span>
+                    <span>{isId ? 'Fitur Multi-Sequence (hingga 5 sequence mulus)' : 'Multi-Sequence support (up to 5 smooth stages)'}</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <span className="text-[#38bdf8] text-xs">✦</span>
+                    <span>{isId ? 'Dynamic Camera Movement Auto-Director' : 'Dynamic Camera Movement Auto-Director'}</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <span className="text-[#38bdf8] text-xs">✦</span>
+                    <span>{isId ? 'Akses penuh selamanya, tanpa langganan bulanan' : 'Lifetime complete access, zero monthly subscriptions'}</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Bonus Value Bar */}
+              <div className="rounded-xl bg-slate-900/90 border border-slate-800 px-4 py-3 flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-slate-400 tracking-wider">
+                  {isId ? 'NILAI BONUS' : 'BONUS VALUE'}
+                </span>
+                <span className="text-sm sm:text-base font-extrabold text-[#38bdf8]">
+                  Rp 149.000
+                </span>
+              </div>
+            </div>
+
+            {/* Bonus #2 Card */}
+            <div className="bg-[#0f172a] text-white rounded-3xl p-7 sm:p-9 border border-slate-800 hover:border-[#818cf8]/60 transition-all flex flex-col justify-between shadow-xl relative group">
+              <div>
+                {/* Icon & Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-950/70 border border-indigo-800/60 text-indigo-400 flex items-center justify-center text-xl shadow-xs group-hover:scale-110 transition-transform">
+                    <MessageSquare size={22} className="text-indigo-400" />
+                  </div>
+                  <span className="px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-700/60 text-indigo-400 font-mono font-bold text-xs uppercase tracking-wider">
+                    {isId ? 'BONUS #2' : 'BONUS #2'}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-1">
+                  {isId ? 'Konsultasi 1-on-1' : '1-on-1 Consultation'}
+                </h3>
+                <h4 className="text-lg sm:text-xl font-black text-[#818cf8] mb-4">
+                  {isId ? 'Langsung ke Mentor - GRATIS' : 'Direct Mentor Access - FREE'}
+                </h4>
+
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-8">
+                  {isId
+                    ? 'Belajar sendiri kadang bisa stuck. Makanya, kamu bisa tanya langsung ke mentor - soal teknik, prompt yang tidak jalan, atau strategi konten. Personal, tanpa antrian, tanpa biaya tambahan.'
+                    : 'Learning solo can lead to roadblocks. Connect directly with an experienced creator to debug prompts, optimize animation workflows, or refine viral strategy. 1-on-1, zero queues, zero extra charges.'}
+                </p>
+
+                {/* Features List */}
+                <ul className="space-y-3.5 mb-8 text-xs sm:text-sm text-slate-300 font-medium">
+                  <li className="flex items-center gap-2.5">
+                    <span className="text-[#818cf8] text-xs">✦</span>
+                    <span>{isId ? 'Tanya apa saja seputar materi timelapse AI' : 'Ask anything regarding AI architecture timelapse'}</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <span className="text-[#818cf8] text-xs">✦</span>
+                    <span>{isId ? 'Dapat feedback langsung dari mentor berpengalaman' : 'Direct critique & pointers from experienced creators'}</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <span className="text-[#818cf8] text-xs">✦</span>
+                    <span>{isId ? 'Eksklusif untuk member - tidak dijual terpisah' : 'Exclusive to kit members - not sold separately'}</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Bonus Value Bar */}
+              <div className="rounded-xl bg-slate-900/90 border border-slate-800 px-4 py-3 flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-slate-400 tracking-wider">
+                  {isId ? 'NILAI BONUS' : 'BONUS VALUE'}
+                </span>
+                <span className="text-sm sm:text-base font-extrabold text-emerald-400">
+                  {isId ? 'Tak Ternilai' : 'Priceless'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Callout Banner */}
+          <div className="max-w-5xl mx-auto bg-[#0f172a] rounded-3xl p-6 sm:p-7 border border-slate-800 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="text-xs sm:text-sm text-slate-300 text-center sm:text-left leading-relaxed">
+              <strong className="text-white font-extrabold">
+                {isId ? 'Semua bonus ini sudah termasuk' : 'All of these exclusive bonuses are included'}
+              </strong>{' '}
+              {isId
+                ? 'dalam harga Rp 49.000 - tanpa syarat tambahan.'
+                : 'within the one-time $3.49 price - zero hidden conditions.'}
+            </p>
+
+            <button
+              type="button"
+              onClick={onOpenStudio}
+              className="px-7 py-3.5 rounded-2xl bg-white hover:bg-slate-100 text-[#0f172a] font-black text-sm transition-all shadow-lg hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer shrink-0"
+            >
+              <span>{isId ? 'Klaim Sekarang' : 'Claim Access Now'}</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* ── 3. FOUR-PHASE REAL ARCHITECTURE SEQUENCE ── */}
       <section id="workflow" className="py-20 border-b border-slate-200 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
