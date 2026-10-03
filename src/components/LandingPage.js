@@ -1123,81 +1123,54 @@ export default function LandingPage({
           style={{ background: '#0284c7' }}
         />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 scroll-reveal">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
-            {/* Left: HD Product Mockup Image */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-2xl bg-white group hover-lift">
-                <Image
-                  src="/product_kit_bundle.jpg"
-                  alt="AI Timelapse Creator Kit Digital Studio Bundle Mockup"
-                  width={1024}
-                  height={768}
-                  className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
-                />
-                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-[#080c14]/85 backdrop-blur-md border border-white/10 text-white flex items-center justify-between shadow-xl">
-                  <div className="text-left">
-                    <span className="font-extrabold text-sm block">Complete Studio Masterclass Kit</span>
-                    <span className="text-[11px] text-slate-300">Prompt Library + Video Training + AI Generator</span>
-                  </div>
-                  <span className="text-xs px-3 py-1 rounded-full bg-[#0284c7] font-mono font-bold uppercase tracking-wider shrink-0">
-                    HD Edition
-                  </span>
-                </div>
-              </div>
+        <div className="max-w-xl mx-auto px-4 sm:px-6 relative z-10 scroll-reveal">
+          <div className="bg-[#0f172a] border-2 border-[#0284c7] rounded-3xl p-8 sm:p-10 shadow-2xl shadow-sky-900/20 text-left relative hover-lift">
+            <div className="inline-block bg-[#0284c7] text-white font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm">
+              {isId ? 'PENAWARAN TERBATAS' : 'LIMITED TIME LAUNCH'}
             </div>
 
-            {/* Right: Obsidian Dark Pricing Card */}
-            <div className="lg:col-span-6">
-              <div className="bg-[#0f172a] border-2 border-[#0284c7] rounded-3xl p-8 sm:p-10 shadow-2xl shadow-sky-900/20 text-left relative hover-lift">
-                <div className="inline-block bg-[#0284c7] text-white font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm">
-                  {isId ? 'PENAWARAN TERBATAS' : 'LIMITED TIME LAUNCH'}
-                </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
+              AI TIMELAPSE COMPLETE KIT
+            </h3>
+            <p className="text-xs text-slate-300 mb-6">
+              {isId ? 'Akses penuh ke semua materi video, prompt formula, dan generator tools.' : 'Full unrestricted access to all training, prompts, and tool generators.'}
+            </p>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
-                  AI TIMELAPSE COMPLETE KIT
-                </h3>
-                <p className="text-xs text-slate-300 mb-6">
-                  {isId ? 'Akses penuh ke semua materi video, prompt formula, dan generator tools.' : 'Full unrestricted access to all training, prompts, and tool generators.'}
-                </p>
+            <div className="flex items-baseline gap-3 mb-2">
+              <span className="text-base text-slate-400 line-through font-medium">
+                {isId ? 'Rp 149.000' : '$49'}
+              </span>
+              <span className="text-4xl sm:text-5xl font-black text-white">
+                {isId ? 'Rp 49.000' : '$19'}
+              </span>
+              <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
+            </div>
 
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-base text-slate-400 line-through font-medium">
-                    {isId ? 'Rp 149.000' : '$49'}
-                  </span>
-                  <span className="text-4xl sm:text-5xl font-black text-white">
-                    {isId ? 'Rp 49.000' : '$19'}
-                  </span>
-                  <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
-                </div>
+            {/* Direct Generator Access & Shopify Checkout CTA */}
+            <div className="flex flex-col gap-3 mb-4">
+              <button
+                type="button"
+                onClick={onOpenStudio}
+                className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
+              >
+                <span>{isId ? 'DAPATKAN AKSES INSTAN (BUKA GENERATOR)' : 'GET INSTANT ACCESS (OPEN GENERATOR)'}</span>
+                <ArrowRight size={18} />
+              </button>
 
-                {/* Direct Generator Access & Shopify Checkout CTA */}
-                <div className="flex flex-col gap-3 mb-4">
-                  <button
-                    type="button"
-                    onClick={onOpenStudio}
-                    className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
-                  >
-                    <span>{isId ? 'DAPATKAN AKSES INSTAN (BUKA GENERATOR)' : 'GET INSTANT ACCESS (OPEN GENERATOR)'}</span>
-                    <ArrowRight size={18} />
-                  </button>
+              <a
+                href={SHOPIFY_PRODUCT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
+              >
+                <span>{isId ? 'Beli Lisensi Penuh via Shopify (Rp 49.000)' : 'Purchase Full License via Shopify ($19)'}</span>
+                <ExternalLink size={14} />
+              </a>
+            </div>
 
-                  <a
-                    href={SHOPIFY_PRODUCT_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
-                  >
-                    <span>{isId ? 'Beli Lisensi Penuh via Shopify (Rp 49.000)' : 'Purchase Full License via Shopify ($19)'}</span>
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400">
-                  <ShieldCheck size={14} className="text-[#38bdf8]" />
-                  <span>{isId ? 'Pembayaran Aman & Terenkripsi via Shopify' : 'Secure & Encrypted Checkout via Shopify'}</span>
-                </div>
-              </div>
+            <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400">
+              <ShieldCheck size={14} className="text-[#38bdf8]" />
+              <span>{isId ? 'Pembayaran Aman & Terenkripsi via Shopify' : 'Secure & Encrypted Checkout via Shopify'}</span>
             </div>
           </div>
         </div>
