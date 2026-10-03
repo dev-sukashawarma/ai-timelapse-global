@@ -23,7 +23,15 @@ import {
   Pause,
   Volume2,
   VolumeX,
-  Sparkles
+  Sparkles,
+  MessageSquare,
+  Palette,
+  Clapperboard,
+  Smartphone,
+  Repeat,
+  Eye,
+  MessageSquareQuote,
+  TrendingUp
 } from 'lucide-react';
 
 export default function LandingPage({
@@ -312,37 +320,175 @@ export default function LandingPage({
         </button>
       </section>
 
-      {/* ── 2. STORY NARRATIVE & VALUE MANIFESTO ── */}
+      {/* ── 2. VIRAL PROOF & 4-STEP PIPELINE WORKFLOW ── */}
       <section className="py-20 bg-[#f8fafc] border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl font-black text-[#0f172a] tracking-tight uppercase mb-6">
-            {isId ? 'KAMU PASTI PERNAH MELIHAT VIDEO SEPERTI INI' : 'YOU’VE PROBABLY SEEN THESE VIDEOS'}
-          </h2>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          {/* Top Social Proof Metrics Bar */}
+          <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-xs p-4 sm:p-6 mb-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+              <div className="flex items-center gap-3 px-3 py-2">
+                <div className="w-10 h-10 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center shrink-0 border border-sky-100">
+                  <Eye size={20} />
+                </div>
+                <div>
+                  <div className="text-base sm:text-lg font-black text-[#0f172a]">10M+ Views</div>
+                  <div className="text-xs text-slate-500">TikTok &amp; YouTube</div>
+                </div>
+              </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10 text-left">
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-[#0284c7] font-mono text-xs block mb-1 font-bold">01 / LAND</span>
-              <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Lahan kosong berdebu.' : 'Empty raw land.'}</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-[#0284c7] font-mono text-xs block mb-1 font-bold">02 / STRUCTURE</span>
-              <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Pondasi beton dipasang.' : 'Foundation emerges.'}</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-[#0284c7] font-mono text-xs block mb-1 font-bold">03 / FRAMING</span>
-              <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Dinding bata mulai naik.' : 'Walls & glass rise.'}</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-[#0284c7] font-mono text-xs block mb-1 font-bold">04 / COMPLETED</span>
-              <p className="text-sm font-bold text-[#0f172a]">{isId ? 'Rumah impian megah jadi.' : 'Dream villa completed.'}</p>
+              <div className="flex items-center gap-3 px-3 py-2 pt-4 md:pt-2">
+                <div className="w-10 h-10 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center shrink-0 border border-sky-100">
+                  <Repeat size={20} />
+                </div>
+                <div>
+                  <div className="text-base sm:text-lg font-black text-[#0f172a]">500K+ Shares</div>
+                  <div className="text-xs text-slate-500">{isId ? 'Lintas Platform' : 'Across Platforms'}</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 px-3 py-2 pt-4 md:pt-2">
+                <div className="w-10 h-10 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center shrink-0 border border-sky-100">
+                  <MessageSquareQuote size={20} />
+                </div>
+                <div>
+                  <div className="text-base sm:text-lg font-black text-[#0f172a]">&ldquo;Ini beneran AI?!&rdquo;</div>
+                  <div className="text-xs text-slate-500">{isId ? '90% Komentar Takjub' : '90% of Comments'}</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 px-3 py-2 pt-4 md:pt-2">
+                <div className="w-10 h-10 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center shrink-0 border border-sky-100">
+                  <TrendingUp size={20} />
+                </div>
+                <div>
+                  <div className="text-base sm:text-lg font-black text-[#0f172a]">Tren #1</div>
+                  <div className="text-xs text-slate-500">Content AI 2026</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <p className="text-base sm:text-xl text-[#1e3a8a] font-semibold max-w-2xl mx-auto leading-relaxed mb-4">
-            {isId
-              ? '"Ini bukan pekerjaan kru studio CGI mahal. Ini murni satu orang, satu laptop, dan instruksi AI yang presisi."'
-              : '"This is not a massive CGI studio production. It is simply one person, one laptop, and the exact AI prompt geometry."'}
-          </p>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-bold text-[#0284c7] tracking-wider uppercase mb-5 shadow-xs">
+              <Sparkles size={13} className="text-[#0284c7]" />
+              <span>{isId ? 'RAHASIANYA?' : 'THE SECRET?'}</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-black text-[#0f172a] tracking-tight mb-5 leading-tight">
+              {isId ? (
+                <>
+                  Ini Bukan CGI Studio. Ini <span className="bg-gradient-to-r from-[#0284c7] to-[#38bdf8] bg-clip-text text-transparent">Satu Orang + AI.</span>
+                </>
+              ) : (
+                <>
+                  Not a CGI Studio. Just <span className="bg-gradient-to-r from-[#0284c7] to-[#38bdf8] bg-clip-text text-transparent">One Person + AI.</span>
+                </>
+              )}
+            </h2>
+
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              {isId
+                ? 'Semua video timelapse rumah viral itu dibuat dengan pipeline sederhana yang bisa kamu ikuti dalam 10 menit.'
+                : 'Every viral architectural timelapse video is crafted using a streamlined 10-minute pipeline anyone can replicate.'}
+            </p>
+          </div>
+
+          {/* 4-Step Pipeline Flow with Connector Arrows */}
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 max-w-5xl mx-auto mb-16">
+            {/* Step 1 */}
+            <div className="flex-1 bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all text-center flex flex-col items-center relative group">
+              <div className="w-8 h-8 rounded-full bg-[#0284c7] text-white font-black text-xs flex items-center justify-center shadow-md shadow-[#0284c7]/30 -mt-10 mb-4 ring-4 ring-[#f8fafc]">
+                1
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <MessageSquare size={22} />
+              </div>
+              <h3 className="text-base font-bold text-[#0f172a] mb-2">
+                {isId ? 'Ketik Prompt' : 'Write Prompt'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Deskripsikan rumah impian. AI yang visualisasikan.'
+                  : 'Describe your dream concept. AI handles visualization.'}
+              </p>
+            </div>
+
+            <div className="hidden lg:flex items-center justify-center text-slate-300">
+              <ArrowRight size={22} />
+            </div>
+
+            {/* Step 2 */}
+            <div className="flex-1 bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all text-center flex flex-col items-center relative group">
+              <div className="w-8 h-8 rounded-full bg-[#0284c7] text-white font-black text-xs flex items-center justify-center shadow-md shadow-[#0284c7]/30 -mt-10 mb-4 ring-4 ring-[#f8fafc]">
+                2
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Palette size={22} />
+              </div>
+              <h3 className="text-base font-bold text-[#0f172a] mb-2">
+                {isId ? 'AI Generate Gambar' : 'AI Generates Frames'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Dari lahan kosong sampai rumah jadi, tahap demi tahap.'
+                  : 'From raw ground to completed villa, stage by stage.'}
+              </p>
+            </div>
+
+            <div className="hidden lg:flex items-center justify-center text-slate-300">
+              <ArrowRight size={22} />
+            </div>
+
+            {/* Step 3 */}
+            <div className="flex-1 bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all text-center flex flex-col items-center relative group">
+              <div className="w-8 h-8 rounded-full bg-[#0284c7] text-white font-black text-xs flex items-center justify-center shadow-md shadow-[#0284c7]/30 -mt-10 mb-4 ring-4 ring-[#f8fafc]">
+                3
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Clapperboard size={22} />
+              </div>
+              <h3 className="text-base font-bold text-[#0f172a] mb-2">
+                {isId ? 'AI Animasikan' : 'AI Animates Clip'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Gambar berubah jadi video timelapse yang smooth.'
+                  : 'Stills transform into smooth, fluid timelapse motion.'}
+              </p>
+            </div>
+
+            <div className="hidden lg:flex items-center justify-center text-slate-300">
+              <ArrowRight size={22} />
+            </div>
+
+            {/* Step 4 */}
+            <div className="flex-1 bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md hover:border-[#0284c7]/40 transition-all text-center flex flex-col items-center relative group">
+              <div className="w-8 h-8 rounded-full bg-[#0284c7] text-white font-black text-xs flex items-center justify-center shadow-md shadow-[#0284c7]/30 -mt-10 mb-4 ring-4 ring-[#f8fafc]">
+                4
+              </div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Smartphone size={22} />
+              </div>
+              <h3 className="text-base font-bold text-[#0f172a] mb-2">
+                {isId ? 'Upload & Viral' : 'Publish & Go Viral'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {isId
+                  ? 'Post ke TikTok/YouTube. Duduk, ngopi, liat views naik.'
+                  : 'Post to TikTok, Reels, & Shorts. Watch views skyrocket.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Manifesto Quote Box */}
+          <div className="max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 text-center shadow-xs">
+            <p className="text-sm sm:text-base text-slate-700 italic font-medium leading-relaxed">
+              {isId
+                ? '"Ini bukan kerja tim. Ini satu orang, satu laptop, dan AI. Dan sekarang, kamu bisa belajar caranya."'
+                : '"This is not a massive production team. This is one person, one laptop, and AI. And now, you can master how it is done."'}
+            </p>
+          </div>
         </div>
       </section>
 
