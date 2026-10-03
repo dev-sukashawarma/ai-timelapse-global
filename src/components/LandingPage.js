@@ -166,31 +166,31 @@ export default function LandingPage({
         </div>
       </header>
 
-      {/* ── 1. HERO CONTAINER WITH FULL CINEMATIC VIDEO BACKGROUND ── */}
-      <section className="pt-4 sm:pt-8 pb-16 px-4 sm:px-6 bg-white border-b border-slate-200">
-        <div className="max-w-6xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl bg-[#080c14] border border-slate-800 min-h-[580px] sm:min-h-[620px] flex items-center">
-          {/* Hero Container Video Background */}
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            poster="/cinematic_villa_timelapse.jpg"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          >
-            {/* Custom user video slot takes priority if added */}
-            <source src="/custom_hero_video.mp4" type="video/mp4" />
-            {/* Built-in high-definition generated reel */}
-            <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
-          </video>
+      {/* ── 1. FULLSCREEN HERO SECTION WITH CINEMATIC VIDEO BACKGROUND ── */}
+      <section className="relative w-full min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] flex items-center overflow-hidden border-b border-slate-800 bg-[#080c14]">
+        {/* Full-Bleed Video Background */}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted={isMuted}
+          playsInline
+          poster="/cinematic_villa_timelapse.jpg"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          {/* Custom user video slot takes priority if added */}
+          <source src="/custom_hero_video.mp4" type="video/mp4" />
+          {/* Built-in high-definition generated reel */}
+          <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
+        </video>
 
-          {/* Deep Navy / Cosmic Vignette Overlay for High-Contrast Text Legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/95 via-[#080c14]/85 to-[#080c14]/40 z-10 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/90 via-transparent to-[#080c14]/40 z-10 pointer-events-none" />
+        {/* Deep Navy / Cosmic Vignette Overlay for High-Contrast Text Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/95 via-[#080c14]/85 to-[#080c14]/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/90 via-transparent to-[#080c14]/40 z-10 pointer-events-none" />
 
-          {/* Hero Foreground Content */}
-          <div className="relative z-20 p-8 sm:p-14 lg:p-16 max-w-3xl">
+        {/* Hero Foreground Content */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 py-16 sm:py-24">
+          <div className="max-w-3xl">
             {/* Refined Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0284c7]/20 border border-[#38bdf8]/40 text-[11px] font-bold text-[#38bdf8] tracking-wider uppercase mb-6 shadow-sm backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
@@ -199,7 +199,7 @@ export default function LandingPage({
             </div>
 
             {/* Display Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-black tracking-tight text-white leading-[1.12] mb-5">
+            <h1 className="text-3xl sm:text-5xl lg:text-[3.75rem] font-black tracking-tight text-white leading-[1.12] mb-5">
               {isId ? (
                 <>
                   Buat Video Timelapse Konstruksi <span className="bg-gradient-to-r from-[#38bdf8] to-[#93c5fd] bg-clip-text text-transparent">100% dengan AI.</span>
@@ -255,35 +255,45 @@ export default function LandingPage({
               </div>
             </div>
           </div>
-
-          {/* Floating Controls for Background Video */}
-          <div className="absolute bottom-6 right-6 z-20 hidden sm:flex items-center gap-3">
-            <div className="flex items-center gap-2 bg-[#080c14]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/60 shadow-lg text-xs text-white">
-              <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
-              <span className="text-[11px] font-bold text-white tracking-wide">
-                8K ARCHITECTURE REEL
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={togglePlay}
-              className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
-              title={isPlaying ? 'Pause Background Video' : 'Play Background Video'}
-            >
-              {isPlaying ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleMute}
-              className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
-              title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-            >
-              {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-            </button>
-          </div>
         </div>
+
+        {/* Floating Controls for Background Video */}
+        <div className="absolute bottom-6 right-6 z-20 hidden sm:flex items-center gap-3">
+          <div className="flex items-center gap-2 bg-[#080c14]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/60 shadow-lg text-xs text-white">
+            <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
+            <span className="text-[11px] font-bold text-white tracking-wide">
+              8K ARCHITECTURE REEL
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={togglePlay}
+            className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
+            title={isPlaying ? 'Pause Background Video' : 'Play Background Video'}
+          >
+            {isPlaying ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleMute}
+            className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
+            title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+          >
+            {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+          </button>
+        </div>
+
+        {/* Scroll Down Indicator */}
+        <button
+          type="button"
+          onClick={() => scrollToSection('workflow')}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-1.5 text-slate-400 hover:text-white cursor-pointer transition-colors"
+        >
+          <span className="text-[10px] uppercase font-bold tracking-widest">{isId ? 'Pelajari Alur Kerja' : 'Explore Workflow'}</span>
+          <ChevronDown size={14} className="animate-bounce text-[#38bdf8]" />
+        </button>
       </section>
 
       {/* ── 2. STORY NARRATIVE & VALUE MANIFESTO ── */}
