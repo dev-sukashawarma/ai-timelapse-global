@@ -58,6 +58,15 @@ export default function LandingPage({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Ensure hero video autoplays reliably
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   // Scroll reveal animation observer
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -211,11 +220,12 @@ export default function LandingPage({
         {/* Full-Bleed Video Background starting from the very top */}
         <video
           ref={videoRef}
+          src="/video-ai.mp4"
           autoPlay
           loop
           muted
           playsInline
-          poster="/cinematic_villa_timelapse.jpg"
+          poster="/video_ai_poster.jpg"
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
           {/* Primary AI timelapse video */}
@@ -224,9 +234,9 @@ export default function LandingPage({
           <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
         </video>
 
-        {/* Deep Navy / Cosmic Vignette Overlay for High-Contrast Text Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/95 via-[#080c14]/85 to-[#080c14]/40 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/90 via-transparent to-[#080c14]/80 z-10 pointer-events-none" />
+        {/* Soft Vignette Overlay so the video is clearly visible while text stays crisp */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/70 via-[#080c14]/35 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/40 via-transparent to-[#080c14]/60 z-10 pointer-events-none" />
 
         {/* Hero Foreground Content */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pt-28 pb-16 sm:pt-36 sm:pb-24">
