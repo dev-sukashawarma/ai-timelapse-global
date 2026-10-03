@@ -11,7 +11,7 @@
  * Zero em-dashes per guidelines.
  */
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import {
   ArrowRight,
@@ -39,6 +39,17 @@ export default function LandingPage({
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+
+  // Navbar Dynamic Scroll State
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState(null);
@@ -75,51 +86,57 @@ export default function LandingPage({
 
   return (
     <div className="w-full text-[#0f172a] bg-white selection:bg-[#38bdf8] selection:text-[#0f172a] min-h-screen font-sans antialiased">
-      {/* ── TOP NAVBAR ── */}
-      <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/90 border-b border-slate-200/80 transition-all">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      {/* ── TOP NAVBAR (Seamlessly Blends Over Video with Soft Gradient) ── */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+          scrolled
+            ? 'bg-[#080c14]/90 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl py-3 sm:py-4'
+            : 'bg-gradient-to-b from-[#080c14]/95 via-[#080c14]/60 to-transparent border-b border-white/5 py-4 sm:py-6'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           {/* Brand Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-[#0284c7] to-[#38bdf8] flex items-center justify-center shadow-md shadow-[#0284c7]/25 shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-[#0284c7] to-[#38bdf8] flex items-center justify-center shadow-md shadow-[#0284c7]/30 shrink-0">
               <span className="text-base sm:text-lg" role="img" aria-label="Logo">🎬</span>
             </div>
             <div>
-              <span className="font-extrabold text-sm sm:text-base tracking-tight text-[#0f172a] block leading-tight">
-                AI TIMELAPSE<span className="text-[#0284c7]">™</span>
+              <span className="font-extrabold text-sm sm:text-base tracking-tight text-white block leading-tight">
+                AI TIMELAPSE<span className="text-[#38bdf8]">™</span>
               </span>
-              <span className="text-[10px] text-slate-500 tracking-widest uppercase font-medium block">
+              <span className="text-[10px] text-slate-300 tracking-widest uppercase font-medium block">
                 Creation Kit
               </span>
             </div>
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs sm:text-sm font-semibold text-slate-600">
+          <nav className="hidden md:flex items-center gap-8 text-xs sm:text-sm font-semibold text-slate-200">
             <button
               type="button"
               onClick={() => scrollToSection('workflow')}
-              className="hover:text-[#0284c7] transition-colors cursor-pointer"
+              className="hover:text-white transition-colors cursor-pointer"
             >
               {isId ? 'Cara Kerja' : 'Workflow'}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('features')}
-              className="hover:text-[#0284c7] transition-colors cursor-pointer"
+              className="hover:text-white transition-colors cursor-pointer"
             >
               {isId ? 'Kurikulum' : 'Curriculum'}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('testimonials')}
-              className="hover:text-[#0284c7] transition-colors cursor-pointer"
+              className="hover:text-white transition-colors cursor-pointer"
             >
               {isId ? 'Testimoni' : 'Reviews'}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('pricing')}
-              className="hover:text-[#0284c7] transition-colors cursor-pointer"
+              className="hover:text-white transition-colors cursor-pointer"
             >
               {isId ? 'Harga' : 'Pricing'}
             </button>
@@ -131,21 +148,21 @@ export default function LandingPage({
               href={SHOPIFY_PRODUCT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-bold text-xs transition-all cursor-pointer shadow-md shadow-[#0284c7]/20 hover:scale-105 active:scale-95"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-bold text-xs transition-all cursor-pointer shadow-md shadow-[#0284c7]/30 hover:scale-105 active:scale-95"
             >
               <span>{isId ? 'Beli Akses - $19' : 'Get Access - $19'}</span>
               <ArrowRight size={14} />
             </a>
 
             {/* Language Switcher */}
-            <div className="flex items-center bg-slate-100 p-1 rounded-full border border-slate-200">
+            <div className="flex items-center bg-[#0f172a]/75 backdrop-blur-md p-1 rounded-full border border-slate-700/60">
               <button
                 type="button"
                 onClick={() => onSwitchLanguage('id')}
                 className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   language === 'id'
-                    ? 'bg-[#0284c7] text-white shadow-xs font-extrabold'
-                    : 'text-slate-600 hover:text-[#0f172a]'
+                    ? 'bg-[#38bdf8] text-[#080c14] shadow-xs font-extrabold'
+                    : 'text-slate-300 hover:text-white'
                 }`}
               >
                 ID
@@ -155,8 +172,8 @@ export default function LandingPage({
                 onClick={() => onSwitchLanguage('en')}
                 className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   language === 'en'
-                    ? 'bg-[#0284c7] text-white shadow-xs font-extrabold'
-                    : 'text-slate-600 hover:text-[#0f172a]'
+                    ? 'bg-[#38bdf8] text-[#080c14] shadow-xs font-extrabold'
+                    : 'text-slate-300 hover:text-white'
                 }`}
               >
                 EN
@@ -167,8 +184,8 @@ export default function LandingPage({
       </header>
 
       {/* ── 1. FULLSCREEN HERO SECTION WITH CINEMATIC VIDEO BACKGROUND ── */}
-      <section className="relative w-full min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] flex items-center overflow-hidden border-b border-slate-800 bg-[#080c14]">
-        {/* Full-Bleed Video Background */}
+      <section className="relative w-full min-h-screen flex items-center overflow-hidden border-b border-slate-800 bg-[#080c14]">
+        {/* Full-Bleed Video Background starting from the very top */}
         <video
           ref={videoRef}
           autoPlay
@@ -186,10 +203,10 @@ export default function LandingPage({
 
         {/* Deep Navy / Cosmic Vignette Overlay for High-Contrast Text Legibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/95 via-[#080c14]/85 to-[#080c14]/40 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/90 via-transparent to-[#080c14]/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/90 via-transparent to-[#080c14]/80 z-10 pointer-events-none" />
 
         {/* Hero Foreground Content */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 py-16 sm:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pt-28 pb-16 sm:pt-36 sm:pb-24">
           <div className="max-w-3xl">
             {/* Refined Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0284c7]/20 border border-[#38bdf8]/40 text-[11px] font-bold text-[#38bdf8] tracking-wider uppercase mb-6 shadow-sm backdrop-blur-md">
