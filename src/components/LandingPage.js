@@ -6,11 +6,9 @@
  * Clean, modern light aesthetic with a crisp White background (Putih),
  * complemented by Deep Navy (Biru tua), Electric Sky Blue (Biru muda), and Dark Slate / Black (Hitam).
  *
- * Integrated with:
- * 1. Looping HD Cinematic AI Video Background (public/hero_timelapse_loop.mp4)
- * 2. Custom Video Slot support (public/custom_hero_video.mp4)
- * 3. Interactive 9-Template Showcase Switcher (10s theme sequence)
- * 4. Zero em-dashes per guidelines.
+ * Hero Container:
+ * Full cinematic video background playing seamlessly inside the Hero container.
+ * Zero em-dashes per guidelines.
  */
 
 import { useState, useRef } from 'react';
@@ -25,27 +23,22 @@ import {
   Pause,
   Volume2,
   VolumeX,
-  Sparkles,
-  Film
+  Sparkles
 } from 'lucide-react';
-import { translations } from '../lib/translations';
 
 export default function LandingPage({
   language = 'id',
   onSwitchLanguage,
 }) {
   const isId = language === 'id';
-  const t = translations[language] || translations.id;
-  const templateItems = t?.templates?.items || [];
 
   // Direct Shopify Checkout URL
   const SHOPIFY_PRODUCT_URL = 'https://tubaf3puagbnjx9l-60629549105.shopifypreview.com/products/ai-timelapse-video-generator-masterclass-lifetime-access';
 
-  // Video Player Controls & Active Template State
+  // Video Player Controls
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [activeTemplateIdx, setActiveTemplateIdx] = useState(3); // Default to Construction (idx 3)
 
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState(null);
@@ -80,8 +73,6 @@ export default function LandingPage({
     }
   };
 
-  const currentTemplate = templateItems[activeTemplateIdx] || templateItems[0] || {};
-
   return (
     <div className="w-full text-[#0f172a] bg-white selection:bg-[#38bdf8] selection:text-[#0f172a] min-h-screen font-sans antialiased">
       {/* ── TOP NAVBAR ── */}
@@ -104,13 +95,6 @@ export default function LandingPage({
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-8 text-xs sm:text-sm font-semibold text-slate-600">
-            <button
-              type="button"
-              onClick={() => scrollToSection('templates-preview')}
-              className="hover:text-[#0284c7] transition-colors cursor-pointer"
-            >
-              {isId ? '9 Template' : '9 Templates'}
-            </button>
             <button
               type="button"
               onClick={() => scrollToSection('workflow')}
@@ -182,254 +166,123 @@ export default function LandingPage({
         </div>
       </header>
 
-      {/* ── 1. HERO SECTION WITH CINEMATIC VIDEO BACKGROUND ── */}
-      <section className="relative pt-10 sm:pt-16 pb-16 overflow-hidden border-b border-slate-200 bg-white">
-        {/* Full-Width Ambient Looping Video Background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+      {/* ── 1. HERO CONTAINER WITH FULL CINEMATIC VIDEO BACKGROUND ── */}
+      <section className="pt-4 sm:pt-8 pb-16 px-4 sm:px-6 bg-white border-b border-slate-200">
+        <div className="max-w-6xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl bg-[#080c14] border border-slate-800 min-h-[580px] sm:min-h-[620px] flex items-center">
+          {/* Hero Container Video Background */}
           <video
+            ref={videoRef}
             autoPlay
             loop
-            muted
+            muted={isMuted}
             playsInline
             poster="/cinematic_villa_timelapse.jpg"
-            className="w-full h-full object-cover object-center opacity-15 scale-105"
+            className="absolute inset-0 w-full h-full object-cover z-0"
           >
             {/* Custom user video slot takes priority if added */}
             <source src="/custom_hero_video.mp4" type="video/mp4" />
             {/* Built-in high-definition generated reel */}
             <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
           </video>
-          {/* Subtle White Vignette to guarantee pristine text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/85 to-white pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/60 pointer-events-none" />
-        </div>
 
-        {/* Ambient Top Sky Glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[120vw] max-w-[1200px] h-[480px] rounded-full pointer-events-none opacity-25 blur-[130px] z-0"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(14, 165, 233, 0.25) 0%, rgba(30, 58, 138, 0.1) 50%, transparent 75%)' }}
-        />
+          {/* Deep Navy / Cosmic Vignette Overlay for High-Contrast Text Legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/95 via-[#080c14]/85 to-[#080c14]/40 z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/90 via-transparent to-[#080c14]/40 z-10 pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left Column: Value Prop & CTAs */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left">
-              {/* Refined Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-[11px] font-bold text-[#0284c7] tracking-wider uppercase mb-5 shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] animate-pulse" />
-                <Sparkles size={12} className="text-[#0284c7]" />
-                <span>{isId ? 'Tren Konten AI Video 2026' : 'Trending AI Video Workflow'}</span>
-              </div>
-
-              {/* Display Headline */}
-              <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-[#0f172a] leading-[1.12] mb-5">
-                {isId ? (
-                  <>
-                    Buat Video Timelapse Konstruksi <span className="bg-gradient-to-r from-[#0284c7] to-[#1e3a8a] bg-clip-text text-transparent">100% dengan AI.</span>
-                  </>
-                ) : (
-                  <>
-                    Create Viral AI Construction <span className="bg-gradient-to-r from-[#0284c7] to-[#1e3a8a] bg-clip-text text-transparent">Timelapses with AI.</span>
-                  </>
-                )}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-base sm:text-lg font-bold text-[#0284c7] tracking-wide mb-3">
-                {isId ? 'Tanpa Kamera. Tanpa Drone. Tanpa Lokasi Proyek.' : 'No Camera. No Drone. No Construction Site.'}
-              </p>
-
-              <p className="text-sm sm:text-base text-slate-600 max-w-xl leading-relaxed mb-8 font-normal">
-                {isId
-                  ? 'Kuasai alur kerja sistematis untuk mengubah prompt sederhana menjadi video timelapse konstruksi bernilai tinggi untuk TikTok, Instagram Reels, dan YouTube Shorts.'
-                  : 'Master the exact system to turn simple prompts into satisfying construction timelapse videos engineered for viral reach on TikTok, Reels, and Shorts.'}
-              </p>
-
-              {/* Primary CTA */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-8">
-                <a
-                  href={SHOPIFY_PRODUCT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#0284c7]/25 cursor-pointer flex items-center justify-center gap-2.5 shrink-0"
-                >
-                  <span>{isId ? 'Dapatkan Akses Instan - $19' : 'Get Instant Access - $19'}</span>
-                  <ArrowRight size={18} />
-                </a>
-              </div>
-
-              {/* Micro Trust Strip */}
-              <div className="flex flex-wrap items-center gap-5 text-xs text-slate-600 font-semibold">
-                <div className="flex items-center gap-1.5">
-                  <Check size={15} className="text-[#0284c7]" />
-                  <span>{isId ? 'Sekali Bayar' : 'One-Time Payment'}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Check size={15} className="text-[#0284c7]" />
-                  <span>{isId ? 'Akses Instan' : 'Instant Access'}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Check size={15} className="text-[#0284c7]" />
-                  <span>{isId ? 'Ramah Pemula' : 'Beginner Friendly'}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Check size={15} className="text-[#0284c7]" />
-                  <span>{isId ? 'Tanpa Langganan' : 'Zero Subscriptions'}</span>
-                </div>
-              </div>
+          {/* Hero Foreground Content */}
+          <div className="relative z-20 p-8 sm:p-14 lg:p-16 max-w-3xl">
+            {/* Refined Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0284c7]/20 border border-[#38bdf8]/40 text-[11px] font-bold text-[#38bdf8] tracking-wider uppercase mb-6 shadow-sm backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
+              <Sparkles size={13} className="text-[#38bdf8]" />
+              <span>{isId ? 'Tren Konten AI Video 2026' : 'Trending AI Video Workflow'}</span>
             </div>
 
-            {/* Right Column: High Definition Showcase Video Player */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-2xl bg-[#090d16] group shadow-sky-500/15">
-                {/* Foreground Video Element */}
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted={isMuted}
-                  playsInline
-                  poster="/cinematic_villa_timelapse.jpg"
-                  className="w-full h-auto aspect-video object-cover transition-transform duration-700"
-                >
-                  <source src="/custom_hero_video.mp4" type="video/mp4" />
-                  <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
-                </video>
+            {/* Display Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-black tracking-tight text-white leading-[1.12] mb-5">
+              {isId ? (
+                <>
+                  Buat Video Timelapse Konstruksi <span className="bg-gradient-to-r from-[#38bdf8] to-[#93c5fd] bg-clip-text text-transparent">100% dengan AI.</span>
+                </>
+              ) : (
+                <>
+                  Create Viral AI Construction <span className="bg-gradient-to-r from-[#38bdf8] to-[#93c5fd] bg-clip-text text-transparent">Timelapses with AI.</span>
+                </>
+              )}
+            </h1>
 
-                {/* Subtle dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090d16]/90 via-transparent to-black/20 pointer-events-none" />
-
-                {/* Top Floating Badge & Controls */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-xs text-white z-10">
-                  <div className="flex items-center gap-2 bg-[#0f172a]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/60 shadow-md">
-                    <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping" />
-                    <span className="font-bold text-[11px] tracking-wide text-white">
-                      AI REEL PREVIEW
-                    </span>
-                  </div>
-
-                  {/* Play & Mute Control Buttons */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={togglePlay}
-                      className="w-8 h-8 rounded-full bg-[#0f172a]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-md"
-                      title={isPlaying ? 'Pause' : 'Play'}
-                    >
-                      {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={toggleMute}
-                      className="w-8 h-8 rounded-full bg-[#0f172a]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-md"
-                      title={isMuted ? 'Unmute' : 'Mute'}
-                    >
-                      {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Bottom Overlay Label */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white bg-[#0f172a]/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-slate-700/60 shadow-lg">
-                  <div>
-                    <span className="font-bold text-white block text-xs">
-                      {isId ? 'Render Sinematik 8K 30fps' : '8K Cinematic AI Render 30fps'}
-                    </span>
-                    <span className="text-[11px] text-slate-300">
-                      Google Veo 3 &bull; Kling AI &bull; Sora
-                    </span>
-                  </div>
-                  <span className="text-[#38bdf8] font-mono text-[11px] font-bold bg-[#0284c7]/20 border border-[#38bdf8]/30 px-2.5 py-1 rounded-full">
-                    HD 1080p
-                  </span>
-                </div>
-              </div>
-
-              {/* Pro Tip on Video Customization */}
-              <p className="text-[11px] text-slate-500 mt-2 text-center">
-                {isId
-                  ? 'Kustomisasi: Video akan otomatis memutar file AI Anda sendiri jika ditaruh di public/custom_hero_video.mp4'
-                  : 'Customization: Will automatically prioritize your own AI render placed at public/custom_hero_video.mp4'}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 1.5 INTERACTIVE 9-TEMPLATE SHOWCASE TICKER ── */}
-      <section id="templates-preview" className="py-12 bg-white border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0284c7] mb-2">
-                <Film size={14} />
-                <span>{isId ? '9 Tema Template AI Siap Pakai' : '9 Curated AI Prompt Templates'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#0f172a] tracking-tight">
-                {isId ? 'PILIH & JALANKAN TEMA TIMELAPSE' : 'SELECT & RUN TIMELAPSE THEMES'}
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md">
-              {isId
-                ? 'Setiap tema dilengkapi prompt bertahap (10 detik per fase) yang diformulasikan khusus untuk Veo 3 dan Kling.'
-                : 'Each theme includes phased prompt sequences (10s per stage) calibrated for Veo 3, Kling, and Sora.'}
+            {/* Subtitle */}
+            <p className="text-base sm:text-xl font-bold text-[#38bdf8] tracking-wide mb-3">
+              {isId ? 'Tanpa Kamera. Tanpa Drone. Tanpa Lokasi Proyek.' : 'No Camera. No Drone. No Construction Site.'}
             </p>
-          </div>
 
-          {/* Horizontal Scrolling Pill Tabs for 9 Templates */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
-            {templateItems.map((tpl, idx) => {
-              const active = activeTemplateIdx === idx;
-              return (
-                <button
-                  key={tpl.id || idx}
-                  type="button"
-                  onClick={() => setActiveTemplateIdx(idx)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 border ${
-                    active
-                      ? 'bg-[#0f172a] text-white border-[#0f172a] shadow-md scale-105'
-                      : 'bg-[#f8fafc] text-slate-700 border-slate-200 hover:border-[#0284c7] hover:text-[#0284c7]'
-                  }`}
-                >
-                  <span>{tpl.emoji}</span>
-                  <span>{tpl.category}</span>
-                </button>
-              );
-            })}
-          </div>
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed mb-8 font-normal">
+              {isId
+                ? 'Kuasai alur kerja sistematis untuk mengubah prompt sederhana menjadi video timelapse konstruksi bernilai tinggi untuk TikTok, Instagram Reels, dan YouTube Shorts.'
+                : 'Master the exact system to turn simple prompts into satisfying construction timelapse videos engineered for viral reach on TikTok, Reels, and Shorts.'}
+            </p>
 
-          {/* Active Template Spotlight Card */}
-          {currentTemplate && (
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#f8fafc] border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <span className="text-2xl">{currentTemplate.emoji}</span>
-                  <span className="text-xs font-mono font-bold text-[#0284c7] uppercase bg-sky-50 border border-sky-200 px-2.5 py-0.5 rounded-full">
-                    {currentTemplate.veoTag || 'Timelapse Formula'}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500">
-                    Template #{activeTemplateIdx + 1} of {templateItems.length}
-                  </span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-black text-[#0f172a] mb-2">
-                  {currentTemplate.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {currentTemplate.description}
-                </p>
-              </div>
-
+            {/* Primary CTA */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-8">
               <a
                 href={SHOPIFY_PRODUCT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-full bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs sm:text-sm shrink-0 flex items-center gap-2 transition-all shadow-md shadow-[#0284c7]/20 hover:scale-105"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#0284c7]/40 cursor-pointer flex items-center justify-center gap-2.5 shrink-0"
               >
-                <span>{isId ? 'Buka Template Ini ($19)' : 'Unlock This Template ($19)'}</span>
-                <ArrowRight size={14} />
+                <span>{isId ? 'Dapatkan Akses Instan - $19' : 'Get Instant Access - $19'}</span>
+                <ArrowRight size={18} />
               </a>
             </div>
-          )}
+
+            {/* Micro Trust Strip */}
+            <div className="flex flex-wrap items-center gap-5 text-xs text-slate-300 font-medium">
+              <div className="flex items-center gap-1.5">
+                <Check size={15} className="text-[#38bdf8]" />
+                <span>{isId ? 'Sekali Bayar' : 'One-Time Payment'}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Check size={15} className="text-[#38bdf8]" />
+                <span>{isId ? 'Akses Instan' : 'Instant Access'}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Check size={15} className="text-[#38bdf8]" />
+                <span>{isId ? 'Ramah Pemula' : 'Beginner Friendly'}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Check size={15} className="text-[#38bdf8]" />
+                <span>{isId ? 'Tanpa Langganan' : 'Zero Subscriptions'}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Floating Controls for Background Video */}
+          <div className="absolute bottom-6 right-6 z-20 hidden sm:flex items-center gap-3">
+            <div className="flex items-center gap-2 bg-[#080c14]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/60 shadow-lg text-xs text-white">
+              <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
+              <span className="text-[11px] font-bold text-white tracking-wide">
+                8K ARCHITECTURE REEL
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={togglePlay}
+              className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
+              title={isPlaying ? 'Pause Background Video' : 'Play Background Video'}
+            >
+              {isPlaying ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleMute}
+              className="w-9 h-9 rounded-full bg-[#080c14]/85 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-white hover:text-[#38bdf8] transition-colors cursor-pointer shadow-lg"
+              title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+            >
+              {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+            </button>
+          </div>
         </div>
       </section>
 
