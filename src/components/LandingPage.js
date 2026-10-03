@@ -1231,14 +1231,14 @@ export default function LandingPage({
               {
                 q: isId ? 'Hasilnya beneran bisa viral?' : 'Can the videos really go viral?',
                 a: isId
-                  ? 'Niche timelapse rumah AI termasuk "satisfying content" yang disukai algoritma. Banyak akun baru dapet ratusan ribu views di video pertama. Kuncinya konsisten + strategi yang tepat - semua ada di panduan.'
-                  : 'AI architecture & timelapse videos belong to the high-engagement "satisfying content" niche favored by social algorithms. Many fresh accounts reach hundreds of thousands of views on their first upload. Consistency and proven prompts are key - everything is detailed inside.',
+                  ? 'Niche timelapse rumah AI termasuk "satisfying content" yang disukai algoritma. Banyak akun baru dapet ratusan ribu views di video pertama. Kuncinya konsisten + strategi yang tepat — semua ada di panduan.'
+                  : 'AI architecture & timelapse videos belong to the high-engagement "satisfying content" niche favored by social algorithms. Many fresh accounts reach hundreds of thousands of views on their first upload. Consistency and proven prompts are key — everything is detailed inside.',
               },
               {
                 q: isId ? 'Saya gaptek, apakah bisa?' : 'I am a complete beginner, is this suitable for me?',
                 a: isId
-                  ? 'Bisa banget! Setiap langkah pakai screenshot dan video tutorial. Intinya: copy prompt -> generate -> edit -> upload. Sesimpel itu.'
-                  : 'Absolutely! Every step is documented with visual walk-throughs and clear screenshots. The workflow is simple: copy prompt -> generate -> edit -> upload.',
+                  ? 'Bisa banget! Setiap langkah pakai screenshot dan video tutorial. Intinya: copy prompt → generate → edit → upload. Sesimpel itu.'
+                  : 'Absolutely! Every step is documented with visual walk-throughs and clear screenshots. The workflow is simple: copy prompt → generate → edit → upload.',
               },
               {
                 q: isId ? 'Berapa lama bisa bikin 1 video?' : 'How long does it take to create one video?',
