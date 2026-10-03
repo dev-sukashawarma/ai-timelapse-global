@@ -639,10 +639,6 @@ export default function LandingPage({
                 unoptimized
                 className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-[#080c14]/80 backdrop-blur-md border border-white/15 text-white text-[11px] font-bold font-mono tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-[#0284c7] transition-all">
-                <Sparkles size={12} className="text-[#38bdf8] group-hover:text-white" />
-                <span>ULTRA HD 4K</span>
-              </div>
             </div>
           </div>
 
