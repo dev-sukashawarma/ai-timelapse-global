@@ -127,8 +127,8 @@ export default function LandingPage({
       <header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
           scrolled
-            ? 'bg-[#080c14]/90 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl py-3 sm:py-4'
-            : 'bg-gradient-to-b from-[#080c14]/95 via-[#080c14]/60 to-transparent border-b border-white/5 py-4 sm:py-6'
+            ? 'bg-black/85 backdrop-blur-xl border-b border-slate-800 shadow-2xl py-3 sm:py-4'
+            : 'bg-transparent py-4 sm:py-6 border-none'
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
