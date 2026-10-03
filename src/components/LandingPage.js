@@ -208,14 +208,15 @@ export default function LandingPage({
 
           {/* Action CTAs & Language Switcher */}
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={onOpenStudio}
+            <a
+              href={SHOPIFY_PRODUCT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-bold text-xs transition-all cursor-pointer shadow-md shadow-[#0284c7]/30 hover:scale-105 active:scale-95"
             >
-              <span>{isId ? 'Buka Generator' : 'Open Generator'}</span>
+              <span>{isId ? 'Beli Akses' : 'Get Access'}</span>
               <ArrowRight size={14} />
-            </button>
+            </a>
 
             {/* Language Switcher */}
             <div className="flex items-center bg-[#0f172a]/75 backdrop-blur-md p-1 rounded-full border border-slate-700/60">
@@ -304,16 +305,17 @@ export default function LandingPage({
                 : 'Master the exact system to turn simple prompts into satisfying construction timelapse videos engineered for viral reach on TikTok, Reels, and Shorts.'}
             </p>
 
-            {/* Primary CTA: Opens Generator Page */}
+            {/* Primary CTA: Shopify Checkout */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-8">
-              <button
-                type="button"
-                onClick={onOpenStudio}
+              <a
+                href={SHOPIFY_PRODUCT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#0284c7]/40 cursor-pointer flex items-center justify-center gap-2.5 shrink-0"
               >
-                <span>{isId ? 'Dapatkan Akses Instan' : 'Get Instant Access'}</span>
+                <span>{isId ? 'Dapatkan Akses Sekarang' : 'Get Instant Access'}</span>
                 <ArrowRight size={18} />
-              </button>
+              </a>
             </div>
 
             {/* Micro Trust Strip */}
@@ -774,14 +776,15 @@ export default function LandingPage({
               </div>
 
               {/* Action Button */}
-              <button
-                type="button"
-                onClick={onOpenStudio}
+              <a
+                href={SHOPIFY_PRODUCT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm sm:text-base transition-all shadow-xl shadow-[#0284c7]/25 hover:scale-105 active:scale-95 cursor-pointer mt-2"
               >
                 <span>{isId ? 'Dapatkan Akses Sekarang' : 'Get Instant Access'}</span>
                 <ArrowRight size={18} />
-              </button>
+              </a>
             </div>
 
             {/* Right Column: Pristine Single Showcase Card */}
@@ -1033,14 +1036,15 @@ export default function LandingPage({
                 : 'within the one-time $19 price - zero hidden conditions.'}
             </p>
 
-            <button
-              type="button"
-              onClick={onOpenStudio}
+            <a
+              href={SHOPIFY_PRODUCT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-7 py-3.5 rounded-2xl bg-white hover:bg-slate-100 text-[#0f172a] font-black text-sm transition-all shadow-lg hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer shrink-0"
             >
               <span>{isId ? 'Klaim Sekarang' : 'Claim Access Now'}</span>
               <ArrowRight size={16} />
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -1168,25 +1172,16 @@ export default function LandingPage({
               </div>
             </div>
 
-            {/* Direct Generator Access & Shopify Checkout CTA */}
+            {/* Direct Shopify Checkout CTA */}
             <div className="flex flex-col gap-3 mb-4">
-              <button
-                type="button"
-                onClick={onOpenStudio}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
-              >
-                <span>{isId ? 'DAPATKAN AKSES INSTAN (BUKA GENERATOR)' : 'GET INSTANT ACCESS (OPEN GENERATOR)'}</span>
-                <ArrowRight size={18} />
-              </button>
-
               <a
                 href={SHOPIFY_PRODUCT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
+                className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
               >
-                <span>{isId ? 'Beli Lisensi Penuh via Shopify (Rp 49.000)' : 'Purchase Full License via Shopify ($19)'}</span>
-                <ExternalLink size={14} />
+                <span>{isId ? 'DAPATKAN AKSES SEKARANG VIA SHOPIFY' : 'GET INSTANT ACCESS VIA SHOPIFY'}</span>
+                <ArrowRight size={18} />
               </a>
             </div>
 
@@ -1353,14 +1348,15 @@ export default function LandingPage({
             </span>
           </div>
 
-          <button
-            type="button"
-            onClick={onOpenStudio}
+          <a
+            href={SHOPIFY_PRODUCT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-[#0284c7]/40 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0"
           >
-            <span>{isId ? 'Buka Generator' : 'Open Generator'}</span>
+            <span>{isId ? 'Beli Sekarang' : 'Get Access Now'}</span>
             <ArrowRight size={14} />
-          </button>
+          </a>
         </div>
       </div>
     </div>
