@@ -58,12 +58,30 @@ export default function LandingPage({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Ensure hero video autoplays reliably
+  // Ensure hero video autoplays reliably across all browsers
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(() => {});
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn('Autoplay prevented, retrying on interaction:', err);
+          const handleInteraction = () => {
+            if (video) {
+              video.muted = true;
+              video.play().catch(() => {});
+            }
+            window.removeEventListener('click', handleInteraction);
+            window.removeEventListener('touchstart', handleInteraction);
+            window.removeEventListener('scroll', handleInteraction);
+          };
+          window.addEventListener('click', handleInteraction, { once: true });
+          window.addEventListener('touchstart', handleInteraction, { once: true });
+          window.addEventListener('scroll', handleInteraction, { once: true });
+        });
+      }
     }
   }, []);
 
@@ -216,27 +234,28 @@ export default function LandingPage({
       </header>
 
       {/* ── 1. FULLSCREEN HERO SECTION WITH CINEMATIC VIDEO BACKGROUND ── */}
-      <section className="relative w-full min-h-screen flex items-center overflow-hidden border-b border-slate-800 bg-[#080c14]">
+      <section className="relative w-full min-h-screen flex items-center overflow-hidden border-b border-slate-800/80 bg-black">
         {/* Full-Bleed Video Background starting from the very top */}
         <video
-          ref={videoRef}
+          ref={(el) => {
+            videoRef.current = el;
+            if (el) {
+              el.muted = true;
+              el.defaultMuted = true;
+            }
+          }}
           src="/video-ai.mp4"
           autoPlay
           loop
           muted
           playsInline
-          poster="/video_ai_poster.jpg"
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          {/* Primary AI timelapse video */}
-          <source src="/video-ai.mp4" type="video/mp4" />
-          {/* Fallback generated reel */}
-          <source src="/hero_timelapse_loop.mp4" type="video/mp4" />
-        </video>
+        />
 
-        {/* Soft Vignette Overlay so the video is clearly visible while text stays crisp */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/70 via-[#080c14]/35 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/40 via-transparent to-[#080c14]/60 z-10 pointer-events-none" />
+        {/* Faded Neutral Overlay: Zero artificial blue tint so the raw cinematic video is fully visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 z-10 pointer-events-none" />
 
         {/* Hero Foreground Content */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pt-28 pb-16 sm:pt-36 sm:pb-24">
