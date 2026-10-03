@@ -33,7 +33,9 @@ import {
   MessageSquareQuote,
   TrendingUp,
   Home,
-  Zap
+  Zap,
+  X,
+  Plus
 } from 'lucide-react';
 
 export default function LandingPage({
@@ -84,11 +86,11 @@ export default function LandingPage({
     return () => observer.disconnect();
   }, []);
 
-  // FAQ Accordion State
-  const [openFaq, setOpenFaq] = useState(null);
+  // FAQ Accordion State - default all open to match reference layout
+  const [openFaqs, setOpenFaqs] = useState({ 0: true, 1: true, 2: true, 3: true, 4: true });
 
   const toggleFaq = (idx) => {
-    setOpenFaq(openFaq === idx ? null : idx);
+    setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }));
   };
 
   const togglePlay = () => {
@@ -657,11 +659,11 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* ── 4. YANG KAMU DAPAT (What You Get - Complete Masterclass Kit) ── */}
+      {/* ── 4. YANG KAMU DAPAT (What You Get - Clean & Elegant Layout) ── */}
       <section id="what-you-get" className="py-24 bg-[#f8fafc] border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-            {/* Left Column: Heading + 5 Bullet Checklist */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Left Column: Heading + 5 Bullet Checklist directly on surface */}
             <div className="lg:col-span-7 scroll-reveal">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284c7] font-extrabold text-xs uppercase tracking-wider mb-5">
                 {isId ? 'YANG KAMU DAPAT' : 'WHAT YOU GET'}
@@ -690,18 +692,18 @@ export default function LandingPage({
                   : 'Complete step-by-step masterclass from scratch to viral success.'}
               </p>
 
-              {/* 5 Checklists with subtle bottom dividers */}
-              <div className="divide-y divide-slate-200/80 border-t border-b border-slate-200/80 mb-8 bg-white p-5 rounded-3xl border shadow-xs">
+              {/* 5 Checklists with clean subtle dividers (No boxy wrapper) */}
+              <div className="space-y-4 mb-8">
                 {/* 1. Template Prompt Siap Pakai */}
-                <div className="flex items-start gap-3.5 py-3.5">
-                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <Check size={12} strokeWidth={3} />
+                <div className="flex items-start gap-4 pb-4 border-b border-slate-200/70">
+                  <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm shadow-[#0284c7]/30">
+                    <Check size={13} strokeWidth={3} />
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
                       {isId ? 'Template Prompt Siap Pakai' : 'Ready-to-Use Prompt Templates'}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
                       {isId
                         ? 'Copy-paste prompt untuk generate gambar rumah tahap demi tahap'
                         : 'Copy-paste exact prompt formulas to generate architectural stages seamlessly.'}
@@ -710,15 +712,15 @@ export default function LandingPage({
                 </div>
 
                 {/* 2. Tutorial AI Image-to-Video */}
-                <div className="flex items-start gap-3.5 py-3.5">
-                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <Check size={12} strokeWidth={3} />
+                <div className="flex items-start gap-4 pb-4 border-b border-slate-200/70">
+                  <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm shadow-[#0284c7]/30">
+                    <Check size={13} strokeWidth={3} />
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
                       {isId ? 'Tutorial AI Image-to-Video' : 'AI Image-to-Video Tutorials'}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
                       {isId
                         ? 'Step-by-step cara ubah gambar jadi video timelapse smooth'
                         : 'Step-by-step methods to convert static frames into 60 FPS buttery-smooth motion.'}
@@ -727,15 +729,15 @@ export default function LandingPage({
                 </div>
 
                 {/* 3. Editing & Music Guide */}
-                <div className="flex items-start gap-3.5 py-3.5">
-                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <Check size={12} strokeWidth={3} />
+                <div className="flex items-start gap-4 pb-4 border-b border-slate-200/70">
+                  <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm shadow-[#0284c7]/30">
+                    <Check size={13} strokeWidth={3} />
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
                       {isId ? 'Editing & Music Guide' : 'Editing & Audio Layering Guide'}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
                       {isId
                         ? 'Gabungkan klip, tambah ASMR sound, optimasi durasi untuk TikTok/Reels'
                         : 'Combine sequence cuts, insert ASMR construction sounds, and optimize timing for TikTok/Reels.'}
@@ -744,15 +746,15 @@ export default function LandingPage({
                 </div>
 
                 {/* 4. Strategi Viral & Hashtag */}
-                <div className="flex items-start gap-3.5 py-3.5">
-                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <Check size={12} strokeWidth={3} />
+                <div className="flex items-start gap-4 pb-4 border-b border-slate-200/70">
+                  <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm shadow-[#0284c7]/30">
+                    <Check size={13} strokeWidth={3} />
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
                       {isId ? 'Strategi Viral & Hashtag' : 'Viral Growth & Hashtag Formula'}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
                       {isId
                         ? 'Formula caption, hashtag, dan timing upload yang terbukti boost views'
                         : 'Tested caption frameworks, algorithmic tag grouping, and scheduling to trigger viral view spikes.'}
@@ -761,15 +763,15 @@ export default function LandingPage({
                 </div>
 
                 {/* 5. Variasi Niche Timelapse */}
-                <div className="flex items-start gap-3.5 py-3.5">
-                  <div className="w-5 h-5 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <Check size={12} strokeWidth={3} />
+                <div className="flex items-start gap-4 pb-1">
+                  <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm shadow-[#0284c7]/30">
+                    <Check size={13} strokeWidth={3} />
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-bold text-[#0f172a]">
                       {isId ? 'Variasi Niche Timelapse' : 'Niche Variations Blueprint'}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-slate-500 mt-0.5 leading-relaxed">
                       {isId
                         ? 'Bukan cuma rumah - gedung, taman, interior, kota futuristik'
                         : 'Expand beyond houses - skyscrapers, luxury interiors, zen gardens, and cyberpunk cities.'}
@@ -782,80 +784,63 @@ export default function LandingPage({
               <button
                 type="button"
                 onClick={onOpenStudio}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm transition-all shadow-lg shadow-[#0284c7]/25 hover:scale-105 active:scale-95 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] hover:from-[#0369a1] hover:to-[#0284c7] text-white font-extrabold text-sm sm:text-base transition-all shadow-xl shadow-[#0284c7]/25 hover:scale-105 active:scale-95 cursor-pointer mt-2"
               >
                 <span>{isId ? 'Dapatkan Akses Sekarang' : 'Get Instant Access'}</span>
-                <ArrowRight size={16} />
+                <ArrowRight size={18} />
               </button>
             </div>
 
-            {/* Right Column: Visual Preview Card & HD Product Kit Mockup */}
-            <div className="lg:col-span-5 flex flex-col gap-6 scroll-reveal scroll-delay-2">
-              {/* Card 1: 4-Step Prompt Flow */}
-              <div className="w-full bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm flex flex-col items-center justify-center text-center hover-lift">
-                <div className="flex items-center justify-between w-full gap-2">
+            {/* Right Column: Pristine Single Showcase Card */}
+            <div className="lg:col-span-5 flex justify-center items-center scroll-reveal scroll-delay-2">
+              <div className="w-full bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-xl shadow-slate-200/50 flex flex-col items-center justify-center text-center hover-lift transition-all">
+                <div className="flex items-center justify-between w-full gap-2 sm:gap-3">
                   {/* Step 1: Fondasi */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-sky-50 border border-sky-100 shadow-xs flex items-center justify-center text-xl sm:text-2xl mb-2 hover:scale-105 transition-transform">
+                    <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-2xl bg-sky-50/80 border border-sky-100/90 shadow-xs flex items-center justify-center text-2xl sm:text-3xl mb-2.5 hover:scale-110 transition-transform">
                       🏗️
                     </div>
-                    <span className="text-[11px] sm:text-xs font-bold text-slate-700">{isId ? 'Fondasi' : 'Foundation'}</span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-700">{isId ? 'Fondasi' : 'Foundation'}</span>
                   </div>
 
-                  <div className="text-slate-300 font-bold text-xs shrink-0">→</div>
+                  <div className="text-slate-300 font-bold text-sm sm:text-base shrink-0">→</div>
 
                   {/* Step 2: Struktur */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-sky-50 border border-sky-100 shadow-xs flex items-center justify-center text-xl sm:text-2xl mb-2 hover:scale-105 transition-transform">
+                    <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-2xl bg-sky-50/80 border border-sky-100/90 shadow-xs flex items-center justify-center text-2xl sm:text-3xl mb-2.5 hover:scale-110 transition-transform">
                       🧱
                     </div>
-                    <span className="text-[11px] sm:text-xs font-bold text-slate-700">{isId ? 'Struktur' : 'Structure'}</span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-700">{isId ? 'Struktur' : 'Structure'}</span>
                   </div>
 
-                  <div className="text-slate-300 font-bold text-xs shrink-0">→</div>
+                  <div className="text-slate-300 font-bold text-sm sm:text-base shrink-0">→</div>
 
                   {/* Step 3: Finishing */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-sky-50 border border-sky-100 shadow-xs flex items-center justify-center text-xl sm:text-2xl mb-2 hover:scale-105 transition-transform">
+                    <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-2xl bg-sky-50/80 border border-sky-100/90 shadow-xs flex items-center justify-center text-2xl sm:text-3xl mb-2.5 hover:scale-110 transition-transform">
                       🏡
                     </div>
-                    <span className="text-[11px] sm:text-xs font-bold text-slate-700">{isId ? 'Finishing' : 'Finishing'}</span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-700">{isId ? 'Finishing' : 'Finishing'}</span>
                   </div>
 
-                  <div className="text-slate-300 font-bold text-xs shrink-0">→</div>
+                  <div className="text-slate-300 font-bold text-sm sm:text-base shrink-0">→</div>
 
                   {/* Step 4: Video! */}
                   <div className="flex flex-col items-center flex-1">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-sky-50 border border-sky-100 shadow-xs flex items-center justify-center text-xl sm:text-2xl mb-2 hover:scale-105 transition-transform">
+                    <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-2xl bg-gradient-to-tr from-[#0284c7] to-[#38bdf8] border border-[#0284c7] shadow-lg shadow-[#0284c7]/25 flex items-center justify-center text-2xl sm:text-3xl mb-2.5 hover:scale-110 transition-transform">
                       🎬
                     </div>
-                    <span className="text-[11px] sm:text-xs font-bold text-[#0284c7] font-black">{isId ? 'Video!' : 'Video!'}</span>
+                    <span className="text-xs sm:text-sm font-extrabold text-[#0284c7]">{isId ? 'Video!' : 'Video!'}</span>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 w-full">
-                  <p className="text-xs sm:text-sm font-extrabold text-[#0284c7]">
+                <div className="mt-10 pt-6 border-t border-slate-100 w-full text-center">
+                  <p className="text-sm sm:text-base font-extrabold text-[#0284c7]">
                     {isId ? 'Semua dari 1 prompt AI' : 'All generated from 1 AI prompt'}
                   </p>
-                </div>
-              </div>
-
-              {/* Card 2: HD Bundle Mockup Image (Zero duplicate curriculum) */}
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-white group hover-lift">
-                <Image
-                  src="/product_kit_bundle.jpg"
-                  alt="AI Timelapse Creator Kit Digital Studio Bundle Mockup"
-                  width={800}
-                  height={500}
-                  className="w-full h-auto object-cover group-hover:scale-103 transition-transform duration-500"
-                />
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-2xl bg-[#080c14]/85 backdrop-blur-md border border-white/10 text-white flex items-center justify-between">
-                  <div className="text-xs font-bold">
-                    <span>AI Timelapse Complete Studio Kit</span>
-                  </div>
-                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-[#0284c7] font-mono font-bold uppercase tracking-wider">
-                    HD Edition
-                  </span>
+                  <p className="text-xs text-slate-400 mt-1 font-medium">
+                    {isId ? 'Otomatis render tahap demi tahap' : 'Automated multi-stage progression'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -1134,129 +1119,170 @@ export default function LandingPage({
       {/* ── 7. PRICING & SHOPIFY CHECKOUT CARD ── */}
       <section id="pricing" className="py-24 relative overflow-hidden border-b border-slate-200 text-center bg-[#f8fafc]">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[450px] rounded-full pointer-events-none opacity-15 blur-[130px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none opacity-15 blur-[140px]"
           style={{ background: '#0284c7' }}
         />
 
-        <div className="max-w-xl mx-auto px-4 sm:px-6 relative z-10 scroll-reveal">
-          <div className="bg-[#0f172a] border-2 border-[#0284c7] rounded-3xl p-8 sm:p-10 shadow-2xl shadow-sky-900/20 text-left relative hover-lift">
-            <div className="inline-block bg-[#0284c7] text-white font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm">
-              {isId ? 'PENAWARAN TERBATAS' : 'LIMITED TIME LAUNCH'}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 scroll-reveal">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+            {/* Left: HD Product Mockup Image */}
+            <div className="lg:col-span-6">
+              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-2xl bg-white group hover-lift">
+                <Image
+                  src="/product_kit_bundle.jpg"
+                  alt="AI Timelapse Creator Kit Digital Studio Bundle Mockup"
+                  width={1024}
+                  height={768}
+                  className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
+                />
+                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-[#080c14]/85 backdrop-blur-md border border-white/10 text-white flex items-center justify-between shadow-xl">
+                  <div className="text-left">
+                    <span className="font-extrabold text-sm block">Complete Studio Masterclass Kit</span>
+                    <span className="text-[11px] text-slate-300">Prompt Library + Video Training + AI Generator</span>
+                  </div>
+                  <span className="text-xs px-3 py-1 rounded-full bg-[#0284c7] font-mono font-bold uppercase tracking-wider shrink-0">
+                    HD Edition
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
-              AI TIMELAPSE COMPLETE KIT
-            </h3>
-            <p className="text-xs text-slate-300 mb-6">
-              {isId ? 'Akses penuh ke semua materi video, prompt formula, dan generator tools.' : 'Full unrestricted access to all training, prompts, and tool generators.'}
-            </p>
+            {/* Right: Obsidian Dark Pricing Card */}
+            <div className="lg:col-span-6">
+              <div className="bg-[#0f172a] border-2 border-[#0284c7] rounded-3xl p-8 sm:p-10 shadow-2xl shadow-sky-900/20 text-left relative hover-lift">
+                <div className="inline-block bg-[#0284c7] text-white font-black text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm">
+                  {isId ? 'PENAWARAN TERBATAS' : 'LIMITED TIME LAUNCH'}
+                </div>
 
-            <div className="flex items-baseline gap-3 mb-2">
-              <span className="text-base text-slate-400 line-through font-medium">
-                {isId ? 'Rp 149.000' : '$49'}
-              </span>
-              <span className="text-4xl sm:text-5xl font-black text-white">
-                {isId ? 'Rp 49.000' : '$19'}
-              </span>
-              <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
-            </div>
+                <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
+                  AI TIMELAPSE COMPLETE KIT
+                </h3>
+                <p className="text-xs text-slate-300 mb-6">
+                  {isId ? 'Akses penuh ke semua materi video, prompt formula, dan generator tools.' : 'Full unrestricted access to all training, prompts, and tool generators.'}
+                </p>
 
-            {/* Direct Generator Access & Shopify Checkout CTA */}
-            <div className="flex flex-col gap-3 mb-4">
-              <button
-                type="button"
-                onClick={onOpenStudio}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
-              >
-                <span>{isId ? 'DAPATKAN AKSES INSTAN (BUKA GENERATOR)' : 'GET INSTANT ACCESS (OPEN GENERATOR)'}</span>
-                <ArrowRight size={18} />
-              </button>
+                <div className="flex items-baseline gap-3 mb-2">
+                  <span className="text-base text-slate-400 line-through font-medium">
+                    {isId ? 'Rp 149.000' : '$49'}
+                  </span>
+                  <span className="text-4xl sm:text-5xl font-black text-white">
+                    {isId ? 'Rp 49.000' : '$19'}
+                  </span>
+                  <span className="text-xs text-[#38bdf8] font-bold uppercase tracking-wider">{isId ? 'Sekali Bayar' : 'One-Time'}</span>
+                </div>
 
-              <a
-                href={SHOPIFY_PRODUCT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
-              >
-                <span>{isId ? 'Beli Lisensi Penuh via Shopify (Rp 49.000)' : 'Purchase Full License via Shopify ($19)'}</span>
-                <ExternalLink size={14} />
-              </a>
-            </div>
+                {/* Direct Generator Access & Shopify Checkout CTA */}
+                <div className="flex flex-col gap-3 mb-4">
+                  <button
+                    type="button"
+                    onClick={onOpenStudio}
+                    className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] hover:from-[#0369a1] hover:to-[#0ea5e9] text-white font-extrabold text-base flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0284c7]/30 hover:scale-[1.02] active:scale-98 transition-all text-center"
+                  >
+                    <span>{isId ? 'DAPATKAN AKSES INSTAN (BUKA GENERATOR)' : 'GET INSTANT ACCESS (OPEN GENERATOR)'}</span>
+                    <ArrowRight size={18} />
+                  </button>
 
-            <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400">
-              <ShieldCheck size={14} className="text-[#38bdf8]" />
-              <span>{isId ? 'Pembayaran Aman & Terenkripsi via Shopify' : 'Secure & Encrypted Checkout via Shopify'}</span>
+                  <a
+                    href={SHOPIFY_PRODUCT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all text-center border border-slate-700/60"
+                  >
+                    <span>{isId ? 'Beli Lisensi Penuh via Shopify (Rp 49.000)' : 'Purchase Full License via Shopify ($19)'}</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400">
+                  <ShieldCheck size={14} className="text-[#38bdf8]" />
+                  <span>{isId ? 'Pembayaran Aman & Terenkripsi via Shopify' : 'Secure & Encrypted Checkout via Shopify'}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── 8. FAQ ACCORDION ── */}
-      <section id="faq" className="py-24 bg-white">
+      <section id="faq" className="py-20 sm:py-24 bg-[#f8fafc] border-t border-slate-200/60">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 scroll-reveal">
-            <h2 className="text-2xl sm:text-3xl font-black text-[#0f172a] uppercase mb-2">
-              {isId ? 'PERTANYAAN UMUM (FAQ)' : 'FREQUENTLY ASKED QUESTIONS'}
+          <div className="text-center mb-10 sm:mb-14 scroll-reveal">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f172a] tracking-tight">
+              {isId ? (
+                <>
+                  Masih Bingung? <span className="text-[#2563eb]">Baca Ini Dulu</span>
+                </>
+              ) : (
+                <>
+                  Still Confused? <span className="text-[#2563eb]">Read This First</span>
+                </>
+              )}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600">
-              {isId ? 'Jawaban cepat untuk hal-hal yang sering ditanyakan.' : 'Everything you need to know before getting started.'}
-            </p>
           </div>
 
-          <div className="space-y-3 scroll-reveal">
-            <div className="bg-[#f8fafc] rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover-lift">
-              <button
-                type="button"
-                onClick={() => toggleFaq(0)}
-                className="w-full p-5 text-left font-bold text-sm sm:text-base text-[#0f172a] flex items-center justify-between gap-4 cursor-pointer hover:text-[#0284c7] transition-colors"
-              >
-                <span>{isId ? 'Apakah saya membutuhkan software berbayar atau kamera?' : 'Do I need expensive cameras or paid software?'}</span>
-                <ChevronDown size={18} className={`shrink-0 transition-transform ${openFaq === 0 ? 'rotate-180 text-[#0284c7]' : 'text-slate-500'}`} />
-              </button>
-              {openFaq === 0 && (
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200 bg-white">
-                  {isId
-                    ? 'Sama sekali tidak! Anda hanya memerlukan laptop atau HP dengan koneksi internet. Semua tools AI yang digunakan gratis atau menyediakan free trial.'
-                    : 'Not at all! All you need is a laptop or phone with internet access. The primary AI tools featured offer free tiers or trial access.'}
+          <div className="space-y-4 scroll-reveal">
+            {[
+              {
+                q: isId ? 'Tools apa saja yang dibutuhkan?' : 'What tools do I need?',
+                a: isId
+                  ? 'Kamu hanya butuh laptop/HP dan koneksi internet. Tools utama: Google Flow AI (gratis), Whisk AI / image generator, dan CapCut untuk editing. Semua panduan setup ada di dalam materi.'
+                  : 'You only need a laptop or phone and an internet connection. Key tools: Google Flow AI (free), Whisk AI / image generator, and CapCut for editing. Full setup instructions are included in the kit.',
+              },
+              {
+                q: isId ? 'Hasilnya beneran bisa viral?' : 'Can the videos really go viral?',
+                a: isId
+                  ? 'Niche timelapse rumah AI termasuk "satisfying content" yang disukai algoritma. Banyak akun baru dapet ratusan ribu views di video pertama. Kuncinya konsisten + strategi yang tepat - semua ada di panduan.'
+                  : 'AI architecture & timelapse videos belong to the high-engagement "satisfying content" niche favored by social algorithms. Many fresh accounts reach hundreds of thousands of views on their first upload. Consistency and proven prompts are key - everything is detailed inside.',
+              },
+              {
+                q: isId ? 'Saya gaptek, apakah bisa?' : 'I am a complete beginner, is this suitable for me?',
+                a: isId
+                  ? 'Bisa banget! Setiap langkah pakai screenshot dan video tutorial. Intinya: copy prompt -> generate -> edit -> upload. Sesimpel itu.'
+                  : 'Absolutely! Every step is documented with visual walk-throughs and clear screenshots. The workflow is simple: copy prompt -> generate -> edit -> upload.',
+              },
+              {
+                q: isId ? 'Berapa lama bisa bikin 1 video?' : 'How long does it take to create one video?',
+                a: isId
+                  ? 'Rata-rata 10-15 menit per video. Kalau sudah terbiasa, bisa batch produce 5-10 video sekaligus dalam 1 jam.'
+                  : 'Around 10-15 minutes per video on average. Once familiar with the workflow, you can batch produce 5-10 videos within an hour.',
+              },
+              {
+                q: isId ? 'Apakah ada update materi?' : 'Will I get future updates?',
+                a: isId
+                  ? 'Ya! Setiap ada tools AI baru atau perubahan algoritma, materi di-update dan kamu dapat akses gratis ke semua update.'
+                  : 'Yes! Whenever new AI tools or algorithm shifts emerge, materials are updated and you get lifetime free access to all updates.',
+              },
+            ].map((faq, idx) => {
+              const isOpen = !!openFaqs[idx];
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-slate-300 transition-all p-5 sm:p-6"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full text-left flex items-start justify-between gap-4 cursor-pointer group"
+                  >
+                    <span className="font-bold text-sm sm:text-base text-rose-500 group-hover:text-rose-600 transition-colors">
+                      {faq.q}
+                    </span>
+                    <span className="shrink-0 w-6 h-6 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+                      {isOpen ? (
+                        <X size={16} strokeWidth={2.5} />
+                      ) : (
+                        <Plus size={16} strokeWidth={2.5} />
+                      )}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                      {faq.a}
+                    </p>
+                  )}
                 </div>
-              )}
-            </div>
-
-            <div className="bg-[#f8fafc] rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover-lift">
-              <button
-                type="button"
-                onClick={() => toggleFaq(1)}
-                className="w-full p-5 text-left font-bold text-sm sm:text-base text-[#0f172a] flex items-center justify-between gap-4 cursor-pointer hover:text-[#0284c7] transition-colors"
-              >
-                <span>{isId ? 'Saya masih pemula tanpa pengalaman AI, apakah bisa?' : 'I am a complete beginner, is this suitable for me?'}</span>
-                <ChevronDown size={18} className={`shrink-0 transition-transform ${openFaq === 1 ? 'rotate-180 text-[#0284c7]' : 'text-slate-500'}`} />
-              </button>
-              {openFaq === 1 && (
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200 bg-white">
-                  {isId
-                    ? 'Bisa banget! Materi dirancang dari nol dengan panduan visual dan template prompt siap copy-paste tanpa perlu istilah teknis rumit.'
-                    : 'Yes! The entire kit is beginner-engineered with step-by-step video walk-throughs and ready-to-paste prompt templates.'}
-                </div>
-              )}
-            </div>
-
-            <div className="bg-[#f8fafc] rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover-lift">
-              <button
-                type="button"
-                onClick={() => toggleFaq(2)}
-                className="w-full p-5 text-left font-bold text-sm sm:text-base text-[#0f172a] flex items-center justify-between gap-4 cursor-pointer hover:text-[#0284c7] transition-colors"
-              >
-                <span>{isId ? 'Bagaimana cara mengakses materi setelah membeli?' : 'How do I access the materials after purchase?'}</span>
-                <ChevronDown size={18} className={`shrink-0 transition-transform ${openFaq === 2 ? 'rotate-180 text-[#0284c7]' : 'text-slate-500'}`} />
-              </button>
-              {openFaq === 2 && (
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200 bg-white">
-                  {isId
-                    ? 'Segera setelah checkout berhasil di Shopify, Anda akan menerima email otomatis yang berisi link akses langsung ke seluruh video, prompt, dan tools generator.'
-                    : 'Immediately upon checkout via Shopify, an automated email with direct access links to all tutorials, prompt sheets, and tool generators will be delivered to your inbox.'}
-                </div>
-              )}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
