@@ -2,7 +2,7 @@
 import { translations } from "@/lib/translations";
 
 export default function TemplateGrid({ onSelect, language = 'en' }) {
-  const t = translations[language] || translations.id;
+  const t = translations[language] || translations.en;
   const templates = t.templates.items || [];
 
   return (

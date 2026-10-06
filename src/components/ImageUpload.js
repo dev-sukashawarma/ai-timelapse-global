@@ -13,18 +13,18 @@ export default function ImageUpload({ onImageReady, onHintChange, hint, language
   const [error, setError] = useState('');
   const inputRef = useRef(null);
 
-  const t = translations[language] || translations.id;
+  const t = translations[language] || translations.en;
 
   const processFile = useCallback((file) => {
     setError('');
     if (!file) return;
 
     if (!ACCEPTED.includes(file.type)) {
-      setError(language === 'en' ? 'Unsupported format. Use JPG, PNG, or WebP.' : 'Format tidak didukung. Gunakan JPG, PNG, atau WebP.');
+      setError('Unsupported format. Use JPG, PNG, or WebP.');
       return;
     }
     if (file.size > MAX_SIZE_MB * 1024 * 1024) {
-      setError(language === 'en' ? `File too large. Maximum ${MAX_SIZE_MB}MB.` : `Ukuran file terlalu besar. Maksimal ${MAX_SIZE_MB}MB.`);
+      setError(`File too large. Maximum ${MAX_SIZE_MB}MB.`);
       return;
     }
 
@@ -107,7 +107,7 @@ export default function ImageUpload({ onImageReady, onHintChange, hint, language
         <div className="relative rounded-2xl overflow-hidden border border-white/15 group shadow-xl">
           <img
             src={preview}
-            alt={language === 'en' ? 'Uploaded image preview' : 'Preview gambar'}
+            alt="Uploaded image preview"
             className="w-full max-h-80 object-cover"
           />
           {/* Overlay on hover */}

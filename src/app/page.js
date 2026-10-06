@@ -22,22 +22,9 @@ import {
 
 export default function Home() {
 
-  // ── Language State ──────────────────────────────────────────────────────────
-  const [language, setLanguage] = useState('en'); // Default to English
-
-  useEffect(() => {
-    const saved = localStorage.getItem('TIMELAPSE_LANG');
-    if (saved && (saved === 'en' || saved === 'id')) {
-      setLanguage(saved);
-    }
-  }, []);
-
-  const changeLanguage = (newLang) => {
-    setLanguage(newLang);
-    localStorage.setItem('TIMELAPSE_LANG', newLang);
-  };
-
-  const t = translations[language] || translations.id;
+  // ── Pure English Configuration ──────────────────────────────────────────────
+  const language = 'en';
+  const t = translations.en;
 
   // ── Beginner Guide Modal ────────────────────────────────────────────────────
   const [showGuide, setShowGuide] = useState(false);
@@ -94,14 +81,14 @@ export default function Home() {
     e?.preventDefault();
     if (!idea.trim() || !hasKey) return;
     setLoading(true);
-    setLoadingLabel(language === 'en' ? 'Analyzing your story concept...' : 'Menganalisis konsep cerita kamu...');
+    setLoadingLabel('Analyzing your story concept...');
     try {
       const results = await generateSceneSuggestions(idea, language);
       setSuggestions(results);
       setStep('suggestions');
     } catch (error) {
       console.error(error);
-      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      const fallbackMsg = 'Please check your API key.';
       alert(`Error: ${error.message || fallbackMsg}`);
     } finally {
       setLoading(false);
@@ -113,7 +100,7 @@ export default function Home() {
   const handleAnalyzeImage = async () => {
     if (!uploadedImage || !hasKey) return;
     setLoading(true);
-    setLoadingLabel(language === 'en' ? 'AI Vision is inspecting your photo...' : 'AI Vision sedang memeriksa foto kamu...');
+    setLoadingLabel('AI Vision is inspecting your photo...');
     try {
       const results = await analyzeImageForTimelapse(
         uploadedImage,
@@ -130,7 +117,7 @@ export default function Home() {
       setStep('suggestions');
     } catch (error) {
       console.error(error);
-      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      const fallbackMsg = 'Please check your API key.';
       alert(`Error: ${error.message || fallbackMsg}`);
     } finally {
       setLoading(false);
@@ -156,7 +143,7 @@ export default function Home() {
 
   const handleGenerateImagePrompts = async (scene) => {
     setLoading(true);
-    setLoadingLabel(language === 'en' ? 'Generating seamless construction keyframes & transitions...' : 'AI menyusun prompt gambar acuan & video transisi tanpa patah...');
+    setLoadingLabel('Generating seamless construction keyframes & transitions...');
     try {
       const result = await generateImageTimelapsePrompts(
         uploadedImage,
@@ -174,7 +161,7 @@ export default function Home() {
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
     } catch (error) {
       console.error(error);
-      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      const fallbackMsg = 'Please check your API key.';
       alert(`Error: ${error.message || fallbackMsg}`);
       setStep('suggestions');
     } finally {
@@ -185,7 +172,7 @@ export default function Home() {
 
   const handleGeneratePrompts = async (scene, count) => {
     setLoading(true);
-    setLoadingLabel(language === 'en' ? 'Crafting cinematic timelapse prompts...' : 'Menyusun prompt sinematik anti-patah...');
+    setLoadingLabel('Crafting cinematic timelapse prompts...');
     try {
       const result = await generateSequencePrompts(scene, parameters, count, cameraMotion, language);
       setPrompts(result);
@@ -193,7 +180,7 @@ export default function Home() {
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
     } catch (error) {
       console.error(error);
-      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      const fallbackMsg = 'Please check your API key.';
       alert(`Error: ${error.message || fallbackMsg}`);
       setStep('suggestions');
     } finally {
@@ -217,23 +204,16 @@ export default function Home() {
   // Copy all prompts to clipboard formatted
   const handleCopyAll = async () => {
     if (!prompts) return;
-    const isEn = language === 'en';
     let text = `========================================\nAI TIMELAPSE GENERATOR PROMPT BUNDLE\nScene: ${selectedScene?.title || ''}\nFormat: ${aspectRatio} | Style: ${visualStyle}\n========================================\n\n`;
 
-    text += isEn 
-      ? `--- PART 1: KEYFRAME IMAGE PROMPTS (IMAGEN / MIDJOURNEY) ---\n\n`
-      : `--- LANGKAH 1: GAMBAR ACUAN (KEYFRAMES) ---\n\n`;
+    text += `--- PART 1: KEYFRAME IMAGE PROMPTS (IMAGEN / MIDJOURNEY) ---\n\n`;
     prompts.frames?.forEach((f, i) => {
       text += `[KEYFRAME ${i + 1}]\n${f}\n\n`;
     });
 
-    text += isEn
-      ? `--- PART 2: VIDEO TRANSITION PROMPTS (VEO 3 / KLING / SORA) ---\n\n`
-      : `--- LANGKAH 2: VIDEO TRANSISI (VEO 3 / KLING) ---\n\n`;
+    text += `--- PART 2: VIDEO TRANSITION PROMPTS (VEO 3 / KLING / SORA) ---\n\n`;
     prompts.transitions?.forEach((tr, i) => {
-      text += isEn
-        ? `[TRANSITION ${i + 1} (Frame ${i + 1} -> Frame ${i + 2})]\n${tr}\n\n`
-        : `[TRANSISI ${i + 1} (Frame ${i + 1} -> Frame ${i + 2})]\n${tr}\n\n`;
+      text += `[TRANSITION ${i + 1} (Frame ${i + 1} -> Frame ${i + 2})]\n${tr}\n\n`;
     });
 
     if (prompts.negative_prompt) {
@@ -245,7 +225,7 @@ export default function Home() {
       setCopyAllStatus(true);
       setTimeout(() => setCopyAllStatus(false), 2500);
     } catch {
-      alert(isEn ? 'Failed to copy automatically. Please copy items one by one.' : 'Gagal menyalin otomatis. Silakan salin satu per satu.');
+      alert('Failed to copy automatically. Please copy items one by one.');
     }
   };
 
@@ -327,33 +307,6 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Language Switcher */}
-            <div className="flex items-center bg-secondary/80 backdrop-blur-md p-0.5 rounded-xl border border-white/10">
-              <button
-                type="button"
-                onClick={() => changeLanguage('en')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  language === 'en'
-                    ? 'bg-primary text-primary-foreground shadow-xs font-extrabold'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-                title="Switch to English"
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => changeLanguage('id')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  language === 'id'
-                    ? 'bg-primary text-primary-foreground shadow-xs font-extrabold'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-                title="Ganti ke Bahasa Indonesia"
-              >
-                ID
-              </button>
-            </div>
 
             {/* Beginner Guide Button */}
             <button
@@ -642,7 +595,7 @@ export default function Home() {
 
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between pt-3 border-t border-white/5 gap-3">
                       <span className="text-[11px] text-muted-foreground/60 hidden sm:inline">
-                        {language === 'en' ? '💡 Tip: Press Enter to generate' : '💡 Tip: Tekan Enter untuk langsung generate'}
+                        💡 Tip: Press Enter to generate
                       </span>
                       <button
                         type="submit"
@@ -650,7 +603,7 @@ export default function Home() {
                         className="w-full sm:w-auto px-6 py-3 btn-glow text-primary-foreground font-bold rounded-xl disabled:opacity-40 disabled:animate-none flex items-center justify-center gap-2 cursor-pointer text-sm shadow-md transition-all hover:scale-[1.01]"
                       >
                         {loading ? (
-                          <><Loader2 className="animate-spin" size={17} /> {loadingLabel || (language === 'en' ? 'Generating...' : 'Memproses...')}</>
+                          <><Loader2 className="animate-spin" size={17} /> {loadingLabel || 'Generating...'}</>
                         ) : (
                           <><Sparkles size={16} /> {t.textForm.submitBtn}</>
                         )}
@@ -808,7 +761,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 mb-6 glass-panel p-4 rounded-2xl border border-primary/20">
                 {uploadedImage && (
                   <div className="w-28 h-20 rounded-xl overflow-hidden border border-white/10 relative shrink-0">
-                    <img src={uploadedImage} alt={language === 'en' ? 'Reference preview' : 'Gambar referensi'} className="w-full h-full object-cover" />
+                    <img src={uploadedImage} alt="Reference preview" className="w-full h-full object-cover" />
                     <div className="absolute bottom-0 inset-x-0 text-center text-[9px] bg-black/70 text-white py-0.5">
                       Frame {clampedImageFrame}
                     </div>
@@ -949,7 +902,7 @@ export default function Home() {
                       {/* Photo Thumbnail */}
                       {inputMode === 'image' && uploadedImage && idx === clampedImageFrame - 1 ? (
                         <div className="w-full aspect-video rounded-xl overflow-hidden border border-primary/40 relative shadow">
-                          <img src={uploadedImage} alt={language === 'en' ? 'Reference photo' : 'Foto referensi'} className="w-full h-full object-cover" />
+                          <img src={uploadedImage} alt="Reference photo" className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-primary/10 flex items-end p-1">
                             <span className="text-[9px] bg-primary text-primary-foreground font-bold px-1.5 py-0.5 rounded shadow">
                               {t.result.yourPhotoThumb}

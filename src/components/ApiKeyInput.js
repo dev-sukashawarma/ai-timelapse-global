@@ -8,7 +8,7 @@ export default function ApiKeyInput({ onKeySaved, language = 'en' }) {
   const [status, setStatus] = useState('idle'); // 'idle' | 'success' | 'error'
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const t = translations[language] || translations.id;
+  const t = translations[language] || translations.en;
 
   useEffect(() => {
     const stored = localStorage.getItem('GEMINI_API_KEY');

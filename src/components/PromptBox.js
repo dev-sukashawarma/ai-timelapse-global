@@ -13,7 +13,7 @@ export default function PromptBox({
   isTransition = false,
 }) {
   const [copied, setCopied] = useState(false);
-  const t = translations[language] || translations.id;
+  const t = translations[language] || translations.en;
 
   const handleCopy = async () => {
     try {
@@ -91,7 +91,7 @@ export default function PromptBox({
           <div className="relative flex-grow min-h-52 bg-black/40">
             <img
               src={referenceImage}
-              alt={language === 'en' ? 'Original reference photo' : 'Foto referensi asli'}
+              alt="Original reference photo"
               className="w-full h-full object-cover"
             />
             <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 bg-green-500/90 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg">

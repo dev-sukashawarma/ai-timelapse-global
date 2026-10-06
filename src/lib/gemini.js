@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const base64ToImagePart = (dataUrl) => {
   const [header, data] = dataUrl.split(',');
   const match = header?.match(/:(.*?);/);
-  if (!match) throw new Error('Format gambar tidak valid atau bukan data URL.');
+  if (!match) throw new Error('Invalid image format or not a valid data URL.');
   const mimeType = match[1];
   return { inlineData: { data, mimeType } };
 };
@@ -18,7 +18,7 @@ const getGenAI = () => {
 };
 
 // Helper: Intercept and translate Gemini API errors
-const handleGeminiError = (error, language = 'id') => {
+const handleGeminiError = (error, language = 'en') => {
   const msg = error.message || "";
   const isEn = language === 'en';
   
