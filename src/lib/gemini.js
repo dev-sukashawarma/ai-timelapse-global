@@ -19,37 +19,28 @@ const getGenAI = () => {
 
 // Helper: Intercept and translate Gemini API errors
 const handleGeminiError = (error, language = 'en') => {
-  const msg = error.message || "";
-  const isEn = language === 'en';
-  
-  if (msg.includes('429') || msg.includes('Quota exceeded')) {
-    if (msg.includes('free_tier')) {
-      throw new Error(isEn 
-        ? "Free Tier quota reached. Please wait ~60 seconds before trying again."
-        : "Ups! Kuota API gratisan (Free Tier) sedang habis. Silakan tunggu sekitar 1 menit dan coba lagi."
-      );
+  const msg = error?.message || "";
+
+  if (msg.includes('429') || msg.includes('Quota exceeded') || msg.includes('RESOURCE_EXHAUSTED')) {
+    if (msg.includes('free_tier') || msg.includes('Free Tier')) {
+      throw new Error("Free Tier quota limit reached on your Gemini API key (HTTP 429). Google AI Studio limits requests per minute. Please wait ~60 seconds before trying again, or use a paid API key.");
     } else {
-      throw new Error(isEn
-        ? "API Key rate limit or quota exceeded. Please wait a moment and try again."
-        : "Ups! API Key kamu kehabisan kuota atau mencapai limit. Tunggu sebentar dan coba lagi."
-      );
+      throw new Error("Rate limit or quota reached (HTTP 429). Google AI Studio allows limited requests per minute on free keys. Please wait 30-60 seconds and try again.");
     }
   }
-  
-  if (msg.includes('503') || msg.includes('high demand') || msg.includes('overloaded')) {
-    throw new Error(isEn
-      ? "Gemini servers are experiencing high demand (503). Please retry in a few seconds."
-      : "Server Gemini sedang sibuk (503). Ini biasanya sementara — tunggu beberapa detik dan coba lagi."
-    );
+
+  if (msg.includes('503') || msg.includes('high demand') || msg.includes('overloaded') || msg.includes('UNAVAILABLE')) {
+    throw new Error("Google Gemini servers are temporarily experiencing high demand (HTTP 503). Please retry in a few seconds.");
   }
 
-  if (msg.includes('API_KEY_INVALID') || msg.includes('INVALID_ARGUMENT')) {
-    throw new Error(isEn
-      ? "Invalid Gemini API Key. Please verify you copied it correctly without extra spaces."
-      : "API Key tidak valid. Pastikan kamu copy-paste dengan benar tanpa spasi tambahan."
-    );
+  if (msg.includes('API_KEY_INVALID') || msg.includes('INVALID_ARGUMENT') || msg.includes('API key not valid')) {
+    throw new Error("Invalid Gemini API Key. Please verify you copied the complete key correctly from Google AI Studio without extra spaces.");
   }
-  
+
+  if (msg.includes('SAFETY') || msg.includes('blocked') || msg.includes('candidate was blocked')) {
+    throw new Error("The prompt was blocked by Google AI content safety filters. Please adjust the description or reference image.");
+  }
+
   throw error;
 };
 
@@ -199,16 +190,13 @@ export const UNIVERSAL_NEGATIVE_PROMPT =
 
 // Ordered model fallback chain prioritizing speed, accuracy, and quota reliability
 const FALLBACK_CHAIN = [
-  'gemini-2.5-flash',
   'gemini-2.0-flash',
-  'gemini-2.5-pro',
   'gemini-1.5-flash',
   'gemini-1.5-pro',
-  'gemini-3.1-pro-preview',
-  'gemini-3.1-flash-lite',
+  'gemini-2.0-flash-lite',
 ];
 
-const executeWithFallback = async (primaryModel, prompt, language = 'id') => {
+const executeWithFallback = async (primaryModel, prompt, language = 'en') => {
   const genAI = getGenAI();
   const chain = [primaryModel, ...FALLBACK_CHAIN.filter(m => m !== primaryModel)];
 
@@ -221,7 +209,7 @@ const executeWithFallback = async (primaryModel, prompt, language = 'id') => {
       });
       const result = await model.generateContent(prompt);
       if (modelName !== primaryModel) {
-        console.info(`[API] Success with model: ${modelName}`);
+        console.info(`[API] Success with fallback model: ${modelName}`);
       }
       return parseWithRepair(result.response.text());
     } catch (error) {
@@ -297,7 +285,7 @@ Respond ONLY with valid JSON:
 ]`;
 
   const imagePart = base64ToImagePart(imageDataUrl);
-  const visionChain = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-1.5-flash'];
+  const visionChain = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
   let lastErr;
   
   for (const modelName of visionChain) {
@@ -413,7 +401,7 @@ Respond strictly with valid JSON:
 }`;
 
   const imagePart = base64ToImagePart(imageDataUrl);
-  const visionChain = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-1.5-flash'];
+  const visionChain = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
   let lastErr;
 
   for (const modelName of visionChain) {
@@ -463,7 +451,7 @@ Respond ONLY with valid JSON array:
   { "title": "...", "description": "...", "category": "...", "emoji": "..." }
 ]`;
 
-  return executeWithFallback("gemini-2.5-flash", prompt, language);
+  return executeWithFallback("gemini-2.0-flash", prompt, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -527,7 +515,7 @@ Respond with valid JSON only:
   "negative_prompt": "${UNIVERSAL_NEGATIVE_PROMPT}"
 }`;
 
-  const result = await executeWithFallback("gemini-2.5-pro", prompt, language);
+  const result = await executeWithFallback("gemini-2.0-flash", prompt, language);
   if (!result.negative_prompt) result.negative_prompt = UNIVERSAL_NEGATIVE_PROMPT;
   return result;
 };

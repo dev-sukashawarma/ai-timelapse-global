@@ -5,6 +5,8 @@ import ApiKeyInput from "@/components/ApiKeyInput";
 import TemplateGrid from "@/components/TemplateGrid";
 import PromptBox from "@/components/PromptBox";
 import ImageUpload from "@/components/ImageUpload";
+import PromptHistoryModal from "@/components/PromptHistoryModal";
+import ErrorModal from "@/components/ErrorModal";
 import { translations } from "@/lib/translations";
 import {
   generateSceneSuggestions,
@@ -17,7 +19,7 @@ import {
   Sparkles, ArrowRight, Loader2, ArrowRightLeft,
   ScanSearch, Globe, HelpCircle, Check, Copy, Download,
   SlidersHorizontal, Video, Layers, X, ShieldAlert, MonitorPlay,
-  ChevronDown
+  ChevronDown, History, AlertTriangle
 } from "lucide-react";
 
 export default function Home() {
@@ -73,6 +75,104 @@ export default function Home() {
     style: visualStyle,
   };
 
+  // ── History State ───────────────────────────────────────────────────────────
+  const [history, setHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
+
+  // ── Error Modal State ───────────────────────────────────────────────────────
+  const [errorModalData, setErrorModalData] = useState(null);
+  const [retryAction, setRetryAction] = useState(null);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('TIMELAPSE_PROMPT_HISTORY');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) setHistory(parsed);
+      }
+    } catch (e) {
+      console.warn('[History] Failed to parse history:', e);
+    }
+  }, []);
+
+  const saveToHistory = (scene, promptBundle, mode, img = null) => {
+    try {
+      const newItem = {
+        id: 'hist_' + Date.now(),
+        createdAt: new Date().toISOString(),
+        title: scene?.title || idea || 'Timelapse Project',
+        description: scene?.description || '',
+        inputMode: mode,
+        aspectRatio,
+        visualStyle,
+        cameraMotion,
+        sequenceCount,
+        prompts: promptBundle,
+        thumbnail: mode === 'image' ? img : null,
+      };
+      setHistory((prev) => {
+        const updated = [newItem, ...prev.filter(x => x.id !== newItem.id)].slice(0, 30);
+        localStorage.setItem('TIMELAPSE_PROMPT_HISTORY', JSON.stringify(updated));
+        return updated;
+      });
+    } catch (e) {
+      console.warn('[History] Could not save history:', e);
+    }
+  };
+
+  const handleDeleteHistory = (id) => {
+    setHistory((prev) => {
+      const updated = prev.filter(x => x.id !== id);
+      localStorage.setItem('TIMELAPSE_PROMPT_HISTORY', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const handleClearAllHistory = () => {
+    setHistory([]);
+    localStorage.removeItem('TIMELAPSE_PROMPT_HISTORY');
+  };
+
+  const handleRestoreHistory = (item) => {
+    setSelectedScene({ title: item.title, description: item.description });
+    setPrompts(item.prompts);
+    if (item.aspectRatio) setAspectRatio(item.aspectRatio);
+    if (item.visualStyle) setVisualStyle(item.visualStyle);
+    if (item.cameraMotion) setCameraMotion(item.cameraMotion);
+    if (item.sequenceCount) setSequenceCount(item.sequenceCount);
+    setStep('result');
+    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
+  };
+
+  const triggerError = (error, context = 'Prompt Generation', retryFn = null) => {
+    console.error(`[${context} Error]:`, error);
+    const rawMsg = error?.message || 'An unexpected error occurred.';
+    let title = `${context} Failed`;
+    let code = 'ERROR';
+
+    if (rawMsg.includes('429') || rawMsg.includes('Quota') || rawMsg.includes('quota') || rawMsg.includes('limit') || rawMsg.includes('RESOURCE_EXHAUSTED')) {
+      title = 'Gemini API Rate Limit / Quota Reached';
+      code = 'HTTP 429 · RESOURCE_EXHAUSTED';
+    } else if (rawMsg.includes('API Key') || rawMsg.includes('API_KEY') || rawMsg.includes('INVALID') || rawMsg.includes('403')) {
+      title = 'Invalid Gemini API Key';
+      code = 'HTTP 403 · AUTH_ERROR';
+    } else if (rawMsg.includes('503') || rawMsg.includes('overloaded') || rawMsg.includes('UNAVAILABLE')) {
+      title = 'Google AI Servers Busy';
+      code = 'HTTP 503 · UNAVAILABLE';
+    } else if (rawMsg.includes('SAFETY') || rawMsg.includes('safety') || rawMsg.includes('blocked')) {
+      title = 'Content Safety Filter Triggered';
+      code = 'SAFETY_FILTER_TRIGGER';
+    }
+
+    setRetryAction(retryFn ? () => retryFn : null);
+    setErrorModalData({
+      title,
+      message: rawMsg,
+      raw: `Error: ${rawMsg}\nContext: ${context}\nTimestamp: ${new Date().toISOString()}\nStack: ${error?.stack || 'N/A'}`,
+      code,
+    });
+  };
+
   // ── Handlers ─────────────────────────────────────────────────────────────────
   const handleKeySaved = useCallback((key) => setHasKey(!!key), []);
 
@@ -87,9 +187,7 @@ export default function Home() {
       setSuggestions(results);
       setStep('suggestions');
     } catch (error) {
-      console.error(error);
-      const fallbackMsg = 'Please check your API key.';
-      alert(`Error: ${error.message || fallbackMsg}`);
+      triggerError(error, 'Analyzing Story Idea', () => handleGenerateSuggestions(e));
     } finally {
       setLoading(false);
       setLoadingLabel('');
@@ -116,9 +214,7 @@ export default function Home() {
       setSuggestions(results);
       setStep('suggestions');
     } catch (error) {
-      console.error(error);
-      const fallbackMsg = 'Please check your API key.';
-      alert(`Error: ${error.message || fallbackMsg}`);
+      triggerError(error, 'AI Image Inspection', handleAnalyzeImage);
     } finally {
       setLoading(false);
       setLoadingLabel('');
@@ -157,12 +253,11 @@ export default function Home() {
         language
       );
       setPrompts(result);
+      saveToHistory(scene, result, 'image', uploadedImage);
       setStep('result');
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
     } catch (error) {
-      console.error(error);
-      const fallbackMsg = 'Please check your API key.';
-      alert(`Error: ${error.message || fallbackMsg}`);
+      triggerError(error, 'Generating Image Timelapse Prompts', () => handleGenerateImagePrompts(scene));
       setStep('suggestions');
     } finally {
       setLoading(false);
@@ -176,12 +271,11 @@ export default function Home() {
     try {
       const result = await generateSequencePrompts(scene, parameters, count, cameraMotion, language);
       setPrompts(result);
+      saveToHistory(scene, result, 'text');
       setStep('result');
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
     } catch (error) {
-      console.error(error);
-      const fallbackMsg = 'Please check your API key.';
-      alert(`Error: ${error.message || fallbackMsg}`);
+      triggerError(error, 'Generating Timelapse Prompts', () => handleGeneratePrompts(scene, count));
       setStep('suggestions');
     } finally {
       setLoading(false);
@@ -307,6 +401,21 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Prompt History Button */}
+            <button
+              type="button"
+              onClick={() => setShowHistory(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-secondary/80 hover:bg-secondary text-foreground border border-white/10 text-xs font-semibold transition-all cursor-pointer shadow-xs"
+              title="View your saved prompt history"
+            >
+              <History size={14} className="text-primary" />
+              <span>History</span>
+              {history.length > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full bg-primary/20 text-primary text-[10px] font-bold">
+                  {history.length}
+                </span>
+              )}
+            </button>
 
             {/* Beginner Guide Button */}
             <button
@@ -1117,6 +1226,24 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* ── MODAL: PROMPT HISTORY ────────────────────────────────────────────── */}
+      <PromptHistoryModal
+        isOpen={showHistory}
+        onClose={() => setShowHistory(false)}
+        history={history}
+        onRestore={handleRestoreHistory}
+        onDelete={handleDeleteHistory}
+        onClearAll={handleClearAllHistory}
+      />
+
+      {/* ── MODAL: ERROR NOTIFICATION & LOGS ─────────────────────────────────── */}
+      <ErrorModal
+        isOpen={!!errorModalData}
+        onClose={() => setErrorModalData(null)}
+        errorData={errorModalData}
+        onRetry={retryAction}
+      />
 
       {/* ── FOOTER ─────────────────────────────────────────────────────────── */}
       <footer className="mt-14 pb-6 text-center text-xs text-muted-foreground/60 w-full z-10 relative">
