@@ -190,10 +190,9 @@ export const UNIVERSAL_NEGATIVE_PROMPT =
 
 // Ordered model fallback chain prioritizing speed, accuracy, and quota reliability
 const FALLBACK_CHAIN = [
-  'gemini-2.0-flash',
-  'gemini-1.5-flash',
-  'gemini-1.5-pro',
-  'gemini-2.0-flash-lite',
+  'gemini-2.5-flash',
+  'gemini-2.5-flash-lite',
+  'gemini-2.5-pro',
 ];
 
 const executeWithFallback = async (primaryModel, prompt, language = 'en') => {
@@ -201,6 +200,8 @@ const executeWithFallback = async (primaryModel, prompt, language = 'en') => {
   const chain = [primaryModel, ...FALLBACK_CHAIN.filter(m => m !== primaryModel)];
 
   let lastError;
+  let quotaError;
+
   for (const modelName of chain) {
     try {
       const model = genAI.getGenerativeModel({
@@ -214,11 +215,15 @@ const executeWithFallback = async (primaryModel, prompt, language = 'en') => {
       return parseWithRepair(result.response.text());
     } catch (error) {
       if (isAuthError(error)) handleGeminiError(error, language);
+      const msg = error.message || '';
+      if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+        quotaError = error;
+      }
       console.warn(`[API] Model ${modelName} failed:`, error.message);
       lastError = error;
     }
   }
-  handleGeminiError(lastError, language);
+  handleGeminiError(quotaError || lastError, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -285,8 +290,9 @@ Respond ONLY with valid JSON:
 ]`;
 
   const imagePart = base64ToImagePart(imageDataUrl);
-  const visionChain = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+  const visionChain = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro'];
   let lastErr;
+  let quotaErr;
   
   for (const modelName of visionChain) {
     try {
@@ -298,11 +304,15 @@ Respond ONLY with valid JSON:
       return parseWithRepair(result.response.text());
     } catch (err) {
       if (isAuthError(err)) handleGeminiError(err, language);
+      const msg = err.message || '';
+      if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+        quotaErr = err;
+      }
       console.warn(`[Vision] ${modelName} failed:`, err.message);
       lastErr = err;
     }
   }
-  handleGeminiError(lastErr, language);
+  handleGeminiError(quotaErr || lastErr, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -401,8 +411,9 @@ Respond strictly with valid JSON:
 }`;
 
   const imagePart = base64ToImagePart(imageDataUrl);
-  const visionChain = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+  const visionChain = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro'];
   let lastErr;
+  let quotaErr;
 
   for (const modelName of visionChain) {
     try {
@@ -416,11 +427,15 @@ Respond strictly with valid JSON:
       return parsed;
     } catch (err) {
       if (isAuthError(err)) handleGeminiError(err, language);
+      const msg = err.message || '';
+      if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+        quotaErr = err;
+      }
       console.warn(`[Vision Timelapse] ${modelName} failed:`, err.message);
       lastErr = err;
     }
   }
-  handleGeminiError(lastErr, language);
+  handleGeminiError(quotaErr || lastErr, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -451,7 +466,7 @@ Respond ONLY with valid JSON array:
   { "title": "...", "description": "...", "category": "...", "emoji": "..." }
 ]`;
 
-  return executeWithFallback("gemini-2.0-flash", prompt, language);
+  return executeWithFallback("gemini-2.5-flash", prompt, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -515,7 +530,7 @@ Respond with valid JSON only:
   "negative_prompt": "${UNIVERSAL_NEGATIVE_PROMPT}"
 }`;
 
-  const result = await executeWithFallback("gemini-2.0-flash", prompt, language);
+  const result = await executeWithFallback("gemini-2.5-flash", prompt, language);
   if (!result.negative_prompt) result.negative_prompt = UNIVERSAL_NEGATIVE_PROMPT;
   return result;
 };
