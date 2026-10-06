@@ -9,7 +9,7 @@ export default function PromptBox({
   helperText,
   referenceNote,
   referenceImage,
-  language = 'id',
+  language = 'en',
   isTransition = false,
 }) {
   const [copied, setCopied] = useState(false);
@@ -91,7 +91,7 @@ export default function PromptBox({
           <div className="relative flex-grow min-h-52 bg-black/40">
             <img
               src={referenceImage}
-              alt="Foto referensi asli"
+              alt={language === 'en' ? 'Original reference photo' : 'Foto referensi asli'}
               className="w-full h-full object-cover"
             />
             <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 bg-green-500/90 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg">

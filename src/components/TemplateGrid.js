@@ -1,7 +1,7 @@
 'use client';
 import { translations } from "@/lib/translations";
 
-export default function TemplateGrid({ onSelect, language = 'id' }) {
+export default function TemplateGrid({ onSelect, language = 'en' }) {
   const t = translations[language] || translations.id;
   const templates = t.templates.items || [];
 

@@ -1,0 +1,1728 @@
+{%- comment -%}
+  AI Timelapse — Full Landing Page (High-End Luxury Editorial Edition - Enhanced Typography + Card Video Support + Luxury Footer)
+  Install: Online Store → Themes → Edit code → sections → Add a new section → "ai-timelapse-landing"
+  Then in the theme editor: Add section → "AI Timelapse Landing"
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign default_product_url = '/products/ai-timelapse-video-generator-masterclass-lifetime-access'
+  assign price = section.settings.price
+  assign cta = section.settings.cta_link | default: default_product_url
+  if cta == '#' or cta == blank
+    assign cta = default_product_url
+  endif
+  assign idea_blocks = section.blocks | where: 'type', 'idea'
+  assign review_blocks = section.blocks | where: 'type', 'review'
+-%}
+
+<div class="atl" style="--atl-overlay: {{ section.settings.overlay | divided_by: 100.0 }};">
+
+  {%- comment -%} ========== 1. HERO ========== {%- endcomment -%}
+  <section class="atl-hero">
+    <div class="atl-hero__media">
+      {%- if section.settings.hero_video != blank -%}
+        {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1920x' }}
+      {%- elsif section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', sizes: '100vw' }}
+      {%- endif -%}
+    </div>
+    <div class="atl-hero__overlay"></div>
+
+    <div class="atl-hero__content">
+      <div class="atl-hero__top">
+        <span class="atl-hero__badge">Architectural AI Masterclass</span>
+        <span class="atl-hero__dot" aria-hidden="true">✦</span>
+        {%- if section.settings.hero_eyebrow != blank -%}
+          <span class="atl-hero__eyebrow">{{ section.settings.hero_eyebrow }}</span>
+        {%- endif -%}
+      </div>
+
+      <h1 class="atl-hero__title">{{ section.settings.hero_heading }}</h1>
+      
+      <p class="atl-hero__sub">{{ section.settings.hero_sub }}</p>
+      
+      <div class="atl-hero__action">
+        <a class="atl-btn atl-btn--gold" href="{{ cta }}">
+          <span>Get Instant Access — {{ price }}</span>
+        </a>
+      </div>
+
+      <ul class="atl-hero__trust">
+        <li><span>One-Time Payment</span></li>
+        <li><span>Instant Access</span></li>
+        <li><span>No Experience Needed</span></li>
+        <li><span>Lifetime Updates</span></li>
+      </ul>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 2. WATCH WHAT YOU CAN CREATE ========== {%- endcomment -%}
+  <section class="atl-sec atl-paper">
+    <div class="atl-wrap">
+      <div class="atl-center atl-reveal">
+        <p class="atl-label">Showcase &amp; Portfolio</p>
+        <h2 class="atl-h2">From Empty Land to a <em>Bespoke Villa</em></h2>
+        <div class="atl-lux-divider"><span>✦</span></div>
+      </div>
+
+      <div class="atl-watch">
+        <div class="atl-watch__frame atl-reveal">
+          <div class="atl-watch__video">
+            {%- if section.settings.showcase_video != blank -%}
+              {{ section.settings.showcase_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '720x' }}
+            {%- else -%}
+              <div class="atl-placeholder">
+                <span>Curated AI Timelapse<br>Showcase</span>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="atl-watch__caption atl-reveal">
+          <span class="atl-mini-tag">Pure AI Generation</span>
+          <p class="atl-watch__italic">From an empty horizon…</p>
+          <p class="atl-watch__italic">into an architectural masterpiece.</p>
+          <div class="atl-watch__highlight">
+            <p class="atl-watch__strong">100% Generated with AI.</p>
+            <p class="atl-watch__muted">No cameras. No drones. Zero on-site filming.</p>
+          </div>
+          <a class="atl-link" href="{{ cta }}">Explore The Workflow &mdash; {{ price }}</a>
+        </div>
+      </div>
+
+      <div class="atl-ba-wrap atl-reveal">
+        <div class="atl-center" style="margin-bottom: 28px;">
+          <p class="atl-label">The Metamorphosis</p>
+          <p class="atl-ba__title">Interactive Comparison</p>
+        </div>
+        <div class="atl-ba" style="--pos: 50%;">
+          <div class="atl-ba__img atl-ba__before">
+            {%- if section.settings.before_image != blank -%}
+              {{ section.settings.before_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1100px) 1100px, 100vw' }}
+            {%- else -%}
+              <div class="atl-placeholder atl-placeholder--wide"><span>Original Raw Land</span></div>
+            {%- endif -%}
+          </div>
+          <div class="atl-ba__img atl-ba__after">
+            {%- if section.settings.after_image != blank -%}
+              {{ section.settings.after_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1100px) 1100px, 100vw' }}
+            {%- else -%}
+              <div class="atl-placeholder atl-placeholder--wide atl-placeholder--dark"><span>Completed Dream Home</span></div>
+            {%- endif -%}
+          </div>
+          <span class="atl-ba__tag atl-ba__tag--l">01 / Initial Plot</span>
+          <span class="atl-ba__tag atl-ba__tag--r">02 / Finished Structure</span>
+          <span class="atl-ba__handle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+          </span>
+          <input class="atl-ba__range" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 3. THE STORY ========== {%- endcomment -%}
+  <section class="atl-sec atl-white">
+    <div class="atl-narrow atl-center">
+      <div class="atl-reveal">
+        <p class="atl-label">The Digital Shift</p>
+        <h2 class="atl-h2">You’ve mesmerized millions<br><em>with content like this.</em></h2>
+        <div class="atl-lux-divider"><span>✦</span></div>
+      </div>
+
+      <div class="atl-story atl-reveal">
+        <p>A quiet plot of raw earth.</p>
+        <p>The ground shifts, concrete sets.</p>
+        <p>Framing ascends with precision.</p>
+        <p>Glass, warm timber, and ambient light…</p>
+        <p class="atl-story__big">And in mere seconds, architectural art is born.</p>
+      </div>
+
+      <div class="atl-reveal">
+        <p class="atl-body">These hypnotic transformations capture millions of views across global feeds every single day.</p>
+        <p class="atl-body">Until now, creators spent months and thousands of dollars filming them. Today, state-of-the-art AI allows you to direct these visions directly from your desk.</p>
+      </div>
+
+      <div class="atl-problem atl-reveal">
+        <span class="atl-mini-tag atl-mini-tag--dark">The True Challenge</span>
+        <p class="atl-problem__quote">“Achieving consistency across building phases without distorted geometry or chaotic prompts usually requires hundreds of wasted hours.”</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 4. INTRODUCING ========== {%- endcomment -%}
+  <section class="atl-sec atl-sand atl-sand--bordered">
+    <div class="atl-narrow atl-center atl-reveal">
+      <p class="atl-label">The Curated Solution</p>
+      <h2 class="atl-wordmark">AI TIMELAPSE<sup>™</sup></h2>
+      <p class="atl-edition-tag">Architectural Edition • Vol. I</p>
+      <div class="atl-lux-divider"><span>✦</span></div>
+      <p class="atl-body atl-body--lead">The definitive blueprint for conceptualizing, generating, and polishing viral AI architectural timelapses.</p>
+      <p class="atl-body">No guesswork. No random outputs. Just a refined, predictable creative pipeline.</p>
+      <div style="margin-top: 36px;">
+        <a class="atl-btn atl-btn--gold" href="{{ cta }}">
+          <span>Acquire The Kit — {{ price }}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 5. EVERYTHING YOU NEED ========== {%- endcomment -%}
+  <section class="atl-sec atl-white">
+    <div class="atl-wrap">
+      <div class="atl-center atl-reveal">
+        <p class="atl-label">Curriculum &amp; Assets</p>
+        <h2 class="atl-h2">What Lies Within The Kit</h2>
+        <div class="atl-lux-divider"><span>✦</span></div>
+      </div>
+
+      <div class="atl-features">
+        <article class="atl-feature atl-reveal">
+          <div class="atl-feature__header">
+            <span class="atl-feature__num">01</span>
+            <span class="atl-feature__tag">Module</span>
+          </div>
+          <h3 class="atl-feature__title">Masterclass Video Training</h3>
+          <p>Follow the cohesive step-by-step masterclass: prompt engineering, consistency locks, timeline pacing, and output mastering.</p>
+        </article>
+
+        <article class="atl-feature atl-reveal">
+          <div class="atl-feature__header">
+            <span class="atl-feature__num">02</span>
+            <span class="atl-feature__tag">Library</span>
+          </div>
+          <h3 class="atl-feature__title">Engineered Prompt Archives</h3>
+          <p>Battle-tested prompts engineered specifically for structural coherence, realistic textures, and cinematographic lighting.</p>
+          <p class="atl-feature__caps">Prompt · Harmonize · Render</p>
+        </article>
+
+        <article class="atl-feature atl-reveal">
+          <div class="atl-feature__header">
+            <span class="atl-feature__num">03</span>
+            <span class="atl-feature__tag">Framework</span>
+          </div>
+          <h3 class="atl-feature__title">Structural Stage Blueprints</h3>
+          <p>A proven progression system guaranteeing natural building logic so your audience remains captivated till the final frame.</p>
+        </article>
+
+        <article class="atl-feature atl-reveal">
+          <div class="atl-feature__header">
+            <span class="atl-feature__num">04</span>
+            <span class="atl-feature__tag">Pipeline</span>
+          </div>
+          <h3 class="atl-feature__title">Image-to-Motion Workflow</h3>
+          <p>Techniques to convert still concept iterations into seamless, fluid cinematic camera movements with zero artifacting.</p>
+        </article>
+
+        <article class="atl-feature atl-reveal">
+          <div class="atl-feature__header">
+            <span class="atl-feature__num">05</span>
+            <span class="atl-feature__tag">Post-Production</span>
+          </div>
+          <h3 class="atl-feature__title">Luxury Editorial Pacing</h3>
+          <p>Simple post-production cuts, sound design tips, and color harmony tuned specifically for high-engagement platforms:</p>
+          <p class="atl-feature__caps">Reels · TikTok · Shorts</p>
+        </article>
+
+        <article class="atl-feature atl-reveal">
+          <div class="atl-feature__header">
+            <span class="atl-feature__num">06</span>
+            <span class="atl-feature__tag">Toolkit</span>
+          </div>
+          <h3 class="atl-feature__title">Prompt Generation Engine</h3>
+          <p>Generate endless original estate styles, climates, and structural aesthetics automatically whenever you need fresh concepts.</p>
+        </article>
+      </div>
+
+      <div class="atl-timeline atl-reveal">
+        <p class="atl-label atl-center">Architectural Phases Covered</p>
+        <ol>
+          <li><span>Virgin Terrain</span></li>
+          <li><span>Excavation</span></li>
+          <li><span>Superstructure</span></li>
+          <li><span>Façade</span></li>
+          <li><span>Roofing</span></li>
+          <li><span>Interior Glow</span></li>
+          <li><span>Finished Estate</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 6. ONE SYSTEM. HUNDREDS OF IDEAS (CARDS: VIDEO OR IMAGE) ========== {%- endcomment -%}
+  <section class="atl-sec atl-paper">
+    <div class="atl-wrap">
+      <div class="atl-center atl-reveal">
+        <p class="atl-label">Infinite Variations</p>
+        <h2 class="atl-h2">One System.<br><em>Infinite Visions.</em></h2>
+        <div class="atl-lux-divider"><span>✦</span></div>
+        <div class="atl-narrow">
+          <p class="atl-body">From mid-century brutalism to Scandinavian glass retreats, the workflow applies to any stylistic vision.</p>
+        </div>
+      </div>
+
+      <div class="atl-ideas">
+        {%- for block in idea_blocks -%}
+          <figure class="atl-idea atl-reveal" {{ block.shopify_attributes }}>
+            <div class="atl-idea__inner">
+              <div class="atl-idea__img">
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '600x' }}
+                {%- elsif block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 220px, 50vw' }}
+                {%- else -%}
+                  <span class="atl-idea__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+            <figcaption>
+              <span class="atl-idea__index">VOL. {{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <span class="atl-idea__label">{{ block.settings.title }}</span>
+            </figcaption>
+          </figure>
+        {%- endfor -%}
+      </div>
+
+      <div class="atl-center atl-reveal" style="margin-top: 48px;">
+        <p class="atl-closing">Limitless aesthetics. One elegant workflow.</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 7. MADE FOR BEGINNERS ========== {%- endcomment -%}
+  <section class="atl-sec atl-white">
+    <div class="atl-wrap atl-beginners">
+      <div class="atl-beginners__intro atl-reveal">
+        <p class="atl-label">Accessibility</p>
+        <h2 class="atl-h2">Sophisticated Results.<br><em>Frictionless Entry.</em></h2>
+        <p class="atl-closing atl-closing--left">You don't need technical pedigree. Simply follow the curated sequence.</p>
+      </div>
+
+      <div class="atl-beginners__list atl-reveal">
+        <p class="atl-label atl-label--ink" style="margin-bottom: 12px;">What You Don't Need:</p>
+        <ul class="atl-x">
+          <li>Expensive cinema cameras or drones</li>
+          <li>Architectural degrees or 3D CAD skills</li>
+          <li>High-end studio computing rigs</li>
+          <li>Complex coding or node programming</li>
+          <li>Years of motion graphics experience</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 8. REVIEWS ========== {%- endcomment -%}
+  {%- if review_blocks.size > 0 -%}
+    <section class="atl-sec atl-paper">
+      <div class="atl-wrap atl-center">
+        <div class="atl-reveal">
+          <p class="atl-label">Testimonials</p>
+          <h2 class="atl-h2">Words From The Creators</h2>
+          <div class="atl-lux-divider"><span>✦</span></div>
+        </div>
+        <div class="atl-reviews">
+          {%- for block in review_blocks -%}
+            <blockquote class="atl-review atl-reveal" {{ block.shopify_attributes }}>
+              <div class="atl-review__stars">★★★★★</div>
+              <p>“{{ block.settings.quote }}”</p>
+              <cite>— {{ block.settings.name }}</cite>
+            </blockquote>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ========== 9. OFFER ========== {%- endcomment -%}
+  <section class="atl-sec atl-sand atl-offer" id="atl-offer">
+    <div class="atl-wrap">
+      <div class="atl-center atl-reveal">
+        <p class="atl-label">Exclusive Acquisition</p>
+        <h2 class="atl-h2">Claim Your Access Today</h2>
+        <div class="atl-lux-divider"><span>✦</span></div>
+      </div>
+
+      <div class="atl-box atl-reveal">
+        <div class="atl-box__badge">Full Access Package</div>
+        <p class="atl-box__title">The AI Timelapse Creation Suite</p>
+        <p class="atl-box__desc">Everything required to produce studio-grade architectural reels.</p>
+        
+        <ul class="atl-check">
+          <li>Full High-Definition Video Masterclass</li>
+          <li>Vault of 100+ Architectural Prompts</li>
+          <li>Step-by-Step Construction Timeline Matrices</li>
+          <li>Image-to-Video Smooth Motion Guide</li>
+          <li>Short-Form Social Audio &amp; Hook Formulas</li>
+          <li>Automated Prompt Generator Access</li>
+          <li>Complimentary Lifetime System Upgrades</li>
+        </ul>
+
+        <div class="atl-price">
+          {%- if section.settings.compare_price != blank -%}
+            <s class="atl-price__compare">{{ section.settings.compare_price }}</s>
+          {%- endif -%}
+          <span class="atl-price__now">{{ price }}</span>
+          <p class="atl-price__caps">One-Time Private Access</p>
+          <p class="atl-price__note">No subscriptions. Immediate unlocked entry.</p>
+        </div>
+
+        <a class="atl-btn atl-btn--gold atl-btn--block" href="{{ cta }}">
+          <span>Unlock Instant Access — {{ price }}</span>
+        </a>
+        <p class="atl-box__foot">Direct access delivered via email immediately following checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 10. FINAL CTA ========== {%- endcomment -%}
+  <section class="atl-sec atl-dark">
+    <div class="atl-narrow atl-center atl-reveal">
+      <p class="atl-label atl-label--gold">Begin The Journey</p>
+      <h2 class="atl-h2">Transcend passive viewing.<br><em>Curate your own universe.</em></h2>
+      <div class="atl-lux-divider atl-lux-divider--light"><span>✦</span></div>
+      
+      <p class="atl-body">Why spend endless hours wandering through trial and error?</p>
+      <p class="atl-body">Begin with a system meticulously engineered for elegance, consistency, and impact.</p>
+      
+      <div class="atl-final-steps">
+        <p>Direct the vision.</p>
+        <p>Render the transformation.</p>
+        <p>Captivate your audience.</p>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <a class="atl-btn atl-btn--gold" href="{{ cta }}">
+          <span>Get Instant Access — {{ price }}</span>
+        </a>
+      </div>
+      <p class="atl-small">One-Time Investment • Instant Digital Access</p>
+    </div>
+  </section>
+
+  {%- comment -%} ========== 11. LUXURY FOOTER ========== {%- endcomment -%}
+  <footer class="atl-footer">
+    <div class="atl-wrap">
+      
+      <div class="atl-footer__top">
+        <div class="atl-footer__brand">
+          <h3 class="atl-footer__logo">AI TIMELAPSE<sup>™</sup></h3>
+          <p class="atl-footer__tagline">The Architectural AI Creation Kit</p>
+          <p class="atl-footer__bio">
+            Engineered for architects, designers, and digital creators worldwide. Directing high-aesthetic visual transformations from simple prompts.
+          </p>
+        </div>
+
+        <div class="atl-footer__col">
+          <h4 class="atl-footer__title">The System</h4>
+          <ul class="atl-footer__links">
+            <li><a href="#atl-offer">Curriculum &amp; Vault</a></li>
+            <li><a href="#atl-offer">Prompt Architecture</a></li>
+            <li><a href="#atl-offer">Construction Matrix</a></li>
+            <li><a href="#atl-offer">Video Transition Engine</a></li>
+          </ul>
+        </div>
+
+        <div class="atl-footer__col">
+          <h4 class="atl-footer__title">Legal &amp; Trust</h4>
+          <ul class="atl-footer__links">
+            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/refund-policy">Refund &amp; Guarantee</a></li>
+            <li><a href="/policies/legal-notice">License Agreement</a></li>
+          </ul>
+        </div>
+
+        <div class="atl-footer__col">
+          <h4 class="atl-footer__title">Assistance</h4>
+          <ul class="atl-footer__links">
+            <li><a href="mailto:support@yourstore.com">Contact Concierge</a></li>
+            <li><a href="#atl-offer">Instant Digital Access</a></li>
+            <li><a href="#atl-offer">One-Time Checkout</a></li>
+          </ul>
+          
+          <div class="atl-footer__socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="atl-footer__trust">
+        <div class="atl-footer__badge">
+          <span>🔒 256-Bit SSL Encrypted Checkout</span>
+        </div>
+        <div class="atl-footer__badge">
+          <span>⚡ Direct Digital Download via Email</span>
+        </div>
+        <div class="atl-footer__badge">
+          <span>💎 Lifetime Access &amp; Free Updates</span>
+        </div>
+      </div>
+
+      <div class="atl-footer__bottom">
+        <p>© {{ 'now' | date: '%Y' }} AI TIMELAPSE. All rights reserved. Powered by Shopify.</p>
+        <p class="atl-footer__disclaimer">
+          Independent educational masterclass. Not affiliated with, endorsed by, or sponsored by OpenAI, Google, Midjourney, or Runaway.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  {%- comment -%} ========== 12. STICKY MOBILE CTA ========== {%- endcomment -%}
+  <div class="atl-sticky" aria-hidden="true">
+    <div class="atl-sticky__info">
+      <span class="atl-sticky__tag">AI Timelapse</span>
+      <span class="atl-sticky__price">{{ price }}</span>
+    </div>
+    <a class="atl-sticky__btn" href="{{ cta }}" tabindex="-1">Access Now</a>
+  </div>
+</div>
+
+<style>
+  .atl {
+    --ink: #0A0A0A;
+    --paper: #FAF8F5;
+    --sand: #F3EFE9;
+    --sand-border: #DFD7CC;
+    --muted: #524E48;
+    --line: #DFD7CC;
+    --gold: #966E3A;
+    --gold-light: #DFC49E;
+    --serif: 'Cormorant Garamond', 'Didot', 'Bodoni MT', Georgia, serif;
+    --sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: lining-nums;
+    background-color: var(--paper);
+  }
+  .atl *, .atl *::before, .atl *::after { box-sizing: border-box; }
+  :where(.atl) :where(p, h1, h2, h3, ul, ol, figure, blockquote) { margin: 0; }
+  .atl img, .atl video { display: block; max-width: 100%; }
+  .atl em { font-style: italic; font-family: var(--serif); font-weight: 600; }
+
+  /* ---------- Layout ---------- */
+  .atl-sec { padding: 104px 24px; position: relative; }
+  .atl-paper { background: var(--paper); }
+  .atl-white { background: #FFFFFF; }
+  .atl-sand { background: var(--sand); }
+  .atl-sand--bordered { border-top: 1px solid var(--sand-border); border-bottom: 1px solid var(--sand-border); }
+  .atl-dark { background: #0A0908; color: #FAF8F5; }
+  .atl-wrap { max-width: 1160px; margin: 0 auto; }
+  .atl-narrow { max-width: 780px; margin: 0 auto; }
+  .atl-center { text-align: center; }
+
+  /* ---------- Luxury Ornaments & Divider ---------- */
+  .atl-lux-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 22px auto 32px;
+  }
+  .atl-lux-divider::before, .atl-lux-divider::after {
+    content: '';
+    width: 60px;
+    height: 1.5px;
+    background: var(--line);
+  }
+  .atl-lux-divider span {
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .atl-lux-divider--light::before, .atl-lux-divider--light::after {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .atl-mini-tag {
+    display: inline-block;
+    padding: 8px 18px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(150, 110, 58, 0.4);
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .atl-mini-tag--dark {
+    border-color: rgba(17,17,17,0.25);
+    background: #EFE9E0;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ---------- Typography (Enhanced Sizes & Bolder Weight) ---------- */
+  .atl-label {
+    margin-bottom: 14px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .atl-label--ink { color: var(--ink); }
+  .atl-label--gold { color: var(--gold-light); }
+  
+  .atl-h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: inherit;
+    text-wrap: balance;
+  }
+  .atl-body {
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #242220;
+  }
+  .atl-body--lead {
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.7;
+  }
+  .atl-body + .atl-body { margin-top: 16px; }
+  .atl-dark .atl-body { color: rgba(250, 248, 245, 0.94); }
+
+  .atl-closing {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.2vw, 40px);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .atl-closing--left { margin-top: 22px; font-style: italic; font-weight: 500; color: var(--muted); }
+
+  .atl-small {
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  /* ---------- Luxury Buttons ---------- */
+  .atl-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 56px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+  .atl-btn--gold {
+    background: #111111;
+    color: #FAF8F5;
+    border-color: #111111;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+  .atl-btn--gold::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+  }
+  .atl-btn--gold:hover {
+    background: #252422;
+    border-color: #252422;
+    color: #FAF8F5;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  }
+  .atl-btn--gold:hover::after {
+    border-color: rgba(212, 182, 143, 0.5);
+  }
+
+  .atl-dark .atl-btn--gold {
+    background: #FAF8F5;
+    color: #111111;
+    border-color: #FAF8F5;
+  }
+  .atl-dark .atl-btn--gold::after {
+    border-color: rgba(0, 0, 0, 0.18);
+  }
+  .atl-dark .atl-btn--gold:hover {
+    background: #EAE6DE;
+    color: #111111;
+  }
+
+  .atl-btn--block { display: flex; width: 100%; }
+
+  .atl-link {
+    display: inline-block;
+    margin-top: 28px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  .atl-link:hover { color: var(--gold); transform: translateX(3px); }
+
+  /* ---------- 1. Hero Section ---------- */
+  .atl-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
+    padding: 80px 24px 60px;
+    overflow: hidden;
+    background: #0A0908;
+    color: #FAF8F5;
+    text-align: center;
+    isolation: isolate;
+  }
+  .atl-hero__media, .atl-hero__overlay { position: absolute; inset: 0; }
+  .atl-hero__media { z-index: -2; }
+  .atl-hero__media video, .atl-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+  .atl-hero__overlay {
+    z-index: -1;
+    background: 
+      linear-gradient(to bottom, rgba(10, 9, 8, 0.95) 0%, rgba(10, 9, 8, 0.45) 18%, rgba(10, 9, 8, 0.15) 35%, rgba(10, 9, 8, 0.3) 70%, rgba(10, 9, 8, 0.9) 100%),
+      radial-gradient(circle at center, rgba(0, 0, 0, calc(var(--atl-overlay) * 0.7)) 0%, rgba(0, 0, 0, calc(var(--atl-overlay) * 1.3)) 100%);
+  }
+  .atl-hero__content {
+    width: 100%;
+    max-width: 840px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: atl-fade 1s ease-out both;
+  }
+  .atl-hero__top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-bottom: 20px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  }
+  .atl-hero__badge {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .atl-hero__dot {
+    color: var(--gold-light);
+    font-size: 10px;
+    opacity: 0.85;
+  }
+  .atl-hero__eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .atl-hero__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(42px, 5.8vw, 76px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    text-wrap: balance;
+    max-width: 780px;
+    margin: 0 auto 18px;
+    text-shadow: 0 4px 28px rgba(0,0,0,0.7);
+  }
+  .atl-hero__sub {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.94);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  }
+  .atl-hero__action {
+    margin-top: 30px;
+  }
+  .atl-hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 10px;
+    margin-top: 26px;
+    padding: 0;
+    list-style: none;
+  }
+  .atl-hero__trust li {
+    display: inline-flex;
+    align-items: center;
+  }
+  .atl-hero__trust li span {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(10, 9, 8, 0.45);
+    backdrop-filter: blur(8px);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* ---------- 2. Watch Section ---------- */
+  .atl-watch {
+    display: grid;
+    grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+    gap: 64px;
+    align-items: center;
+    max-width: 1020px;
+    margin: 48px auto 0;
+  }
+  .atl-watch__frame {
+    padding: 12px;
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  }
+  .atl-watch__video {
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .atl-watch__video video { width: 100%; height: 100%; object-fit: cover; }
+  .atl-watch__caption {
+    text-align: left;
+  }
+  .atl-watch__italic {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(30px, 3.4vw, 44px);
+    line-height: 1.25;
+    color: #2F2D2A;
+  }
+  .atl-watch__highlight {
+    margin-top: 28px;
+    padding: 8px 0 8px 24px;
+    border-left: 3px solid var(--gold);
+  }
+  .atl-watch__strong {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(28px, 2.8vw, 36px);
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .atl-watch__muted {
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  .atl-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background: #EAE6DF;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .atl-placeholder--dark { background: #262422; color: #D4B68F; }
+
+  /* Before / After */
+  .atl-ba-wrap { max-width: 1080px; margin: 96px auto 0; }
+  .atl-ba__title {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 6px;
+  }
+  .atl-ba {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    user-select: none;
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    background: var(--sand);
+  }
+  .atl-ba__img { position: absolute; inset: 0; }
+  .atl-ba__img img { width: 100%; height: 100%; object-fit: cover; }
+  .atl-ba__after { clip-path: inset(0 0 0 var(--pos)); }
+  .atl-ba::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    pointer-events: none;
+  }
+  .atl-ba__handle {
+    position: absolute;
+    top: 50%;
+    left: var(--pos);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    background: rgba(10, 9, 8, 0.75);
+    color: #FFFFFF;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .atl-ba__tag {
+    position: absolute;
+    bottom: 22px;
+    z-index: 2;
+    padding: 10px 18px;
+    background: rgba(10, 9, 8, 0.9);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .atl-ba__tag--l { left: 22px; }
+  .atl-ba__tag--r { right: 22px; }
+  .atl-ba__range {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+
+  /* ---------- 3. Story ---------- */
+  .atl-story { margin-bottom: 44px; }
+  .atl-story p {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.2vw, 38px);
+    font-weight: 500;
+    line-height: 1.55;
+    color: #4A4642;
+  }
+  .atl-story .atl-story__big {
+    margin-top: 28px;
+    font-weight: 700;
+    font-size: clamp(32px, 3.8vw, 48px);
+    line-height: 1.25;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .atl-problem {
+    margin-top: 64px;
+    padding: 54px 40px;
+    border-top: 2px solid var(--line);
+    border-bottom: 2px solid var(--line);
+    background: var(--paper);
+  }
+  .atl-problem__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.45;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  /* ---------- 4. Introducing Wordmark ---------- */
+  .atl-wordmark {
+    margin: 10px 0 16px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(52px, 8vw, 106px);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .atl-wordmark sup { font-size: 0.3em; vertical-align: super; font-weight: 600; }
+  .atl-edition-tag {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  /* ---------- 5. Features Grid ---------- */
+  .atl-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 36px;
+    margin-top: 48px;
+  }
+  .atl-feature {
+    padding: 34px 30px;
+    border: 1px solid var(--line);
+    background: #FFFFFF;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .atl-feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+  }
+  .atl-feature__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .atl-feature__num {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .atl-feature__tag {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .atl-feature__title {
+    margin-bottom: 14px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .atl-feature p {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #2F2D2A;
+  }
+  .atl-feature__caps {
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Phase timeline */
+  .atl-timeline { margin-top: 96px; }
+  .atl-timeline ol {
+    display: flex;
+    margin-top: 32px;
+    padding: 0;
+    list-style: none;
+    counter-reset: atl-step;
+  }
+  .atl-timeline li {
+    position: relative;
+    flex: 1;
+    padding-top: 36px;
+    text-align: center;
+    counter-increment: atl-step;
+  }
+  .atl-timeline li span {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .atl-timeline li::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    z-index: 1;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    background: #FFFFFF;
+    transform: translateX(-50%);
+  }
+  .atl-timeline li:last-child::before { background: var(--gold); }
+  .atl-timeline li + li::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--line);
+  }
+
+  /* ---------- 6. Ideas Gallery (Cards with Video Support) ---------- */
+  .atl-ideas {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 26px 18px;
+    margin-top: 44px;
+  }
+  .atl-idea__inner {
+    padding: 7px;
+    border: 1px solid var(--line);
+    background: #FFFFFF;
+  }
+  .atl-idea__img {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #EAE6DF;
+  }
+  .atl-idea__img img,
+  .atl-idea__img video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .atl-idea:hover .atl-idea__img img,
+  .atl-idea:hover .atl-idea__img video {
+    transform: scale(1.06);
+  }
+  .atl-idea__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 40px;
+    color: #9C968C;
+  }
+  .atl-idea figcaption {
+    margin-top: 14px;
+    text-align: center;
+  }
+  .atl-idea__index {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: var(--gold);
+    margin-bottom: 5px;
+  }
+  .atl-idea__label {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* ---------- 7. Beginners ---------- */
+  .atl-beginners {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .atl-x { padding: 0; list-style: none; }
+  .atl-x li {
+    position: relative;
+    padding: 20px 0 20px 44px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 26px;
+    color: #1F1D1B;
+  }
+  .atl-x li:first-child { border-top: 1px solid var(--line); }
+  .atl-x li::before, .atl-x li::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    width: 16px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .atl-x li::before { transform: rotate(45deg); }
+  .atl-x li::after { transform: rotate(-45deg); }
+
+  /* ---------- 8. Reviews ---------- */
+  .atl-reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 44px;
+    text-align: center;
+  }
+  .atl-review {
+    padding: 44px 34px;
+    border: 1px solid var(--line);
+    background: #FFFFFF;
+  }
+  .atl-review__stars {
+    color: var(--gold);
+    letter-spacing: 0.32em;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .atl-review p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.5;
+    color: #1F1D1B;
+  }
+  .atl-review cite {
+    display: block;
+    margin-top: 20px;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- 9. Offer Box ---------- */
+  .atl-box {
+    max-width: 660px;
+    margin: 44px auto 0;
+    padding: 56px 52px 48px;
+    border: 2px solid var(--ink);
+    background: #FFFFFF;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    position: relative;
+  }
+  .atl-box__badge {
+    display: inline-block;
+    padding: 6px 18px;
+    background: var(--ink);
+    color: #FAF8F5;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .atl-box__title {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .atl-box__desc {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .atl-check { margin-top: 16px; padding: 0; list-style: none; text-align: left; }
+  .atl-check li {
+    position: relative;
+    padding: 16px 0 16px 36px;
+    border-bottom: 1px solid var(--line);
+    font-size: 17px;
+    font-weight: 500;
+    color: #1F1D1B;
+  }
+  .atl-check li::before {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .atl-price { margin: 40px 0 30px; }
+  .atl-price__compare {
+    display: block;
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .atl-price__now {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 102px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .atl-price__caps {
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .atl-price__note {
+    margin-top: 8px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--muted);
+  }
+  .atl-box__foot {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* ---------- 10. Final Steps ---------- */
+  .atl-final-steps {
+    margin: 36px auto 0;
+    padding: 24px 0;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+  }
+  .atl-final-steps p {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(25px, 2.8vw, 34px);
+    line-height: 1.5;
+    color: #FFFFFF;
+  }
+
+  /* ---------- 11. Luxury Footer Styles ---------- */
+  .atl-footer {
+    background: #080807;
+    color: #FAF8F5;
+    padding: 88px 24px 48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: var(--sans);
+  }
+  .atl-footer__top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: 48px 36px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .atl-footer__brand {
+    text-align: left;
+  }
+  .atl-footer__col {
+    text-align: left;
+  }
+  .atl-footer__logo {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+  }
+  .atl-footer__logo sup {
+    font-size: 0.3em;
+    vertical-align: super;
+  }
+  .atl-footer__tagline {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-top: 8px;
+  }
+  .atl-footer__bio {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(250, 248, 245, 0.8);
+    margin-top: 18px;
+    max-width: 400px;
+  }
+  .atl-footer__title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 22px;
+  }
+  .atl-footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .atl-footer__links a {
+    color: rgba(250, 248, 245, 0.8);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+  .atl-footer__links a:hover {
+    color: var(--gold-light);
+  }
+  .atl-footer__socials {
+    display: flex;
+    gap: 18px;
+    margin-top: 26px;
+  }
+  .atl-footer__socials a {
+    color: rgba(250, 248, 245, 0.8);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .atl-footer__socials a:hover {
+    color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+
+  /* Mid Footer Badges */
+  .atl-footer__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 40px;
+    padding: 34px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .atl-footer__badge {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(250, 248, 245, 0.88);
+    font-weight: 600;
+  }
+
+  /* Bottom Copyright & Disclaimer */
+  .atl-footer__bottom {
+    padding-top: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(250, 248, 245, 0.65);
+  }
+  .atl-footer__disclaimer {
+    font-size: 13px;
+    max-width: 650px;
+    line-height: 1.6;
+    color: rgba(250, 248, 245, 0.55);
+  }
+
+  /* ---------- 12. Sticky Mobile CTA ---------- */
+  .atl-sticky { display: none; }
+
+  /* ---------- Animation ---------- */
+  .atl--js .atl-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .atl--js .atl-reveal.is-in { opacity: 1; transform: none; }
+  @keyframes atl-fade {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 989px) {
+    .atl-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .atl-ideas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .atl-beginners { grid-template-columns: 1fr; gap: 40px; }
+    .atl-watch { gap: 40px; }
+  }
+  @media (max-width: 860px) {
+    .atl-footer__top {
+      grid-template-columns: 1fr 1fr;
+      gap: 36px 20px;
+    }
+    .atl-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 749px) {
+    .atl-sec { padding: 76px 20px; }
+    .atl-hero { min-height: 100vh; min-height: 100dvh; height: auto; padding: 70px 20px 48px; }
+    .atl-hero__top { padding: 0; gap: 6px 10px; margin-bottom: 14px; }
+    .atl-hero__badge { font-size: 11px; }
+    .atl-hero__eyebrow { font-size: 11px; }
+    .atl-hero__title { margin-bottom: 14px; }
+    .atl-hero__sub { font-size: 16px; line-height: 1.6; }
+    .atl-hero .atl-btn { display: flex; width: 100%; padding: 18px 16px; font-size: 14px; font-weight: 700; }
+    .atl-hero__trust {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+      margin-top: 22px;
+      width: 100%;
+      max-width: 360px;
+    }
+    .atl-hero__trust li { justify-content: center; width: 100%; }
+    .atl-hero__trust li span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 6px 8px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
+    .atl-watch { grid-template-columns: 1fr; text-align: center; }
+    .atl-watch__caption { text-align: center; }
+    .atl-watch__frame { max-width: 340px; margin: 0 auto; }
+    .atl-watch__highlight { border-left: none; padding-left: 0; }
+    
+    .atl-ba-wrap { margin-top: 60px; }
+    .atl-ba { aspect-ratio: 4 / 5; }
+
+    .atl-features { grid-template-columns: 1fr; gap: 26px; }
+    .atl-timeline ol { flex-direction: column; gap: 0; max-width: 280px; margin: 28px auto 0; }
+    .atl-timeline li { padding: 0 0 24px 36px; text-align: left; }
+    .atl-timeline li span { font-size: 20px; font-weight: 600; }
+    .atl-timeline li::before { top: 6px; left: 4px; transform: none; }
+    .atl-timeline li + li::after { top: -14px; right: auto; left: 9px; width: 2px; height: 24px; }
+
+    .atl-ideas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
+    .atl-box { padding: 44px 24px 36px; }
+    .atl-price__now { font-size: 84px; }
+
+    .atl-sticky {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--line);
+      background: rgba(250, 248, 245, 0.96);
+      backdrop-filter: blur(10px);
+      transform: translateY(110%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .atl-sticky.is-visible { transform: none; }
+    .atl-sticky__info { display: flex; flex-direction: column; text-align: left; }
+    .atl-sticky__tag { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .atl-sticky__price { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--ink); }
+    .atl-sticky__btn {
+      padding: 14px 28px;
+      background: var(--ink);
+      color: #FAF8F5;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 580px) {
+    .atl-footer {
+      padding: 60px 20px 40px;
+    }
+    .atl-footer__top {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .atl-footer__trust {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .atl-hero__content { animation: none; }
+    .atl--js .atl-reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    function init(root) {
+      if (!root || root.dataset.atlReady) return;
+      root.dataset.atlReady = '1';
+
+      // Scroll reveal
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if ('IntersectionObserver' in window && !reduce) {
+        root.classList.add('atl--js');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        root.querySelectorAll('.atl-reveal').forEach(function (el) { io.observe(el); });
+      }
+
+      // Before / after slider
+      root.querySelectorAll('.atl-ba').forEach(function (ba) {
+        var range = ba.querySelector('.atl-ba__range');
+        if (!range) return;
+        var update = function () { ba.style.setProperty('--pos', range.value + '%'); };
+        range.addEventListener('input', update);
+        update();
+      });
+
+      // Sticky mobile CTA
+      var bar = root.querySelector('.atl-sticky');
+      var hero = root.querySelector('.atl-hero');
+      var offer = root.querySelector('.atl-offer');
+      if (bar && hero && 'IntersectionObserver' in window) {
+        var heroIn = true, offerIn = false;
+        var sync = function () { bar.classList.toggle('is-visible', !heroIn && !offerIn); };
+        new IntersectionObserver(function (e) { heroIn = e[0].isIntersecting; sync(); }).observe(hero);
+        if (offer) new IntersectionObserver(function (e) { offerIn = e[0].isIntersecting; sync(); }).observe(offer);
+      }
+    }
+
+    document.querySelectorAll('.atl').forEach(init);
+    document.addEventListener('shopify:section:load', function (e) {
+      init(e.target.querySelector('.atl'));
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AI Timelapse Landing",
+  "tag": "section",
+  "class": "section-ai-timelapse-landing",
+  "settings": [
+    { "type": "header", "content": "Checkout" },
+    { "type": "url", "id": "cta_link", "label": "Button link (all buttons)", "info": "Paste your product or checkout URL" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$19" },
+    { "type": "text", "id": "compare_price", "label": "Compare-at price (optional)", "info": "Shown crossed out, e.g. $49" },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "video", "id": "hero_video", "label": "Background video" },
+    { "type": "image_picker", "id": "hero_image", "label": "Fallback image", "info": "Used when no video is selected" },
+    { "type": "range", "id": "overlay", "label": "Overlay darkness", "min": 0, "max": 70, "step": 5, "unit": "%", "default": 50 },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "No Camera. No Drone. No Construction Site." },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Create Viral AI Timelapse Videos With AI" },
+    { "type": "textarea", "id": "hero_sub", "label": "Subheading", "default": "Learn the exact AI workflow to turn simple prompts into satisfying construction timelapse videos for TikTok, Instagram Reels, and YouTube Shorts." },
+
+    { "type": "header", "content": "Watch what you can create" },
+    { "type": "video", "id": "showcase_video", "label": "Showcase video (vertical 9:16)" },
+    { "type": "image_picker", "id": "before_image", "label": "Before image (empty land)" },
+    { "type": "image_picker", "id": "after_image", "label": "After image (finished house)" }
+  ],
+  "blocks": [
+    {
+      "type": "idea",
+      "name": "Video idea",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Modern Homes" },
+        { "type": "video", "id": "video", "label": "Video (autoloop)" },
+        { "type": "image_picker", "id": "image", "label": "Fallback image" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Name" }
+      ]
+    }
+  ],
+  "max_blocks": 30,
+  "presets": [
+    {
+      "name": "AI Timelapse Landing",
+      "blocks": [
+        { "type": "idea", "settings": { "title": "Modern Homes" } },
+        { "type": "idea", "settings": { "title": "Tropical Villas" } },
+        { "type": "idea", "settings": { "title": "Japanese Houses" } },
+        { "type": "idea", "settings": { "title": "Mountain Cabins" } },
+        { "type": "idea", "settings": { "title": "Luxury Hotels" } },
+        { "type": "idea", "settings": { "title": "Restaurants" } },
+        { "type": "idea", "settings": { "title": "Futuristic Buildings" } },
+        { "type": "idea", "settings": { "title": "Beach Houses" } },
+        { "type": "idea", "settings": { "title": "Fantasy Architecture" } },
+        { "type": "idea", "settings": { "title": "Luxury Mansions" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

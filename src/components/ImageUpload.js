@@ -7,7 +7,7 @@ import { translations } from '@/lib/translations';
 const MAX_SIZE_MB = 10;
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 
-export default function ImageUpload({ onImageReady, onHintChange, hint, language = 'id' }) {
+export default function ImageUpload({ onImageReady, onHintChange, hint, language = 'en' }) {
   const [dragOver, setDragOver] = useState(false);
   const [preview, setPreview] = useState(null);
   const [error, setError] = useState('');
@@ -107,7 +107,7 @@ export default function ImageUpload({ onImageReady, onHintChange, hint, language
         <div className="relative rounded-2xl overflow-hidden border border-white/15 group shadow-xl">
           <img
             src={preview}
-            alt="Preview gambar"
+            alt={language === 'en' ? 'Uploaded image preview' : 'Preview gambar'}
             className="w-full max-h-80 object-cover"
           />
           {/* Overlay on hover */}

@@ -1,0 +1,1126 @@
+{% comment %}
+  =============================================================================
+  AI TIMELAPSE MASTERCLASS — SHOPIFY LANDING PAGE (KG DESIGNS LUXURY STYLE)
+  
+  CARA PEMASANGAN DI SHOPIFY:
+  -----------------------------------------------------------------------------
+  OPSI 1 (Paling Mudah via Theme Customizer):
+  1. Buka Shopify Admin > Online Store > Themes > Customize (pada tema aktif, misal Horizon).
+  2. Di panel kiri, klik "Add section" > pilih "Custom Liquid".
+  3. Copy dan paste SELURUH isi file ini ke dalam kolom Custom Liquid.
+  4. (Opsional) Klik dan geser section Custom Liquid ke posisi paling atas di bawah Header.
+  5. Klik "Save" di kanan atas.
+  
+  OPSI 2 (Via Halaman Khusus / Pages):
+  1. Buka Shopify Admin > Online Store > Pages > Add page.
+  2. Beri judul: "AI Timelapse Masterclass".
+  3. Pada kolom content, klik ikon "<>" (Show HTML).
+  4. Paste seluruh kode ini, lalu klik Save.
+  
+  CATATAN PENTING:
+  - Tombol pembelian diarahkan ke: {{ shop.url }}/products/ai-timelapse-video-generator-masterclass-lifetime-access
+  - Anda bisa mengganti URL produk pada bagian javascript SHOPIFY_PRODUCT_URL di bawah jika handle produk berbeda.
+  =============================================================================
+{% endcomment %}
+
+<div class="kg-lp-root">
+  <style>
+    /* ── BASE & TYPOGRAPHY (KG DESIGNS AESTHETIC) ────────────────────────── */
+    .kg-lp-root {
+      --kg-bg: #0b0f17;
+      --kg-bg-card: #111827;
+      --kg-bg-card-hover: #162032;
+      --kg-text-main: #f8fafc;
+      --kg-text-muted: #94a3b8;
+      --kg-accent: #38bdf8;
+      --kg-accent-glow: rgba(56, 189, 248, 0.25);
+      --kg-border: rgba(255, 255, 255, 0.1);
+      --kg-border-hover: rgba(56, 189, 248, 0.4);
+      --kg-gold: #f59e0b;
+      
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--kg-text-main);
+      background-color: var(--kg-bg);
+      line-height: 1.6;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .kg-lp-root * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .kg-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── TOP ANNOUNCEMENT TICKER ────────────────────────────────────────── */
+    .kg-topbar {
+      background: linear-gradient(90deg, #0369a1 0%, #0284c7 50%, #0369a1 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .kg-topbar span.kg-dot {
+      width: 5px;
+      height: 5px;
+      background: #bae6fd;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ── HERO SECTION ───────────────────────────────────────────────────── */
+    .kg-hero {
+      position: relative;
+      padding: 70px 20px 80px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.18) 0%, rgba(11, 15, 23, 1) 75%);
+      border-bottom: 1px solid var(--kg-border);
+    }
+    
+    .kg-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 7px 18px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7dd3fc;
+      margin-bottom: 24px;
+    }
+    .kg-hero-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    .kg-hero-kicker {
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--kg-text-muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .kg-hero-title {
+      font-size: 36px;
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      max-width: 860px;
+      margin: 0 auto 20px;
+      text-transform: uppercase;
+    }
+    @media (min-width: 768px) {
+      .kg-hero-title {
+        font-size: 56px;
+      }
+    }
+    .kg-hero-title .kg-highlight {
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .kg-hero-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #94a3b8;
+      max-width: 680px;
+      margin: 0 auto 34px;
+      font-weight: 400;
+    }
+    @media (min-width: 768px) {
+      .kg-hero-desc {
+        font-size: 17px;
+      }
+    }
+
+    .kg-hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+    @media (min-width: 540px) {
+      .kg-hero-actions {
+        flex-direction: row;
+      }
+    }
+
+    .kg-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      width: 100%;
+      max-width: 320px;
+    }
+    @media (min-width: 540px) {
+      .kg-btn-primary {
+        width: auto;
+      }
+    }
+    .kg-btn-primary:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(2, 132, 199, 0.6);
+      border-color: #38bdf8;
+    }
+
+    .kg-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #e2e8f0 !important;
+      text-decoration: none !important;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 28px;
+      border-radius: 8px;
+      border: 1px solid var(--kg-border);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px;
+    }
+    @media (min-width: 540px) {
+      .kg-btn-secondary {
+        width: auto;
+      }
+    }
+    .kg-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #94a3b8;
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+
+    .kg-hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .kg-stars {
+      color: #f59e0b;
+      letter-spacing: 2px;
+      font-size: 14px;
+    }
+
+    /* ── VALUE STRIP (METRICS) ──────────────────────────────────────────── */
+    .kg-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--kg-border);
+      border-bottom: 1px solid var(--kg-border);
+    }
+    @media (min-width: 768px) {
+      .kg-metrics {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .kg-metric-item {
+      background: var(--kg-bg);
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .kg-metric-num {
+      font-size: 26px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .kg-metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+
+    /* ── SECTION HEADER COMMON ─────────────────────────────────────────── */
+    .kg-section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .kg-subhead {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .kg-title {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      .kg-title {
+        font-size: 38px;
+      }
+    }
+    .kg-lead {
+      font-size: 14px;
+      color: #94a3b8;
+      max-width: 580px;
+      margin: 12px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ── SIGNATURE COLLECTIONS / CURRICULUM (KG DESIGNS STYLE) ────────── */
+    .kg-collections-sec {
+      padding: 90px 0;
+      background: #0f172a;
+      border-bottom: 1px solid var(--kg-border);
+    }
+    .kg-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .kg-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .kg-cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .kg-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .kg-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .kg-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+    .kg-card:hover::before {
+      opacity: 1;
+    }
+    .kg-card-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: rgba(56, 189, 248, 0.3);
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+    .kg-card-tag {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .kg-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .kg-card p {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .kg-card-feature {
+      font-size: 11px;
+      font-weight: 700;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── BEFORE & AFTER VISUAL TRANSFORMATION ────────────────────────────── */
+    .kg-compare-sec {
+      padding: 90px 0;
+      background: var(--kg-bg);
+      border-bottom: 1px solid var(--kg-border);
+    }
+    .kg-compare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .kg-compare-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .kg-compare-box {
+      background: #111827;
+      border-radius: 14px;
+      padding: 28px 24px;
+      border: 1px solid var(--kg-border);
+      display: flex;
+      flex-direction: column;
+    }
+    .kg-compare-box.highlight {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: linear-gradient(180deg, #111e33 0%, #111827 100%);
+      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
+    }
+    .kg-compare-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .kg-compare-box:not(.highlight) .kg-compare-tag {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+    .kg-compare-box.highlight .kg-compare-tag {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .kg-compare-box h4 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .kg-compare-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .kg-compare-list li {
+      font-size: 13.5px;
+      color: #94a3b8;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .kg-compare-list li strong {
+      color: #ffffff;
+    }
+
+    /* ── REAL REACTIONS (TESTIMONIALS A LA KG DESIGNS) ──────────────────── */
+    .kg-reviews-sec {
+      padding: 90px 0;
+      background: #0f172a;
+      border-bottom: 1px solid var(--kg-border);
+    }
+    .kg-reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .kg-reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .kg-review-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .kg-review-stars {
+      color: #f59e0b;
+      margin-bottom: 16px;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+    .kg-review-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #cbd5e1;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .kg-review-author {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kg-review-author::after {
+      content: "• VERIFIED PURCHASE";
+      color: #38bdf8;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* ── PRICING & CHECKOUT BLOCK ───────────────────────────────────────── */
+    .kg-pricing-sec {
+      padding: 90px 0;
+      background: radial-gradient(circle at 50% 50%, rgba(2, 132, 199, 0.12) 0%, rgba(11, 15, 23, 1) 80%);
+      border-bottom: 1px solid var(--kg-border);
+    }
+    .kg-pricing-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #111827;
+      border: 2px solid #0284c7;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(2, 132, 199, 0.2);
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .kg-pricing-box {
+        padding: 50px 44px;
+      }
+    }
+    .kg-pricing-pill {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+      white-space: nowrap;
+    }
+    .kg-price-wrap {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0 10px;
+    }
+    .kg-price-original {
+      font-size: 20px;
+      color: #64748b;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .kg-price-current {
+      font-size: 54px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .kg-price-currency {
+      font-size: 22px;
+      color: #38bdf8;
+      font-weight: 700;
+      vertical-align: super;
+    }
+    .kg-pricing-note {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 28px;
+    }
+    
+    .kg-check-list {
+      text-align: left;
+      list-style: none;
+      max-width: 480px;
+      margin: 0 auto 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .kg-check-list li {
+      font-size: 13.5px;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .kg-check-icon {
+      color: #38bdf8;
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── FAQ ACCORDION ─────────────────────────────────────────────────── */
+    .kg-faq-sec {
+      padding: 90px 0;
+      background: var(--kg-bg);
+      border-bottom: 1px solid var(--kg-border);
+    }
+    .kg-faq-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .kg-faq-item {
+      background: #111827;
+      border: 1px solid var(--kg-border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+    .kg-faq-item:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .kg-faq-question {
+      padding: 20px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .kg-faq-icon {
+      font-size: 18px;
+      color: #38bdf8;
+      transition: transform 0.25s ease;
+    }
+    .kg-faq-item.active .kg-faq-icon {
+      transform: rotate(45deg);
+    }
+    .kg-faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 22px;
+      font-size: 13.5px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .kg-faq-item.active .kg-faq-answer {
+      max-height: 250px;
+      padding: 0 22px 20px;
+    }
+
+    /* ── STICKY FLOATING CTA BAR ────────────────────────────────────────── */
+    .kg-floating-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 15, 23, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 12px 20px;
+      z-index: 9999;
+      transform: translateY(110%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .kg-floating-bar.visible {
+      transform: translateY(0);
+    }
+    .kg-floating-content {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .kg-floating-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .kg-floating-sub {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+    .kg-floating-btn {
+      background: #0284c7;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background 0.2s ease;
+    }
+    .kg-floating-btn:hover {
+      background: #0369a1;
+    }
+
+    @media (max-width: 640px) {
+      .kg-floating-text {
+        display: none;
+      }
+      .kg-floating-content {
+        justify-content: center;
+      }
+      .kg-floating-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+
+  <!-- 1. TOP ANNOUNCEMENT BAR -->
+  <div class="kg-topbar">
+    <span>LIFETIME ACCESS • DIGITAL DOWNLOAD</span>
+    <span class="kg-dot"></span>
+    <span>COMMERCIAL USE LICENSE INCLUDED</span>
+    <span class="kg-dot"></span>
+    <span>LIMITED LAUNCH PRICE $19</span>
+  </div>
+
+  <!-- 2. HERO SECTION (HIGH-CONTRAST & MINIMALIST LIKE KG DESIGNS) -->
+  <section class="kg-hero">
+    <div class="kg-container">
+      <div class="kg-hero-badge">The Signature AI Masterclass</div>
+      <p class="kg-hero-kicker">AN INTRODUCTORY TO</p>
+      <h1 class="kg-hero-title">
+        CREATE VIRAL AI <span class="kg-highlight">TIMELAPSE VIDEOS</span>
+      </h1>
+      <p class="kg-hero-desc">
+        No Camera. No Drone. No Construction Site.<br>
+        Learn the exact prompt architecture and frame-interpolation workflow to turn simple sentences into breathtaking 8K construction timelapses commanding millions of views.
+      </p>
+
+      <div class="kg-hero-actions">
+        <a href="#kg-pricing" class="kg-btn-primary kg-checkout-trigger">
+          GET INSTANT ACCESS — $19
+        </a>
+        <a href="#kg-showcase" class="kg-btn-secondary">
+          WATCH SHOWCASE ↓
+        </a>
+      </div>
+
+      <div class="kg-hero-trust">
+        <span class="kg-stars">★★★★★</span>
+        <span>4.9/5 RATED BY 2,400+ DIGITAL CREATORS</span>
+        <span>•</span>
+        <span>INSTANT DOWNLOAD ACCESS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. METRICS / STATS STRIP -->
+  <div class="kg-metrics">
+    <div class="kg-metric-item">
+      <div class="kg-metric-num">100%</div>
+      <div class="kg-metric-label">AI Generated (Zero Gear)</div>
+    </div>
+    <div class="kg-metric-item">
+      <div class="kg-metric-num">8K UHD</div>
+      <div class="kg-metric-label">Photorealistic Quality</div>
+    </div>
+    <div class="kg-metric-item">
+      <div class="kg-metric-num">&lt; 15 Mins</div>
+      <div class="kg-metric-label">Workflow Turnaround</div>
+    </div>
+    <div class="kg-metric-item">
+      <div class="kg-metric-num">Commercial</div>
+      <div class="kg-metric-label">Client & Social Rights</div>
+    </div>
+  </div>
+
+  <!-- 4. SIGNATURE CURRICULUM COLLECTIONS (KG DESIGNS STYLE) -->
+  <section class="kg-collections-sec" id="kg-showcase">
+    <div class="kg-container">
+      <div class="kg-section-header">
+        <span class="kg-subhead">Curated Curriculum</span>
+        <h2 class="kg-title">SIGNATURE MODULES</h2>
+        <p class="kg-lead">Every tool, prompt formula, and workflow engineered to take you from absolute beginner to high-performing creator in one afternoon.</p>
+      </div>
+
+      <div class="kg-cards-grid">
+        <!-- Card 1 -->
+        <div class="kg-card">
+          <div>
+            <div class="kg-card-num">01</div>
+            <span class="kg-card-tag">Foundation</span>
+            <h3>Prompt Engineering Architecture</h3>
+            <p>Master the exact seed keywords, camera parameters, and negative prompts that guarantee crisp construction evolution.</p>
+          </div>
+          <div class="kg-card-feature">✓ Complete Copy-Paste Prompt Sheet</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="kg-card">
+          <div>
+            <div class="kg-card-num">02</div>
+            <span class="kg-card-tag">Workflow</span>
+            <h3>Zero-Flicker Consistency</h3>
+            <p>The step-by-step frame continuity system so buildings rise seamlessly without AI morphing glitches or random distortion.</p>
+          </div>
+          <div class="kg-card-feature">✓ Midjourney + Runway + Luma Formula</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="kg-card">
+          <div>
+            <div class="kg-card-num">03</div>
+            <span class="kg-card-tag">Production</span>
+            <h3>Cinematic SFX & Soundscapes</h3>
+            <p>Get our exclusive library of royalty-free heavy equipment ambiances, diesel engine rumbles, and structural impact sound effects.</p>
+          </div>
+          <div class="kg-card-feature">✓ Royalty-Free Sound Library Included</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="kg-card">
+          <div>
+            <div class="kg-card-num">04</div>
+            <span class="kg-card-tag">Growth</span>
+            <h3>The Viral Retention Blueprint</h3>
+            <p>Pacing formulas, text-hook templates, and TikTok/Reels algorithm secrets that push timelapse videos past 1,000,000 views.</p>
+          </div>
+          <div class="kg-card-feature">✓ Tested On 50M+ Organic Views</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BEFORE & AFTER TRANSFORMATION -->
+  <section class="kg-compare-sec">
+    <div class="kg-container">
+      <div class="kg-section-header">
+        <span class="kg-subhead">Transformation</span>
+        <h2 class="kg-title">THE DIFFERENCE</h2>
+        <p class="kg-lead">Why amateur AI videos fail to get views, and how our framework changes the game.</p>
+      </div>
+
+      <div class="kg-compare-grid">
+        <!-- Amateur -->
+        <div class="kg-compare-box">
+          <span class="kg-compare-tag">Amateur Approach</span>
+          <h4>Guessing Prompts Without A System</h4>
+          <ul class="kg-compare-list">
+            <li>✕ Inconsistent structures that wobble and distort</li>
+            <li>✕ Grainy 720p outputs that look artificial</li>
+            <li>✕ Wasting dozens of paid AI credits on bad renders</li>
+            <li>✕ Zero viral reach due to poor narrative pacing</li>
+          </ul>
+        </div>
+
+        <!-- Signature -->
+        <div class="kg-compare-box highlight">
+          <span class="kg-compare-tag">Our Signature Workflow</span>
+          <h4>Precision Prompt Sequence System</h4>
+          <ul class="kg-compare-list">
+            <li>✓ <strong>Rock-solid consistency</strong> from foundation to rooftop</li>
+            <li>✓ <strong>8K photorealism</strong> indistinguishable from actual drone footage</li>
+            <li>✓ <strong>Zero wasted credits:</strong> 95%+ first-pass generation success</li>
+            <li>✓ <strong>High-retention hooks</strong> tailored for viral TikTok & Reels feeds</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. REAL REACTIONS (REVIEWS A LA KG DESIGNS) -->
+  <section class="kg-reviews-sec">
+    <div class="kg-container">
+      <div class="kg-section-header">
+        <span class="kg-subhead">Real Reactions</span>
+        <h2 class="kg-title">CREATOR REVIEWS</h2>
+        <p class="kg-lead">What creators and agency owners are saying after implementing the workflow.</p>
+      </div>
+
+      <div class="kg-reviews-grid">
+        <div class="kg-review-card">
+          <div>
+            <div class="kg-review-stars">★★★★★</div>
+            <p class="kg-review-text">"I don't normally write reviews, but I was blown away by the consistency trick. My very first construction timelapse hit 430K views on TikTok within 48 hours. Best $19 I've ever spent."</p>
+          </div>
+          <div class="kg-review-author">David K.</div>
+        </div>
+
+        <div class="kg-review-card">
+          <div>
+            <div class="kg-review-stars">★★★★★</div>
+            <p class="kg-review-text">"As a 3D artist, I used to spend weeks rendering construction sequences. This workflow cut that down to 20 minutes with higher realism. The prompt database alone is worth hundreds."</p>
+          </div>
+          <div class="kg-review-author">Marcus S.</div>
+        </div>
+
+        <div class="kg-review-card">
+          <div>
+            <div class="kg-review-stars">★★★★★</div>
+            <p class="kg-review-text">"Completely beginner friendly. I had never touched Midjourney before this, and within an hour I had a cinematic bridge building timelapse ready for my portfolio."</p>
+          </div>
+          <div class="kg-review-author">Elena R.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PRICING & CHECKOUT (CLEAN LUXURY BOX) -->
+  <section class="kg-pricing-sec" id="kg-pricing">
+    <div class="kg-container">
+      <div class="kg-pricing-box">
+        <div class="kg-pricing-pill">Limited Launch Pricing</div>
+        <p class="kg-hero-kicker" style="margin-top: 10px;">LIFETIME ACCESS • INSTANT DELIVERY</p>
+        <h3 style="font-size: 26px; font-weight: 900; color: #ffffff; text-transform: uppercase;">
+          The Complete AI Timelapse Masterclass
+        </h3>
+
+        <div class="kg-price-wrap">
+          <span class="kg-price-original">$97</span>
+          <span class="kg-price-current"><span class="kg-price-currency">$</span>19</span>
+        </div>
+        <p class="kg-pricing-note">One-time payment • No recurring fees • Free future updates</p>
+
+        <ul class="kg-check-list">
+          <li><span class="kg-check-icon">✓</span> <strong>Full Video Masterclass (Step-by-Step)</strong></li>
+          <li><span class="kg-check-icon">✓</span> <strong>Master Prompt Vault (50+ Tested Formulas)</strong></li>
+          <li><span class="kg-check-icon">✓</span> <strong>Seed Continuity & Consistency Cheat Sheet</strong></li>
+          <li><span class="kg-check-icon">✓</span> <strong>Royalty-Free Site Sound Effects Bundle</strong></li>
+          <li><span class="kg-check-icon">✓</span> <strong>Commercial License For Client & Social Projects</strong></li>
+          <li><span class="kg-check-icon">✓</span> <strong>30-Day 100% Money-Back Guarantee</strong></li>
+        </ul>
+
+        <a href="/products/ai-timelapse-video-generator-masterclass-lifetime-access" class="kg-btn-primary kg-checkout-trigger" style="width: 100%; max-width: 420px; font-size: 15px;">
+          GET INSTANT ACCESS NOW — $19
+        </a>
+
+        <p style="margin-top: 18px; font-size: 11px; color: #64748b; letter-spacing: 0.06em;">
+          🔒 256-BIT ENCRYPTED CHECKOUT • INSTANT ACCESS SENT TO YOUR EMAIL
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ ACCORDION -->
+  <section class="kg-faq-sec">
+    <div class="kg-container">
+      <div class="kg-section-header">
+        <span class="kg-subhead">Common Questions</span>
+        <h2 class="kg-title">FREQUENTLY ASKED</h2>
+      </div>
+
+      <div class="kg-faq-wrap">
+        <div class="kg-faq-item">
+          <div class="kg-faq-question">
+            <span>Do I need an expensive computer or GPU?</span>
+            <span class="kg-faq-icon">+</span>
+          </div>
+          <div class="kg-faq-answer">
+            No! All the AI tools taught in this masterclass run 100% in the cloud. You can generate stunning 8K timelapses on any basic laptop, Mac, or even a smartphone.
+          </div>
+        </div>
+
+        <div class="kg-faq-item">
+          <div class="kg-faq-question">
+            <span>Do I need prior video editing experience?</span>
+            <span class="kg-faq-icon">+</span>
+          </div>
+          <div class="kg-faq-answer">
+            Zero prior experience needed. We provide copy-and-paste prompt templates and a clear visual workflow that guides you click-by-click.
+          </div>
+        </div>
+
+        <div class="kg-faq-item">
+          <div class="kg-faq-question">
+            <span>Can I sell these videos or use them for clients?</span>
+            <span class="kg-faq-icon">+</span>
+          </div>
+          <div class="kg-faq-answer">
+            Yes! Your purchase includes a full commercial license, allowing you to monetize videos on social media (TikTok Creativity Program, YouTube Ads) and deliver work to paying clients.
+          </div>
+        </div>
+
+        <div class="kg-faq-item">
+          <div class="kg-faq-question">
+            <span>How do I receive the masterclass after purchase?</span>
+            <span class="kg-faq-icon">+</span>
+          </div>
+          <div class="kg-faq-answer">
+            Access is 100% immediate. Upon completing checkout, you will receive an instant download link on the order confirmation screen as well as in your email inbox.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. STICKY FLOATING CTA BAR (MOBILE & DESKTOP) -->
+  <div class="kg-floating-bar" id="kgFloatingBar">
+    <div class="kg-floating-content">
+      <div class="kg-floating-text">
+        <div class="kg-floating-title">AI Timelapse Video Masterclass</div>
+        <div class="kg-floating-sub">Instant Access • Lifetime Updates • $19</div>
+      </div>
+      <a href="#kg-pricing" class="kg-floating-btn kg-checkout-trigger">
+        GET ACCESS — $19
+      </a>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE JS (ACCORDION, STICKY BAR, DYNAMIC SHOPIFY CHECKOUT LINK) -->
+  <script>
+    (function() {
+      // 1. Smooth scroll to pricing
+      var checkoutButtons = document.querySelectorAll('.kg-checkout-trigger');
+      checkoutButtons.forEach(function(btn) {
+        var href = btn.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }
+      });
+
+      // 2. FAQ Accordion Toggle
+      var faqItems = document.querySelectorAll('.kg-faq-item');
+      faqItems.forEach(function(item) {
+        var q = item.querySelector('.kg-faq-question');
+        if (q) {
+          q.addEventListener('click', function() {
+            var isActive = item.classList.contains('active');
+            faqItems.forEach(function(el) { el.classList.remove('active'); });
+            if (!isActive) {
+              item.classList.add('active');
+            }
+          });
+        }
+      });
+
+      // 3. Sticky Floating CTA on scroll
+      var floatingBar = document.getElementById('kgFloatingBar');
+      if (floatingBar) {
+        window.addEventListener('scroll', function() {
+          var scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY > 450) {
+            floatingBar.classList.add('visible');
+          } else {
+            floatingBar.classList.remove('visible');
+          }
+        });
+      }
+    })();
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "KG AI Timelapse Landing",
+  "tag": "section",
+  "class": "section-kg-landing",
+  "settings": [],
+  "presets": [
+    {
+      "name": "KG AI Timelapse Landing"
+    }
+  ]
+}
+{% endschema %}
+

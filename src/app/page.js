@@ -5,7 +5,6 @@ import ApiKeyInput from "@/components/ApiKeyInput";
 import TemplateGrid from "@/components/TemplateGrid";
 import PromptBox from "@/components/PromptBox";
 import ImageUpload from "@/components/ImageUpload";
-import LandingPage from "@/components/LandingPage";
 import { translations } from "@/lib/translations";
 import {
   generateSceneSuggestions,
@@ -22,16 +21,14 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  // ── View State (landing | studio) ───────────────────────────────────────────
-  const [currentView, setCurrentView] = useState('landing');
 
   // ── Language State ──────────────────────────────────────────────────────────
-  const [language, setLanguage] = useState('id'); // 'id' | 'en'
+  const [language, setLanguage] = useState('en'); // Default to English
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('TIMELAPSE_LANG');
-    if (savedLang === 'en' || savedLang === 'id') {
-      setTimeout(() => setLanguage(savedLang), 0);
+    const saved = localStorage.getItem('TIMELAPSE_LANG');
+    if (saved && (saved === 'en' || saved === 'id')) {
+      setLanguage(saved);
     }
   }, []);
 
@@ -104,7 +101,8 @@ export default function Home() {
       setStep('suggestions');
     } catch (error) {
       console.error(error);
-      alert(`Error: ${error.message || 'Periksa API Key kamu.'}`);
+      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      alert(`Error: ${error.message || fallbackMsg}`);
     } finally {
       setLoading(false);
       setLoadingLabel('');
@@ -132,7 +130,8 @@ export default function Home() {
       setStep('suggestions');
     } catch (error) {
       console.error(error);
-      alert(`Error: ${error.message || 'Periksa API Key kamu.'}`);
+      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      alert(`Error: ${error.message || fallbackMsg}`);
     } finally {
       setLoading(false);
       setLoadingLabel('');
@@ -175,7 +174,8 @@ export default function Home() {
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
     } catch (error) {
       console.error(error);
-      alert(`Error: ${error.message || 'Periksa API Key kamu.'}`);
+      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      alert(`Error: ${error.message || fallbackMsg}`);
       setStep('suggestions');
     } finally {
       setLoading(false);
@@ -193,7 +193,8 @@ export default function Home() {
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }), 120);
     } catch (error) {
       console.error(error);
-      alert(`Error: ${error.message || 'Periksa API Key kamu.'}`);
+      const fallbackMsg = language === 'en' ? 'Please check your API key.' : 'Periksa API Key kamu.';
+      alert(`Error: ${error.message || fallbackMsg}`);
       setStep('suggestions');
     } finally {
       setLoading(false);
@@ -216,16 +217,23 @@ export default function Home() {
   // Copy all prompts to clipboard formatted
   const handleCopyAll = async () => {
     if (!prompts) return;
+    const isEn = language === 'en';
     let text = `========================================\nAI TIMELAPSE GENERATOR PROMPT BUNDLE\nScene: ${selectedScene?.title || ''}\nFormat: ${aspectRatio} | Style: ${visualStyle}\n========================================\n\n`;
 
-    text += `--- LANGKAH 1: GAMBAR ACUAN (KEYFRAMES) ---\n\n`;
+    text += isEn 
+      ? `--- PART 1: KEYFRAME IMAGE PROMPTS (IMAGEN / MIDJOURNEY) ---\n\n`
+      : `--- LANGKAH 1: GAMBAR ACUAN (KEYFRAMES) ---\n\n`;
     prompts.frames?.forEach((f, i) => {
       text += `[KEYFRAME ${i + 1}]\n${f}\n\n`;
     });
 
-    text += `--- LANGKAH 2: VIDEO TRANSISI (VEO 3 / KLING) ---\n\n`;
+    text += isEn
+      ? `--- PART 2: VIDEO TRANSITION PROMPTS (VEO 3 / KLING / SORA) ---\n\n`
+      : `--- LANGKAH 2: VIDEO TRANSISI (VEO 3 / KLING) ---\n\n`;
     prompts.transitions?.forEach((tr, i) => {
-      text += `[TRANSISI ${i + 1} (Frame ${i + 1} -> Frame ${i + 2})]\n${tr}\n\n`;
+      text += isEn
+        ? `[TRANSITION ${i + 1} (Frame ${i + 1} -> Frame ${i + 2})]\n${tr}\n\n`
+        : `[TRANSISI ${i + 1} (Frame ${i + 1} -> Frame ${i + 2})]\n${tr}\n\n`;
     });
 
     if (prompts.negative_prompt) {
@@ -237,7 +245,7 @@ export default function Home() {
       setCopyAllStatus(true);
       setTimeout(() => setCopyAllStatus(false), 2500);
     } catch {
-      alert('Gagal menyalin otomatis. Silakan salin satu per satu.');
+      alert(isEn ? 'Failed to copy automatically. Please copy items one by one.' : 'Gagal menyalin otomatis. Silakan salin satu per satu.');
     }
   };
 
@@ -283,18 +291,6 @@ export default function Home() {
     (inputMode === 'image' && uploadedImage)
   );
 
-  if (currentView === 'landing') {
-    return (
-      <LandingPage
-        language={language}
-        onSwitchLanguage={changeLanguage}
-        onOpenStudio={() => {
-          setCurrentView('studio');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
-    );
-  }
 
   return (
     <main className="min-h-screen p-4 md:p-8 lg:p-14 relative overflow-hidden flex flex-col items-center bg-ambient-cinema">
@@ -322,61 +318,52 @@ export default function Home() {
         {/* ── TOP NAV BAR ────────────────────────────────────────────────────── */}
         <nav className="w-full flex items-center justify-between pb-6 border-b border-white/5 mb-8">
           <div className="flex items-center gap-2.5">
-            <button
-              type="button"
-              onClick={() => {
-                setCurrentView('landing');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary/50 text-xs font-semibold text-white/90 hover:text-white transition-all cursor-pointer shadow-xs"
-            >
-              <span className="text-muted-foreground group-hover:text-primary transition-colors">←</span>
-              <span>{language === 'en' ? 'Back to Landing' : 'Kembali ke Landing'}</span>
-            </button>
-            <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary tracking-wide">
               {t.nav.badge}
             </div>
-            <span className="hidden sm:inline-block text-[11px] font-medium text-muted-foreground/60 px-2 py-0.5 rounded-md bg-secondary">
+            <span className="inline-block text-[11px] font-medium text-muted-foreground/60 px-2 py-0.5 rounded-md bg-secondary">
               {t.nav.version}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Language Switcher */}
+            <div className="flex items-center bg-secondary/80 backdrop-blur-md p-0.5 rounded-xl border border-white/10">
+              <button
+                type="button"
+                onClick={() => changeLanguage('en')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  language === 'en'
+                    ? 'bg-primary text-primary-foreground shadow-xs font-extrabold'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                title="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => changeLanguage('id')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  language === 'id'
+                    ? 'bg-primary text-primary-foreground shadow-xs font-extrabold'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                title="Ganti ke Bahasa Indonesia"
+              >
+                ID
+              </button>
+            </div>
+
             {/* Beginner Guide Button */}
             <button
               type="button"
               onClick={() => setShowGuide(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold transition-all cursor-pointer shadow-xs"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold transition-all cursor-pointer shadow-xs"
             >
               <HelpCircle size={14} />
               <span>{t.nav.helpBtn}</span>
             </button>
-
-            {/* Language Switcher */}
-            <div className="flex items-center bg-secondary/80 p-0.5 rounded-xl border border-border">
-              <button
-                type="button"
-                onClick={() => changeLanguage('id')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
-                  language === 'id'
-                    ? 'bg-primary text-primary-foreground shadow-xs'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span>🇮🇩</span> ID
-              </button>
-              <button
-                type="button"
-                onClick={() => changeLanguage('en')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
-                  language === 'en'
-                    ? 'bg-primary text-primary-foreground shadow-xs'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span>🇬🇧</span> EN
-              </button>
-            </div>
           </div>
         </nav>
 
@@ -821,7 +808,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 mb-6 glass-panel p-4 rounded-2xl border border-primary/20">
                 {uploadedImage && (
                   <div className="w-28 h-20 rounded-xl overflow-hidden border border-white/10 relative shrink-0">
-                    <img src={uploadedImage} alt="Gambar referensi" className="w-full h-full object-cover" />
+                    <img src={uploadedImage} alt={language === 'en' ? 'Reference preview' : 'Gambar referensi'} className="w-full h-full object-cover" />
                     <div className="absolute bottom-0 inset-x-0 text-center text-[9px] bg-black/70 text-white py-0.5">
                       Frame {clampedImageFrame}
                     </div>
@@ -962,7 +949,7 @@ export default function Home() {
                       {/* Photo Thumbnail */}
                       {inputMode === 'image' && uploadedImage && idx === clampedImageFrame - 1 ? (
                         <div className="w-full aspect-video rounded-xl overflow-hidden border border-primary/40 relative shadow">
-                          <img src={uploadedImage} alt="Foto referensi" className="w-full h-full object-cover" />
+                          <img src={uploadedImage} alt={language === 'en' ? 'Reference photo' : 'Foto referensi'} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-primary/10 flex items-end p-1">
                             <span className="text-[9px] bg-primary text-primary-foreground font-bold px-1.5 py-0.5 rounded shadow">
                               {t.result.yourPhotoThumb}

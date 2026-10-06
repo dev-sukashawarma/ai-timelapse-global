@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Key, CheckCircle, XCircle, ExternalLink } from 'lucide-react';
 import { translations } from '@/lib/translations';
 
-export default function ApiKeyInput({ onKeySaved, language = 'id' }) {
+export default function ApiKeyInput({ onKeySaved, language = 'en' }) {
   const [keyValue, setKeyValue] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'success' | 'error'
   const [isExpanded, setIsExpanded] = useState(false);

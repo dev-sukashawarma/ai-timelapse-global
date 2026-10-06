@@ -1,0 +1,367 @@
+<!-- ==========================================================================
+     AI TIMELAPSE™ — SHOPIFY PRODUCT DESCRIPTION (PREMIUM REDESIGN v2)
+     
+     CARA PAKAI:
+     1. Shopify Admin > Products > AI Timelapse > Description > klik ikon "<>" (Show HTML)
+     2. Hapus semua isi deskripsi lama
+     3. Copy-paste SELURUH kode di bawah ini (mulai dari <div class="sp"> sampai </div> terakhir)
+     4. Klik Save
+     
+     VIDEO: Ganti URL "YOUR_SHOPIFY_VIDEO_URL_HERE" dengan URL video dari:
+     Shopify Admin > Content > Files > Upload video-ai.mp4 > Copy URL
+     ========================================================================== -->
+
+<div class="sp">
+<style>
+/* ── Reset & Base ────────────────────────────────────────────────────────── */
+.sp{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#1e293b;line-height:1.6;max-width:780px;margin:0 auto;padding:0 0 20px;box-sizing:border-box}
+.sp *{box-sizing:border-box;margin:0;padding:0}
+.sp img{max-width:100%;height:auto}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes sp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes sp-pulse-glow{0%,100%{box-shadow:0 0 20px rgba(56,189,248,0.15)}50%{box-shadow:0 0 35px rgba(56,189,248,0.35)}}
+@keyframes sp-gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes sp-shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes sp-badge-pop{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes sp-count-up{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ── Hero Video Section ──────────────────────────────────────────────────── */
+.sp-hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:28px;aspect-ratio:16/9;background:#000}
+.sp-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sp-hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.3) 40%,rgba(0,0,0,0.1) 70%,rgba(0,0,0,0.4) 100%);z-index:1}
+.sp-hero-content{position:absolute;bottom:0;left:0;right:0;padding:20px 22px;z-index:2;color:#fff}
+.sp-hero-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(2,132,199,0.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(56,189,248,0.3);color:#7dd3fc;font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:10px;animation:sp-badge-pop 0.5s ease-out}
+.sp-hero h2{font-size:22px;font-weight:900;line-height:1.2;letter-spacing:-0.02em;margin-bottom:6px;text-shadow:0 2px 12px rgba(0,0,0,0.5)}
+@media(min-width:640px){.sp-hero h2{font-size:30px}}
+.sp-hero p{font-size:13px;color:#cbd5e1;line-height:1.5;max-width:500px}
+.sp-hero-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:60px;height:60px;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;animation:sp-float 3s ease-in-out infinite;cursor:pointer}
+.sp-hero-play::after{content:"";width:0;height:0;border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent #ffffff;margin-left:4px}
+
+/* ── Accent Line Divider ─────────────────────────────────────────────────── */
+.sp-divider{height:3px;border-radius:4px;background:linear-gradient(90deg,#0284c7,#38bdf8,#7dd3fc,#38bdf8,#0284c7);background-size:300% 100%;animation:sp-gradient-shift 4s ease infinite;margin:28px 0;opacity:0.6}
+
+/* ── Social Proof Stats Row ──────────────────────────────────────────────── */
+.sp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.sp-stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px 10px;text-align:center}
+.sp-stat-num{font-size:22px;font-weight:900;color:#0f172a;line-height:1;margin-bottom:2px;animation:sp-count-up 0.6s ease-out}
+.sp-stat-label{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em}
+
+/* ── Headline Block ──────────────────────────────────────────────────────── */
+.sp-headline{text-align:center;margin-bottom:24px}
+.sp-headline h3{font-size:20px;font-weight:900;color:#0f172a;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:6px;line-height:1.25}
+@media(min-width:640px){.sp-headline h3{font-size:26px}}
+.sp-headline .sp-accent{color:#0284c7}
+.sp-headline p{font-size:14px;color:#64748b;max-width:560px;margin:0 auto;line-height:1.55}
+.sp-mini-badge{display:inline-flex;align-items:center;gap:5px;background:#e0f2fe;color:#0284c7;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:999px;margin-bottom:12px;border:1px solid #bae6fd}
+
+/* ── Story Progression Strip ─────────────────────────────────────────────── */
+.sp-story{background:#0f172a;border-radius:18px;padding:22px 18px;margin-bottom:28px;color:#fff;border:1px solid #1e293b}
+.sp-story-label{font-size:11px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#38bdf8;text-align:center;margin-bottom:14px}
+.sp-story-desc{font-size:13.5px;color:#94a3b8;text-align:center;line-height:1.6;margin-bottom:16px;max-width:540px;margin-left:auto;margin-right:auto}
+.sp-timeline{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px}
+.sp-timeline-dot{width:8px;height:8px;border-radius:50%;background:#38bdf8;flex-shrink:0;display:none}
+@media(min-width:640px){.sp-timeline-dot{display:block}}
+.sp-timeline-item{background:#1e293b;padding:8px 14px;border-radius:10px;font-size:11px;font-weight:700;color:#e2e8f0;border:1px solid #334155;white-space:nowrap;text-align:center}
+.sp-timeline-item.sp-active{border-color:#38bdf8;color:#38bdf8;background:#0c4a6e}
+.sp-timeline-arrow{color:#38bdf8;font-weight:900;font-size:14px;flex-shrink:0}
+.sp-problem-strip{margin-top:18px;background:rgba(244,63,94,0.08);border:1px solid rgba(244,63,94,0.2);border-radius:12px;padding:14px 16px;text-align:center}
+.sp-problem-strip strong{color:#fb7185;font-size:13px}
+.sp-problem-strip span{color:#fda4af;font-size:12.5px;display:block;margin-top:4px}
+
+/* ── Product Name Banner ─────────────────────────────────────────────────── */
+.sp-product-name{text-align:center;padding:22px 16px;margin-bottom:28px;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 50%,#f0f9ff 100%);border-radius:18px;border:1px solid #bae6fd}
+.sp-product-name h3{font-size:24px;font-weight:900;color:#0f172a;margin-bottom:4px;letter-spacing:-0.01em}
+@media(min-width:640px){.sp-product-name h3{font-size:28px}}
+.sp-product-name p{font-size:14px;font-weight:700;color:#0284c7}
+.sp-product-name .sp-sub{font-size:13px;color:#64748b;font-weight:500;margin-top:6px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* ── Feature Cards Grid ──────────────────────────────────────────────────── */
+.sp-features{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:28px}
+@media(min-width:540px){.sp-features{grid-template-columns:repeat(2,1fr)}}
+.sp-fcard{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px;position:relative;overflow:hidden;transition:all 0.25s ease}
+.sp-fcard:hover{border-color:#38bdf8;box-shadow:0 8px 24px rgba(2,132,199,0.08);transform:translateY(-2px)}
+.sp-fcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0284c7,#38bdf8);opacity:0;transition:opacity 0.25s ease}
+.sp-fcard:hover::before{opacity:1}
+.sp-fcard-icon{font-size:28px;margin-bottom:10px;display:block}
+.sp-fcard h4{font-size:14.5px;font-weight:800;color:#0f172a;margin-bottom:6px}
+.sp-fcard p{font-size:12.5px;color:#475569;line-height:1.55}
+
+/* ── Concepts Tags ───────────────────────────────────────────────────────── */
+.sp-concepts{margin-bottom:28px;text-align:center}
+.sp-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.sp-tag{background:#f1f5f9;border:1px solid #e2e8f0;padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:700;color:#1e293b;transition:all 0.2s ease}
+.sp-tag:hover{background:#e0f2fe;border-color:#bae6fd;color:#0284c7}
+
+/* ── No Skills Needed Section ────────────────────────────────────────────── */
+.sp-beginner{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:22px 18px;margin-bottom:28px}
+.sp-beginner h3{font-size:18px;font-weight:900;color:#0f172a;text-transform:uppercase;margin-bottom:4px}
+.sp-beginner>p{font-size:13px;color:#64748b;margin-bottom:14px}
+.sp-no-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:14px}
+@media(min-width:540px){.sp-no-grid{grid-template-columns:repeat(2,1fr)}}
+.sp-no-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#334155;padding:6px 10px;background:#fff;border-radius:10px;border:1px solid #f1f5f9}
+.sp-no-x{color:#ef4444;font-weight:900;font-size:16px;flex-shrink:0}
+.sp-yes-banner{background:#e0f2fe;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;color:#0369a1;text-align:center}
+
+/* ── What You Get Checklist Box ──────────────────────────────────────────── */
+.sp-bundle{background:#fff;border:2px solid #0284c7;border-radius:20px;padding:24px 18px;margin-bottom:28px;position:relative;overflow:hidden;animation:sp-pulse-glow 4s ease-in-out infinite}
+.sp-bundle::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0284c7,#38bdf8,#7dd3fc,#38bdf8,#0284c7);background-size:300% 100%;animation:sp-gradient-shift 3s ease infinite}
+.sp-bundle-header{text-align:center;margin-bottom:18px}
+.sp-bundle-header h3{font-size:20px;font-weight:900;color:#0f172a;margin-bottom:2px}
+.sp-bundle-header p{font-size:14px;font-weight:800;color:#0284c7}
+.sp-checklist{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:540px){.sp-checklist{grid-template-columns:repeat(2,1fr)}}
+.sp-check{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#1e293b;padding:6px 0}
+.sp-check-icon{display:flex;align-items:center;justify-content:center;width:22px;height:22px;background:linear-gradient(135deg,#0284c7,#38bdf8);color:#fff;border-radius:50%;font-size:11px;font-weight:900;flex-shrink:0;box-shadow:0 2px 6px rgba(2,132,199,0.25)}
+
+/* ── Final CTA Card ──────────────────────────────────────────────────────── */
+.sp-cta-card{background:linear-gradient(160deg,#0f172a 0%,#0c4a6e 50%,#0f172a 100%);border-radius:22px;padding:32px 18px;color:#fff;text-align:center;border:1px solid #334155;position:relative;overflow:hidden}
+.sp-cta-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(56,189,248,0.12) 0%,transparent 60%);pointer-events:none}
+.sp-cta-label{font-size:12px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#7dd3fc;margin-bottom:12px;position:relative}
+.sp-cta-price{font-size:48px;font-weight:900;color:#38bdf8;line-height:1;margin-bottom:2px;position:relative;text-shadow:0 0 30px rgba(56,189,248,0.3)}
+.sp-cta-strike{font-size:18px;color:#475569;text-decoration:line-through;font-weight:400;margin-left:6px}
+.sp-cta-sub{font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#94a3b8;margin-bottom:18px;position:relative}
+.sp-cta-btn{display:inline-block;width:100%;max-width:400px;background:linear-gradient(180deg,#0284c7 0%,#0369a1 100%);color:#ffffff !important;text-decoration:none !important;font-weight:800;font-size:16px;padding:16px 24px;border-radius:14px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 6px 20px rgba(2,132,199,0.35),0 0 0 1px rgba(56,189,248,0.2);cursor:pointer;border:none;margin:0 auto 16px;position:relative;transition:all 0.2s ease}
+.sp-cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(2,132,199,0.45),0 0 0 1px rgba(56,189,248,0.3)}
+.sp-cta-btn::after{content:"";position:absolute;inset:0;border-radius:14px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);background-size:200% 100%;animation:sp-shimmer 3s ease-in-out infinite}
+.sp-cta-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;position:relative}
+.sp-cta-pill{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.06);padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.08);font-size:11.5px;color:#cbd5e1;font-weight:600}
+.sp-cta-pill b{color:#38bdf8;font-size:13px}
+.sp-cta-desc{font-size:13px;color:#94a3b8;max-width:480px;margin:0 auto 18px;line-height:1.6;position:relative}
+.sp-cta-footer{font-size:11px;color:#475569;letter-spacing:0.06em;margin-top:18px;position:relative}
+
+/* ── Guarantee Badge ─────────────────────────────────────────────────────── */
+.sp-guarantee{display:flex;align-items:center;gap:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:14px 16px;margin-bottom:28px}
+.sp-guarantee-icon{width:40px;height:40px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sp-guarantee-text{font-size:12.5px;color:#15803d;line-height:1.5}
+.sp-guarantee-text strong{color:#166534;font-size:13px}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     HERO VIDEO (Sama seperti Hero di Landing Page Website)
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-hero">
+  <video autoplay loop muted playsinline preload="auto" poster="">
+    <!-- ⚠️ GANTI URL di bawah ini dengan URL video Anda dari Shopify Files -->
+    <source src="YOUR_SHOPIFY_VIDEO_URL_HERE" type="video/mp4">
+  </video>
+  <div class="sp-hero-overlay"></div>
+  <div class="sp-hero-content">
+    <div class="sp-hero-badge">🔥 AI VIDEO TREND 2026</div>
+    <h2>CREATE VIRAL AI TIMELAPSE VIDEOS WITH AI</h2>
+    <p>No Camera. No Drone. No Construction Site. Turn simple text prompts into cinematic construction timelapses.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SOCIAL PROOF STATS
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-stats">
+  <div class="sp-stat">
+    <div class="sp-stat-num">10M+</div>
+    <div class="sp-stat-label">Niche Views</div>
+  </div>
+  <div class="sp-stat">
+    <div class="sp-stat-num">500K+</div>
+    <div class="sp-stat-label">Shares</div>
+  </div>
+  <div class="sp-stat">
+    <div class="sp-stat-num">#1</div>
+    <div class="sp-stat-label">AI Trend</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     STORY: YOU'VE SEEN THESE VIDEOS
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-story">
+  <div class="sp-story-label">YOU'VE PROBABLY SEEN THESE VIDEOS</div>
+  <div class="sp-story-desc">
+    Empty land. Then the foundation appears. Walls start going up. Windows, roofs, landscaping... and within seconds, an entire dream house comes to life. These videos are <strong style="color:#e2e8f0;">incredibly satisfying to watch</strong> and rack up millions of views.
+  </div>
+
+  <div class="sp-timeline">
+    <div class="sp-timeline-item">🏜️ Empty Land</div>
+    <div class="sp-timeline-arrow">&rarr;</div>
+    <div class="sp-timeline-item">🧱 Foundation</div>
+    <div class="sp-timeline-arrow">&rarr;</div>
+    <div class="sp-timeline-item">🏗️ Structure</div>
+    <div class="sp-timeline-arrow">&rarr;</div>
+    <div class="sp-timeline-item">🧰 Walls</div>
+    <div class="sp-timeline-arrow">&rarr;</div>
+    <div class="sp-timeline-item">🏠 Roof</div>
+    <div class="sp-timeline-arrow">&rarr;</div>
+    <div class="sp-timeline-item">🪟 Finishing</div>
+    <div class="sp-timeline-arrow">&rarr;</div>
+    <div class="sp-timeline-item sp-active">✨ Completed</div>
+  </div>
+
+  <div class="sp-problem-strip">
+    <strong>The problem?</strong>
+    <span>Getting AI to generate consistent scenes that look like a real construction process takes hours of trial and error.</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PRODUCT NAME BANNER
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-product-name">
+  <div class="sp-mini-badge">THE SOLUTION</div>
+  <h3>AI TIMELAPSE&trade;</h3>
+  <p>The Complete AI Timelapse Creation Kit</p>
+  <div class="sp-sub">A simple, step-by-step system for creating AI construction timelapse content from scratch. Instead of figuring everything out yourself, <strong>follow the workflow.</strong></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     6 FEATURE CARDS
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-headline">
+  <div class="sp-mini-badge">COMPLETE TOOLKIT</div>
+  <h3>EVERYTHING YOU NEED <span class="sp-accent">TO START CREATING</span></h3>
+</div>
+
+<div class="sp-features">
+  <div class="sp-fcard">
+    <span class="sp-fcard-icon">🎬</span>
+    <h4>Step-by-Step Video Training</h4>
+    <p>Follow the complete process from idea to finished video. Learn how to generate scenes, animate them, edit them together, and prepare for social media.</p>
+  </div>
+  <div class="sp-fcard">
+    <span class="sp-fcard-icon">🧠</span>
+    <h4>Ready-to-Use AI Prompts</h4>
+    <p>Don't spend hours guessing. Start with prompts designed for AI construction sequences. Copy. Customize. Generate.</p>
+  </div>
+  <div class="sp-fcard">
+    <span class="sp-fcard-icon">🏗️</span>
+    <h4>Construction Sequence Templates</h4>
+    <p>Create a believable progression from groundwork to luxury finish. Each stage is structured so your timelapse feels like a real transformation.</p>
+  </div>
+  <div class="sp-fcard">
+    <span class="sp-fcard-icon">🎥</span>
+    <h4>Image-to-Video Workflow</h4>
+    <p>Transform your generated scenes into animated AI video clips. Then combine them into one satisfying, seamless timelapse.</p>
+  </div>
+  <div class="sp-fcard">
+    <span class="sp-fcard-icon">✂️</span>
+    <h4>Simple Editing Workflow</h4>
+    <p>No pro editing experience required. Arrange, time, and polish clips into short-form content designed for TikTok, Reels, &amp; Shorts.</p>
+  </div>
+  <div class="sp-fcard">
+    <span class="sp-fcard-icon">⚡</span>
+    <h4>AI Prompt Generator</h4>
+    <p>Don't want to write every prompt yourself? Use the included generator to create new concepts and construction sequences 10x faster.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     VIDEO CONCEPT IDEAS
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-divider"></div>
+
+<div class="sp-concepts">
+  <div class="sp-headline">
+    <div class="sp-mini-badge">UNLIMITED IDEAS</div>
+    <h3>ONE SYSTEM. <span class="sp-accent">HUNDREDS OF VIDEO IDEAS.</span></h3>
+    <p>Once you understand the workflow, you're not limited to one type of house.</p>
+  </div>
+
+  <div class="sp-tags">
+    <span class="sp-tag">🏡 Modern Homes</span>
+    <span class="sp-tag">🌴 Tropical Villas</span>
+    <span class="sp-tag">🏯 Japanese Houses</span>
+    <span class="sp-tag">🏔️ Mountain Cabins</span>
+    <span class="sp-tag">🏨 Luxury Hotels</span>
+    <span class="sp-tag">🍽️ Restaurants</span>
+    <span class="sp-tag">🏙️ Futuristic Buildings</span>
+    <span class="sp-tag">🏖️ Beach Houses</span>
+    <span class="sp-tag">🏰 Fantasy Architecture</span>
+    <span class="sp-tag">💎 Luxury Mansions</span>
+  </div>
+  <p style="font-size:13px;font-weight:700;color:#475569;margin-top:6px;">One workflow. Endless creative possibilities.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     MADE FOR BEGINNERS
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-divider"></div>
+
+<div class="sp-beginner">
+  <div class="sp-mini-badge">ZERO EXPERIENCE NEEDED</div>
+  <h3>MADE FOR BEGINNERS</h3>
+  <p>You don't need to be an AI expert or professional filmmaker. You don't need:</p>
+  <div class="sp-no-grid">
+    <div class="sp-no-row"><span class="sp-no-x">&times;</span> A camera</div>
+    <div class="sp-no-row"><span class="sp-no-x">&times;</span> A drone</div>
+    <div class="sp-no-row"><span class="sp-no-x">&times;</span> A construction site</div>
+    <div class="sp-no-row"><span class="sp-no-x">&times;</span> Architecture experience</div>
+    <div class="sp-no-row"><span class="sp-no-x">&times;</span> Advanced video editing skills</div>
+    <div class="sp-no-row"><span class="sp-no-x">&times;</span> Complicated AI knowledge</div>
+  </div>
+  <div class="sp-yes-banner">✅ You just need to follow the process.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     GUARANTEE BADGE
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-guarantee">
+  <div class="sp-guarantee-icon">🛡️</div>
+  <div class="sp-guarantee-text">
+    <strong>Instant Digital Access</strong><br>
+    Get immediate access to all materials the moment your purchase is confirmed. No waiting, no shipping delays.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     WHAT YOU GET — FULL BUNDLE CHECKLIST
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-bundle">
+  <div class="sp-bundle-header">
+    <div class="sp-mini-badge" style="background:#0f172a;color:#38bdf8;border-color:#334155;">COMPLETE PACKAGE</div>
+    <h3>WHAT YOU GET</h3>
+    <p>AI TIMELAPSE COMPLETE KIT</p>
+  </div>
+
+  <div class="sp-checklist">
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Complete Video Training</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> AI Timelapse Prompt Library</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Construction Sequence Templates</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Image Generation Workflow</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Image-to-Video Workflow</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Editing Workflow</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Content Idea Library</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Hooks &amp; Caption Ideas</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> AI Prompt Generator</div>
+    <div class="sp-check"><span class="sp-check-icon">&check;</span> Future Kit Updates</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     FINAL CTA CARD — CLOSING SECTION
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="sp-cta-card">
+  <div class="sp-cta-label">STOP SCROLLING PAST AI CONTENT. START CREATING IT.</div>
+
+  <div class="sp-cta-price">$19 <span class="sp-cta-strike">$97</span></div>
+  <div class="sp-cta-sub">ONE-TIME PAYMENT &bull; NO SUBSCRIPTION</div>
+
+  <div class="sp-cta-desc">
+    You can spend hours experimenting with tools and prompts... or start with a workflow that's already organized for you. Create your first AI construction timelapse. Publish it. Then create another.
+  </div>
+
+  <a href="#" onclick="const btn=document.querySelector('form[action*=\'/cart/add\'] button[type=\'submit\'],form[action*=\'/cart/add\'] [name=\'add\'],.product-form__submit,.shopify-payment-button button');if(btn){btn.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){btn.click()},600);return false;}" class="sp-cta-btn">
+    GET AI TIMELAPSE &mdash; $19
+  </a>
+
+  <div class="sp-cta-pills">
+    <span class="sp-cta-pill"><b>&check;</b> One-Time Payment</span>
+    <span class="sp-cta-pill"><b>&check;</b> Instant Access</span>
+    <span class="sp-cta-pill"><b>&check;</b> Beginner Friendly</span>
+    <span class="sp-cta-pill"><b>&check;</b> No Subscription</span>
+  </div>
+
+  <div class="sp-cta-footer">
+    AI TIMELAPSE&trade; &bull; Create. Animate. Publish.
+  </div>
+</div>
+
+</div>

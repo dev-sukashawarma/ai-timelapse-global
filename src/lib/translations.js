@@ -393,7 +393,7 @@ export const translations = {
   en: {
     meta: {
       title: "AI Timelapse Generator - Cinematic Prompt Studio",
-      description: "Create seamless, ultra-high-quality AI timelapse prompts for Google Veo 3, Imagen, Kling, and Sora.",
+      description: "Generate seamless, ultra-high-quality AI timelapse prompts for Google Veo 3, Imagen, Kling, and Sora.",
     },
     nav: {
       badge: "🎬 Timelapse AI Prompt Studio",
@@ -414,7 +414,7 @@ export const translations = {
       step2Title: "2. Upload a Photo or Describe an Idea",
       step2Desc: "Have a renovation or construction photo? Upload it and specify whether it is the starting point, midpoint, or final result. Or type an idea such as \"skyscraper building from empty lot\".",
       step3Title: "3. Copy Prompts into AI Video Tools",
-      step3Desc: "The app generates reference photos (Keyframes) and video connectors (Transitions). Copy image prompts into Google Imagen/Midjourney, then copy video prompts into Google Veo 3 or Kling AI!",
+      step3Desc: "The app generates reference images (Keyframes) and video connectors (Transitions). Copy image prompts into Google Imagen/Midjourney, then copy video prompts into Google Veo 3 or Kling AI!",
       tipTitle: "💡 Seamless (Anti-Jump) Tip",
       tipDesc: "Use 2 to 4 transitions for construction projects so the video doesn't cross-fade, but instead displays realistic layer-by-layer material accumulation.",
       closeBtn: "Got It, Let's Start",
@@ -487,7 +487,7 @@ export const translations = {
       posEndTipDesc: "Your finished building serves as the final visual anchor. AI systematically reverse-engineers the excavation, foundation rebar, and framing.",
       posMidTipTitle: "⚠️ Midpoint Notice",
       posMidTipDesc: "Use at least 3-4 transitions so the phases before and after the photo transition smoothly.",
-      autoUpgradeSeq: "→ Increase to 4 transitions automatically",
+      autoUpgradeSeq: "→ Automatically increase to 4 transitions",
     },
     imageUpload: {
       dragTitle: "Drop Photo Here",
@@ -514,7 +514,7 @@ export const translations = {
           id: 1,
           category: "Golden Hour",
           title: "Sunrise Over Misty Mountain Ridge",
-          description: "Pitch black mountain valley slowly awakens as morning sun peaks over the ridge, burning off dense fog layers to reveal lush green peaks bathed in golden light.",
+          description: "Pitch black mountain valley slowly awakens as morning sun peeks over the ridge, burning off dense fog layers to reveal lush green peaks bathed in golden light.",
           emoji: "🌄",
           veoTag: "Lighting Shift",
         },
