@@ -1,4 +1,11 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+
+const safetySettings = [
+  { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
+  { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
+  { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
+  { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
+];
 
 // Helper: convert base64 data URL to inline image part for Gemini
 const base64ToImagePart = (dataUrl) => {
@@ -17,9 +24,18 @@ const getGenAI = () => {
   return new GoogleGenerativeAI(apiKey);
 };
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const isTransientError = (msg) => {
+  return msg.includes('503') || msg.includes('high demand') || msg.includes('overloaded') || msg.includes('UNAVAILABLE');
+};
+
 // Helper: Intercept and translate Gemini API errors
 const handleGeminiError = (error, language = 'en') => {
   const msg = error?.message || "";
+
+  if (msg.startsWith("All available")) {
+    throw error;
+  }
 
   if (msg.includes('429') || msg.includes('Quota exceeded') || msg.includes('RESOURCE_EXHAUSTED')) {
     if (msg.includes('free_tier') || msg.includes('Free Tier')) {
@@ -188,42 +204,63 @@ const isAuthError = (err) => {
 export const UNIVERSAL_NEGATIVE_PROMPT = 
   "blurry, out of focus, abrupt jump cuts, morphing, asset popping, camera jitter, shaky tripod, distorted architecture, melting concrete, deformed perspective, oversaturated colors, flickering sunlight, ghosting artifacts, low resolution, unnatural teleportation of objects";
 
-// Ordered model fallback chain prioritizing speed, accuracy, and quota reliability
+// Ordered model fallback chain prioritizing active models recommended by Google API
 const FALLBACK_CHAIN = [
-  'gemini-2.5-flash',
   'gemini-2.5-flash-lite',
-  'gemini-2.5-pro',
+  'gemini-3.1-flash-lite',
+  'gemini-3.1-pro-preview',
+  'gemini-2.5-flash',
 ];
 
 const executeWithFallback = async (primaryModel, prompt, language = 'en') => {
   const genAI = getGenAI();
   const chain = [primaryModel, ...FALLBACK_CHAIN.filter(m => m !== primaryModel)];
 
-  let lastError;
   let quotaError;
+  const attemptErrors = [];
 
   for (const modelName of chain) {
-    try {
-      const model = genAI.getGenerativeModel({
-        model: modelName,
-        generationConfig: { responseMimeType: "application/json" }
-      });
-      const result = await model.generateContent(prompt);
-      if (modelName !== primaryModel) {
-        console.info(`[API] Success with fallback model: ${modelName}`);
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: { responseMimeType: "application/json" },
+          safetySettings,
+        });
+        const result = await model.generateContent(prompt);
+        if (modelName !== primaryModel) {
+          console.info(`[API] Success with fallback model: ${modelName}`);
+        }
+        return parseWithRepair(result.response.text());
+      } catch (error) {
+        if (isAuthError(error)) handleGeminiError(error, language);
+        const msg = error.message || '';
+
+        // If 503 high demand on first attempt, pause 1.2s and retry once before skipping model
+        if (attempt === 1 && isTransientError(msg)) {
+          console.warn(`[API] Model ${modelName} returned 503 (high demand). Retrying once in 1200ms...`);
+          await sleep(1200);
+          continue;
+        }
+
+        attemptErrors.push(`• ${modelName}: ${msg}`);
+        if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+          quotaError = error;
+        }
+        console.warn(`[API] Model ${modelName} failed:`, error.message);
+        break;
       }
-      return parseWithRepair(result.response.text());
-    } catch (error) {
-      if (isAuthError(error)) handleGeminiError(error, language);
-      const msg = error.message || '';
-      if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
-        quotaError = error;
-      }
-      console.warn(`[API] Model ${modelName} failed:`, error.message);
-      lastError = error;
     }
   }
-  handleGeminiError(quotaError || lastError, language);
+
+  if (quotaError) {
+    handleGeminiError(quotaError, language);
+  }
+
+  const detailedErr = new Error(
+    `All available Gemini models failed.\n\nAttempts:\n${attemptErrors.join('\n')}`
+  );
+  handleGeminiError(detailedErr, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -290,29 +327,54 @@ Respond ONLY with valid JSON:
 ]`;
 
   const imagePart = base64ToImagePart(imageDataUrl);
-  const visionChain = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro'];
-  let lastErr;
+  const visionChain = [
+    'gemini-2.5-flash-lite',
+    'gemini-3.1-flash-lite',
+    'gemini-3.1-pro-preview',
+    'gemini-2.5-flash',
+  ];
   let quotaErr;
+  const attemptErrors = [];
   
   for (const modelName of visionChain) {
-    try {
-      const model = genAI.getGenerativeModel({
-        model: modelName,
-        generationConfig: { responseMimeType: 'application/json' }
-      });
-      const result = await model.generateContent([textPrompt, imagePart]);
-      return parseWithRepair(result.response.text());
-    } catch (err) {
-      if (isAuthError(err)) handleGeminiError(err, language);
-      const msg = err.message || '';
-      if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
-        quotaErr = err;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: { responseMimeType: 'application/json' },
+          safetySettings,
+        });
+        const result = await model.generateContent([textPrompt, imagePart]);
+        return parseWithRepair(result.response.text());
+      } catch (err) {
+        if (isAuthError(err)) handleGeminiError(err, language);
+        const msg = err.message || '';
+
+        // If 503 high demand on first attempt, pause 1.2s and retry once before skipping model
+        if (attempt === 1 && isTransientError(msg)) {
+          console.warn(`[Vision] Model ${modelName} returned 503 (high demand). Retrying once in 1200ms...`);
+          await sleep(1200);
+          continue;
+        }
+
+        attemptErrors.push(`• ${modelName}: ${msg}`);
+        if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+          quotaErr = err;
+        }
+        console.warn(`[Vision] ${modelName} failed:`, err.message);
+        break;
       }
-      console.warn(`[Vision] ${modelName} failed:`, err.message);
-      lastErr = err;
     }
   }
-  handleGeminiError(quotaErr || lastErr, language);
+
+  if (quotaErr) {
+    handleGeminiError(quotaErr, language);
+  }
+
+  const detailedErr = new Error(
+    `All available vision models failed.\n\nAttempts:\n${attemptErrors.join('\n')}`
+  );
+  handleGeminiError(detailedErr, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -411,31 +473,56 @@ Respond strictly with valid JSON:
 }`;
 
   const imagePart = base64ToImagePart(imageDataUrl);
-  const visionChain = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro'];
-  let lastErr;
+  const visionChain = [
+    'gemini-2.5-flash-lite',
+    'gemini-3.1-flash-lite',
+    'gemini-3.1-pro-preview',
+    'gemini-2.5-flash',
+  ];
   let quotaErr;
+  const attemptErrors = [];
 
   for (const modelName of visionChain) {
-    try {
-      const model = genAI.getGenerativeModel({
-        model: modelName,
-        generationConfig: { responseMimeType: 'application/json' }
-      });
-      const result = await model.generateContent([textPrompt, imagePart]);
-      const parsed = parseWithRepair(result.response.text());
-      if (!parsed.negative_prompt) parsed.negative_prompt = UNIVERSAL_NEGATIVE_PROMPT;
-      return parsed;
-    } catch (err) {
-      if (isAuthError(err)) handleGeminiError(err, language);
-      const msg = err.message || '';
-      if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
-        quotaErr = err;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: { responseMimeType: 'application/json' },
+          safetySettings,
+        });
+        const result = await model.generateContent([textPrompt, imagePart]);
+        const parsed = parseWithRepair(result.response.text());
+        if (!parsed.negative_prompt) parsed.negative_prompt = UNIVERSAL_NEGATIVE_PROMPT;
+        return parsed;
+      } catch (err) {
+        if (isAuthError(err)) handleGeminiError(err, language);
+        const msg = err.message || '';
+
+        // If 503 high demand on first attempt, pause 1.2s and retry once before skipping model
+        if (attempt === 1 && isTransientError(msg)) {
+          console.warn(`[Vision Timelapse] Model ${modelName} returned 503 (high demand). Retrying once in 1200ms...`);
+          await sleep(1200);
+          continue;
+        }
+
+        attemptErrors.push(`• ${modelName}: ${msg}`);
+        if (msg.includes('429') || msg.includes('Quota') || msg.includes('RESOURCE_EXHAUSTED')) {
+          quotaErr = err;
+        }
+        console.warn(`[Vision Timelapse] ${modelName} failed:`, err.message);
+        break;
       }
-      console.warn(`[Vision Timelapse] ${modelName} failed:`, err.message);
-      lastErr = err;
     }
   }
-  handleGeminiError(quotaErr || lastErr, language);
+
+  if (quotaErr) {
+    handleGeminiError(quotaErr, language);
+  }
+
+  const detailedErr = new Error(
+    `All available vision models failed.\n\nAttempts:\n${attemptErrors.join('\n')}`
+  );
+  handleGeminiError(detailedErr, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -466,7 +553,7 @@ Respond ONLY with valid JSON array:
   { "title": "...", "description": "...", "category": "...", "emoji": "..." }
 ]`;
 
-  return executeWithFallback("gemini-2.5-flash", prompt, language);
+  return executeWithFallback("gemini-2.5-flash-lite", prompt, language);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -530,7 +617,7 @@ Respond with valid JSON only:
   "negative_prompt": "${UNIVERSAL_NEGATIVE_PROMPT}"
 }`;
 
-  const result = await executeWithFallback("gemini-2.5-flash", prompt, language);
+  const result = await executeWithFallback("gemini-2.5-flash-lite", prompt, language);
   if (!result.negative_prompt) result.negative_prompt = UNIVERSAL_NEGATIVE_PROMPT;
   return result;
 };
